@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест функциональности корзины</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .test-button:hover {
+            background: #0056b3;
+        }
+        .cart-info {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ff4444;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+        .cart-icon {
+            position: relative;
+            display: inline-block;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Тест функциональности корзины RUSKY</h1>
+        
+        <div>
+            <h3>Добавить товары в корзину:</h3>
+            <button class="test-button" onclick="addTestProduct1()">Добавить CLAY-COM</button>
+            <button class="test-button" onclick="addTestProduct2()">Добавить Оборудование</button>
+            <button class="test-button" onclick="clearTestCart()">Очистить корзину</button>
+            
+            <span class="cart-icon">
+                🛒
+                <span class="cart-badge" id="cartBadge" style="display: none;">0</span>
+            </span>
+        </div>
+
+        <div>
+            <h3>Переходы:</h3>
+            <button class="test-button" onclick="goToCart()">Перейти в корзину</button>
+            <button class="test-button" onclick="goToRequest()">Перейти к запросу цены</button>
+        </div>
+
+        <div class="cart-info">
+            <h3>Содержимое корзины:</h3>
+            <div id="cartContents">Корзина пуста</div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+    <script>
+        function addTestProduct1() {
+            const productId = 'test-clay-com';
+            const productName = 'Коммуникационный спутник CLAY-COM (Тест)';
+            const productPrice = 0;
+            const productImage = 'CLAY-COM.png';
+            const productType = 'satellite';
+
+            if (typeof addToCart === 'function') {
+                addToCart(productId, productName, productPrice, productImage, productType);
+            } else {
+                console.error('Функция addToCart не найдена');
+                // Прямое добавление в localStorage
+                try {
+                    const cart = JSON.parse(localStorage.getItem('rusky_cart') || '[]');
+                    const existingItem = cart.find(item => item.id === productId);
+                    
+                    if (existingItem) {
+                        existingItem.qty = (existingItem.qty || 1) + 1;
+                    } else {
+                        cart.push({
+                            id: productId,
+                            name: productName,
+                            price: productPrice,
+                            image: productImage,
+                            type: productType,
+                            qty: 1
+                        });
+                    }
+                    
+                    localStorage.setItem('rusky_cart', JSON.stringify(cart));
+                    alert('Товар добавлен в корзину!');
+                } catch (e) {
+                    console.error('Ошибка:', e);
+                }
+            }
+            updateCartDisplay();
+        }
+
+        function addTestProduct2() {
+            const productId = 'test-equipment';
+            const productName = 'Тестовое оборудование';
+            const productPrice = 50000;
+            const productImage = 'equipment-1.png';
+            const productType = 'equipment';
+
+            if (typeof addToCart === 'function') {
+                addToCart(productId, productName, productPrice, productImage, productType);
+            } else {
+                try {
+                    const cart = JSON.parse(localStorage.getItem('rusky_cart') || '[]');
+                    const existingItem = cart.find(item => item.id === productId);
+                    
+                    if (existingItem) {
+                        existingItem.qty = (existingItem.qty || 1) + 1;
+                    } else {
+                        cart.push({
+                            id: productId,
+                            name: productName,
+                            price: productPrice,
+                            image: productImage,
+                            type: productType,
+                            qty: 1
+                        });
+                    }
+                    
+                    localStorage.setItem('rusky_cart', JSON.stringify(cart));
+                    alert('Товар добавлен в корзину!');
+                } catch (e) {
+                    console.error('Ошибка:', e);
+                }
+            }
+            updateCartDisplay();
+        }
+
+        function clearTestCart() {
+            localStorage.removeItem('rusky_cart');
+            updateCartDisplay();
+            alert('Корзина очищена!');
+        }
+
+        function goToCart() {
+            window.location.href = 'cart.html';
+        }
+
+        function goToRequest() {
+            window.location.href = 'request.html';
+        }
+
+        function updateCartDisplay() {
+            try {
+                const cart = JSON.parse(localStorage.getItem('rusky_cart') || '[]');
+                const cartContents = document.getElementById('cartContents');
+                const cartBadge = document.getElementById('cartBadge');
+                
+                if (cart.length === 0) {
+                    cartContents.innerHTML = 'Корзина пуста';
+                    cartBadge.style.display = 'none';
+                } else {
+                    const totalQty = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+                    cartBadge.textContent = totalQty;
+                    cartBadge.style.display = 'flex';
+                    
+                    let html = '<ul>';
+                    cart.forEach(item => {
+                        html += `<li><strong>${item.name}</strong> - Количество: ${item.qty} (${item.type === 'satellite' ? 'Цена по запросу' : item.price + ' ₽'})</li>`;
+                    });
+                    html += '</ul>';
+                    cartContents.innerHTML = html;
+                }
+            } catch (e) {
+                console.error('Ошибка при обновлении отображения корзины:', e);
+            }
+        }
+
+        // Обновляем отображение при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartDisplay();
+        });
+    </script>
+</body>
+</html>

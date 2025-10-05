@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест бургер-меню без свечения</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background: #1a1a1a;
+            color: white;
+            margin: 0;
+            padding: 20px;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+        
+        /* Принудительно показываем бургер-меню для тестирования */
+        .burger-menu {
+            display: flex !important;
+        }
+        
+        .test-info {
+            background: rgba(40, 167, 69, 0.1);
+            border: 1px solid rgba(40, 167, 69, 0.3);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .visual-check {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .burger-demo {
+            display: inline-block;
+            margin: 20px;
+            padding: 20px;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+        }
+        
+        .burger-demo h4 {
+            margin-top: 0;
+            color: #007acc;
+        }
+        
+        /* Контрастный фон для проверки прозрачности */
+        .contrast-bg {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            background-size: 400% 400%;
+            animation: gradientShift 4s ease infinite;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .debug-panel {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.9);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 12px;
+            z-index: 9999;
+            max-width: 250px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo">RUSKY</div>
+        <nav class="header-nav">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="equipment.html">ОБОРУДОВАНИЕ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="about.html">О НАС</a>
+        </nav>
+        <div class="burger-menu">
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+        </div>
+    </header>
+
+    <nav class="mobile-nav">
+        <div class="mobile-nav-list">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="equipment.html">ОБОРУДОВАНИЕ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="about.html">О НАС</a>
+        </div>
+    </nav>
+
+    <div class="test-container">
+        <h1>🍔 Бургер-меню без свечения</h1>
+        
+        <div class="test-info">
+            <h2>✅ Убранные эффекты:</h2>
+            <ul>
+                <li>❌ <code>background</code> - полностью прозрачный</li>
+                <li>❌ <code>background-color</code> - убран</li>
+                <li>❌ <code>box-shadow</code> - убрано свечение</li>
+                <li>❌ <code>backdrop-filter</code> - убран размытый фон</li>
+                <li>❌ <code>border</code> - убрана рамка</li>
+                <li>❌ <code>outline</code> - убран контур фокуса</li>
+            </ul>
+        </div>
+
+        <div class="visual-check">
+            <h3>🎨 Визуальная проверка</h3>
+            <p>Бургер-меню должно быть полностью прозрачным с видимыми только белыми линиями:</p>
+            
+            <div class="burger-demo">
+                <h4>Обычное состояние</h4>
+                <div class="burger-menu">
+                    <div class="burger-line"></div>
+                    <div class="burger-line"></div>
+                    <div class="burger-line"></div>
+                </div>
+            </div>
+            
+            <div class="burger-demo">
+                <h4>Активное состояние</h4>
+                <div class="burger-menu active">
+                    <div class="burger-line"></div>
+                    <div class="burger-line"></div>
+                    <div class="burger-line"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="contrast-bg">
+            <h3 style="color: white; text-align: center; margin-bottom: 20px;">
+                🌈 Контрастный фон для проверки прозрачности
+            </h3>
+            <div style="text-align: center;">
+                <div class="burger-menu" style="display: inline-flex !important;">
+                    <div class="burger-line"></div>
+                    <div class="burger-line"></div>
+                    <div class="burger-line"></div>
+                </div>
+                <p style="color: white; margin-top: 10px;">
+                    Бургер-меню должно быть полностью прозрачным<br>
+                    с видимым градиентным фоном позади
+                </p>
+            </div>
+        </div>
+
+        <div class="test-info">
+            <h3>🔧 Примененные CSS правила:</h3>
+            <pre><code>.burger-menu {
+    background: none !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    border: none !important;
+    outline: none !important;
+}
+
+.burger-menu:active,
+.burger-menu:hover,
+.burger-menu:focus {
+    background: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+}</code></pre>
+        </div>
+
+        <div class="test-info">
+            <h3>🎯 Инструкции для проверки:</h3>
+            <ol>
+                <li>Кликните по бургер-меню в шапке</li>
+                <li>Наведите курсор на бургер-меню</li>
+                <li>Нажмите и удерживайте бургер-меню</li>
+                <li>Во всех случаях не должно быть видно никакого фона или свечения</li>
+                <li>Должны быть видны только белые линии иконки</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="debug-panel">
+        <h4>🔍 Debug Info</h4>
+        <div id="debugInfo">Загрузка...</div>
+    </div>
+
+    <script src="main.js"></script>
+    <script>
+        function updateDebugInfo() {
+            const burger = document.querySelector('.burger-menu');
+            const debugEl = document.getElementById('debugInfo');
+            
+            if (burger) {
+                const styles = window.getComputedStyle(burger);
+                const info = `
+                    Background: ${styles.backgroundColor}<br>
+                    Box-shadow: ${styles.boxShadow}<br>
+                    Border: ${styles.border}<br>
+                    Outline: ${styles.outline}<br>
+                    Backdrop: ${styles.backdropFilter}<br>
+                    <small>${new Date().toLocaleTimeString()}</small>
+                `;
+                debugEl.innerHTML = info;
+            } else {
+                debugEl.innerHTML = 'Burger element not found';
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🍔 Тест без свечения загружен');
+            updateDebugInfo();
+            
+            // Обновляем информацию каждые 3 секунды
+            setInterval(updateDebugInfo, 3000);
+            
+            // Обновляем при взаимодействии с бургером
+            const burger = document.querySelector('.burger-menu');
+            if (burger) {
+                ['mouseenter', 'mouseleave', 'mousedown', 'mouseup', 'click'].forEach(event => {
+                    burger.addEventListener(event, updateDebugInfo);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RUSKY — Техническая поддержка</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="header-logo" onclick="location.href='index.html'" style="cursor:pointer">RUSKY</div>
+    <nav class="header-nav">
+      <a href="index.html">ГЛАВНАЯ</a>
+      <a href="#" onclick="openFilterModal()">ФИЛЬТР</a>
+      <a href="equipment.html">ОБОРУДОВАНИЕ</a>
+      <a href="satellites.html">СПУТНИКИ</a>
+      <a href="#" onclick="openDocumentationModal()">ДОКУМЕНТАЦИЯ</a>
+      <div class="dropdown">
+          <a href="#" class="dropdown-toggle">ЗАПУСК</a>
+          <div class="dropdown-content">
+              <a href="launch-process.html">Процесс запуска</a>
+              <a href="launch-help.html">Помощь с запуском</a>
+          </div>
+      </div>
+      <a href="support.html" class="active">ПОДДЕРЖКА</a>
+      <a href="orders.html">МОИ ЗАКАЗЫ</a>
+      <a href="about.html">О НАС</a>
+    </nav>
+    <a href="cart.html" class="cart-icon" aria-label="Корзина">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="10" cy="26" r="3" fill="white"/>
+        <circle cx="24" cy="26" r="3" fill="white"/>
+        <path d="M4 7H7L10 20H25L28 11H9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      <span class="cart-badge" id="cartBadge" style="display: none;">0</span>
+    </a>
+      <div class="burger-menu">
+      <div class="burger-line"></div>
+      <div class="burger-line"></div>
+      <div class="burger-line"></div>
+    </div>
+  </header>
+  <!-- Mobile Navigation -->
+  <nav class="mobile-nav">
+    <div class="mobile-nav-list">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="#" onclick="openFilterModal()">ФИЛЬТР</a>
+            <a href="equipment.html">ОБОРУДОВАНИЕ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="#" onclick="openDocumentationModal()">ДОКУМЕНТАЦИЯ</a>
+            <a href="launch-process.html">ПРОЦЕСС ЗАПУСКА</a>
+            <a href="launch-help.html">ПОМОЩЬ С ЗАПУСКОМ</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+            <a href="orders.html">МОИ ЗАКАЗЫ</a>
+            <a href="about.html">О НАС</a>
+            <a href="cart.html" class="mobile-cart-link" aria-label="Корзина">
+                <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="10" cy="26" r="3" fill="white"/>
+                    <circle cx="24" cy="26" r="3" fill="white"/>
+                    <path d="M4 7H7L10 20H25L28 11H9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
+                КОРЗИНА
+            </a>
+        </div>
+  </nav>
+  <div class="mobile-nav-overlay"></div>
+
+  <main class="support-page">
+    <div class="support-breadcrumbs">
+      <div class="support-breadcrumbs-container">
+        <a href="index.html">ГЛАВНАЯ</a> 
+        <span>›</span> 
+        <span>ПОДДЕРЖКА</span>
+      </div>
+    </div>
+
+    <div class="support-container">
+      <div class="support-block">
+        <h1>Техническая поддержка</h1>
+        
+        <div class="support-content">
+          <p>Техническая поддержка оказывается клиентам ООО «RUSKY» по действующим договорам. Заявки оформляются через обращение на почту service@rusky-tech.ru.</p>
+          
+          <p>В форме заявки обязательно заполните тему письма, а также подробно опишите:</p>
+          
+          <div class="support-requirements">
+            <p><strong>Ваше ФИО, название вашей организации и должность в ней;</strong></p>
+            <p><strong>Название оборудования;</strong></p>
+            <p><strong>Возникшую проблему;</strong></p>
+            <p><strong>Предпринятые действия по её устранению;</strong></p>
+            <p><strong>Номер договора (по возможности);</strong></p>
+            <p><strong>Серийный номер оборудования (по возможности).</strong></p>
+          </div>
+          
+          <p>Подробный регламент гарантийного обслуживания оборудования ООО «RUSKY» размещен на странице <a href="#" class="support-link">Политика компании</a>.</p>
+        </div>
+      </div>
+      
+      <div class="support-block">
+        <h2>Контакты</h2>
+        
+        <div class="contact-info">
+          <div class="contact-item">
+            <strong>Телефон:</strong> +7 (495) 123-45-67
+          </div>
+          
+          <div class="contact-item">
+            <strong>Адрес:</strong> Россия, 115432, г. Москва, Бизнес-парк «Дельта», ул. Инноваций, 10, стр. 2, офис 5.214
+          </div>
+          
+          <div class="contact-item">
+            <strong>E-mail:</strong> contact@rusky-tech.ru
+          </div>
+          
+          <div class="contact-item">
+            <strong>E-mail тех. поддержки:</strong> service@rusky-tech.ru
+          </div>
+          
+          <div class="contact-item">
+            <strong>По вопросам трудоустройства:</strong> hr@rusky-tech.ru
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-block">
+      <h3>О нашей компании</h3>
+      <p>RUSKY — команда энтузиастов, разработчиков, инженеров и учёных, создающих спутники нового поколения.<br>
+      Мы обеспечиваем полный цикл работ: от проектирования до вывода на орбиту.</p>
+    </div>
+    <div class="footer-block">
+      <h3>Информация</h3>
+      <p>Политика конфиденциальности</p>
+    </div>
+    <div class="footer-block">
+      <h3>Контакты</h3>
+      <p>Телефон: +7 (999) 123-45-67<br>
+      Адрес: Россия, 119234<br>
+      г. Москва, ул. Космическая, д. 1<br>
+      E-mail: <a href="mailto:info@rusky.ru">info@rusky.ru</a></p>
+    </div>
+    <div class="footer-copyright">
+      © 2025. Все права защищены.
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

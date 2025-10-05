@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Диагностика размера заголовка мобильной версии</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .diagnostic-panel {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.95);
+            padding: 15px;
+            border-radius: 8px;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 350px;
+            font-size: 12px;
+        }
+        
+        .screen-info {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 100, 255, 0.9);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 1000;
+            min-width: 120px;
+            text-align: center;
+        }
+        
+        .css-breakdown {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px;
+            border-radius: 6px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            line-height: 1.4;
+        }
+        
+        .status-good { color: #00ff00; }
+        .status-warning { color: #ffff00; }
+        .status-error { color: #ff0000; }
+        .status-info { color: #00ddff; }
+        
+        .toggle-panel {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(100, 0, 255, 0.8);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="screen-info" id="screenInfo">Загрузка...</div>
+    
+    <div class="diagnostic-panel" id="diagnosticPanel">
+        <h3 style="margin: 0 0 10px; font-size: 14px; color: #ff6666;">🔍 Диагностика размера H1</h3>
+        
+        <div id="mainDiagnostics">Анализируется...</div>
+        
+        <div class="css-breakdown" id="cssBreakdown">
+            <strong>CSS анализ:</strong><br>
+            <span id="cssAnalysis">Проверяется...</span>
+        </div>
+        
+        <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 8px; margin-top: 8px;">
+            <strong style="color: #ffaa00;">Возможные причины проблем:</strong>
+            <ul style="margin: 5px 0; padding-left: 15px; font-size: 11px; line-height: 1.3;">
+                <li>CSS переменная clamp() переопределяет медиа-запросы</li>
+                <li>Конфликт специфичности селекторов</li>
+                <li>Кеширование браузера</li>
+                <li>Медиа-запросы в неправильном порядке</li>
+            </ul>
+        </div>
+    </div>
+    
+    <button class="toggle-panel" onclick="togglePanel()">Скрыть панель</button>
+
+    <!-- Hero секция для тестирования -->
+    <section class="hero-section" style="background-image: url('img-1.png'); background-size: cover; background-position: center;">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 id="testTitle">Хотите купить спутник?</h1>
+            <p class="hero-subtitle">
+                Тестовая страница для диагностики размера заголовка
+            </p>
+            <p class="hero-desc">
+                Эта страница поможет определить, почему не меняется размер заголовка в мобильной версии.
+            </p>
+            <a href="#" class="hero-btn">ТЕСТ</a>
+        </div>
+    </section>
+
+    <script>
+        let panelVisible = true;
+        
+        function togglePanel() {
+            const panel = document.getElementById('diagnosticPanel');
+            const button = document.querySelector('.toggle-panel');
+            
+            if (panelVisible) {
+                panel.style.display = 'none';
+                button.textContent = 'Показать панель';
+                panelVisible = false;
+            } else {
+                panel.style.display = 'block';
+                button.textContent = 'Скрыть панель';
+                panelVisible = true;
+            }
+        }
+        
+        function runDiagnostics() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            const title = document.getElementById('testTitle');
+            
+            // Информация об экране
+            let deviceCategory = '';
+            if (width <= 360) deviceCategory = 'Очень маленький экран';
+            else if (width <= 480) deviceCategory = 'Мобильный';
+            else if (width <= 768) deviceCategory = 'Планшет';
+            else deviceCategory = 'Десктоп';
+            
+            document.getElementById('screenInfo').innerHTML = 
+                `${deviceCategory}<br>${width}×${height}px`;
+            
+            if (!title) return;
+            
+            // Получаем вычисленные стили
+            const computedStyles = getComputedStyle(title);
+            const fontSize = parseInt(computedStyles.fontSize);
+            const fontSizeRaw = computedStyles.fontSize;
+            
+            // Определяем ожидаемый размер
+            let expectedSize = 28;
+            if (width <= 360) expectedSize = 24;
+            else if (width <= 768) expectedSize = 28;
+            
+            // Основная диагностика
+            let diagnostics = [];
+            
+            if (fontSize === expectedSize) {
+                diagnostics.push(`<span class="status-good">✅ Размер корректный: ${fontSize}px</span>`);
+            } else {
+                diagnostics.push(`<span class="status-error">❌ Размер: ${fontSize}px (ожидался ${expectedSize}px)</span>`);
+            }
+            
+            diagnostics.push(`<span class="status-info">📱 Экран: ${width}px (${deviceCategory})</span>`);
+            diagnostics.push(`<span class="status-info">🎯 Ожидаемый размер: ${expectedSize}px</span>`);
+            
+            // Проверка CSS переменной
+            const rootStyles = getComputedStyle(document.documentElement);
+            const cssVarValue = rootStyles.getPropertyValue('--fs-h1').trim();
+            diagnostics.push(`<span class="status-info">📐 CSS переменная --fs-h1: ${cssVarValue}</span>`);
+            
+            // Вычисляем clamp результат
+            const minSize = 28;
+            const maxSize = 44;
+            const vwSize = Math.round(width * 0.06); // 6vw
+            const clampResult = Math.max(minSize, Math.min(maxSize, vwSize));
+            diagnostics.push(`<span class="status-info">🧮 clamp(28px, 6vw, 44px) = ${clampResult}px (6vw = ${vwSize}px)</span>`);
+            
+            if (clampResult !== expectedSize) {
+                diagnostics.push(`<span class="status-warning">⚠️ CSS clamp переопределяет медиа-запросы!</span>`);
+            }
+            
+            document.getElementById('mainDiagnostics').innerHTML = diagnostics.join('<br>');
+            
+            // CSS анализ
+            let cssAnalysis = [];
+            cssAnalysis.push(`font-size: ${fontSizeRaw}`);
+            cssAnalysis.push(`font-weight: ${computedStyles.fontWeight}`);
+            cssAnalysis.push(`text-align: ${computedStyles.textAlign}`);
+            cssAnalysis.push(`padding: ${computedStyles.padding}`);
+            cssAnalysis.push(`margin: ${computedStyles.margin}`);
+            cssAnalysis.push(`max-width: ${computedStyles.maxWidth}`);
+            
+            document.getElementById('cssAnalysis').innerHTML = cssAnalysis.join('<br>');
+        }
+        
+        // Запускаем диагностику
+        runDiagnostics();
+        window.addEventListener('resize', runDiagnostics);
+        
+        // Обновляем каждую секунду для точности
+        setInterval(runDiagnostics, 1000);
+    </script>
+</body>
+</html>

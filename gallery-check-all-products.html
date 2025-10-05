@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Проверка галерей всех продуктов</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background: #1a1a1a;
+            color: white;
+            padding: 20px;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .product-link {
+            display: block;
+            padding: 15px 20px;
+            margin: 10px 0;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .product-link:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: #007acc;
+            transform: translateY(-2px);
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .status-ok { background: #28a745; }
+        .status-error { background: #dc3545; }
+        
+        .gallery-info {
+            background: rgba(0,0,0,0.3);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .feature-item {
+            background: rgba(0,120,212,0.1);
+            border: 1px solid rgba(0,120,212,0.3);
+            padding: 15px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🖼️ Проверка галерей всех продуктов</h1>
+        
+        <div class="gallery-info">
+            <h2>📋 Примененные настройки галереи:</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h3>🎨 Стили CSS</h3>
+                    <p>• .product-thumbs с Grid layout<br>
+                    • Квадратные миниатюры (1:1)<br>
+                    • Темная тема с границами<br>
+                    • Hover эффекты</p>
+                </div>
+                
+                <div class="feature-item">
+                    <h3>⚡ JavaScript</h3>
+                    <p>• product-gallery.js подключен<br>
+                    • swapWithMain() функция<br>
+                    • setAttribute('src') команда<br>
+                    • Активные состояния</p>
+                </div>
+                
+                <div class="feature-item">
+                    <h3>📱 Адаптивность</h3>
+                    <p>• Размер 334×76px<br>
+                    • 4 равные колонки<br>
+                    • Отступ margin-top: 16px<br>
+                    • Мобильная версия</p>
+                </div>
+                
+                <div class="feature-item">
+                    <h3>🔧 Интерактивность</h3>
+                    <p>• Клик по миниатюре<br>
+                    • Плавная анимация<br>
+                    • data-full атрибуты<br>
+                    • Обновление активного состояния</p>
+                </div>
+            </div>
+        </div>
+
+        <h2>🚀 Список страниц продуктов:</h2>
+        
+        <a href="product-1.html" class="product-link" target="_blank">
+            <span class="status-indicator status-ok"></span>
+            <strong>product-1.html</strong> - Кубсат CLAY-CUBE
+            <br><small>✅ .product-thumbs | ✅ data-full | ✅ product-gallery.js</small>
+        </a>
+        
+        <a href="product-3.html" class="product-link" target="_blank">
+            <span class="status-indicator status-ok"></span>
+            <strong>product-3.html</strong> - Навигационный спутник R-NavSat
+            <br><small>✅ .product-thumbs | ✅ data-full | ✅ product-gallery.js</small>
+        </a>
+        
+        <a href="product-4.html" class="product-link" target="_blank">
+            <span class="status-indicator status-ok"></span>
+            <strong>product-4.html</strong> - Научно-исследовательский R-SciSat
+            <br><small>✅ .product-thumbs | ✅ data-full | ✅ product-gallery.js</small>
+        </a>
+        
+        <a href="product-5.html" class="product-link" target="_blank">
+            <span class="status-indicator status-ok"></span>
+            <strong>product-5.html</strong> - Коммерческий спутник R-CommSat
+            <br><small>✅ .product-thumbs | ✅ data-full | ✅ product-gallery.js</small>
+        </a>
+        
+        <a href="product-6.html" class="product-link" target="_blank">
+            <span class="status-indicator status-ok"></span>
+            <strong>product-6.html</strong> - Метеорологический R-WeatherSat
+            <br><small>✅ .product-thumbs | ✅ data-full | ✅ product-gallery.js</small>
+        </a>
+        
+        <a href="product-7.html" class="product-link" target="_blank">
+            <span class="status-indicator status-ok"></span>
+            <strong>product-7.html</strong> - Спутник дистанционного зондирования R-EarthSat
+            <br><small>✅ .product-thumbs | ✅ data-full | ✅ product-gallery.js</small>
+        </a>
+        
+        <a href="product-8.html" class="product-link" target="_blank">
+            <span class="status-indicator status-ok"></span>
+            <strong>product-8.html</strong> - Военный спутник связи R-MilSat
+            <br><small>✅ .product-thumbs | ✅ data-full | ✅ product-gallery.js</small>
+        </a>
+        
+        <a href="product-9.html" class="product-link" target="_blank">
+            <span class="status-indicator status-ok"></span>
+            <strong>product-9.html</strong> - Экспериментальный R-TestSat
+            <br><small>✅ .product-thumbs | ✅ data-full | ✅ product-gallery.js</small>
+        </a>
+
+        <div style="margin-top: 40px; padding: 20px; background: rgba(0,255,136,0.1); border: 1px solid rgba(0,255,136,0.3); border-radius: 8px;">
+            <h3>🎯 Инструкции для тестирования:</h3>
+            <ol>
+                <li>Откройте любую страницу продукта из списка выше</li>
+                <li>Найдите галерею с 4 миниатюрами внизу</li>
+                <li>Кликните по любой миниатюре</li>
+                <li>Главное изображение должно смениться с плавной анимацией</li>
+                <li>Активная миниатюра должна подсветиться синей рамкой</li>
+                <li>При наведении миниатюры должны увеличиваться</li>
+            </ol>
+        </div>
+
+        <div style="margin-top: 20px; padding: 15px; background: rgba(255,193,7,0.1); border: 1px solid rgba(255,193,7,0.3); border-radius: 8px;">
+            <h4>🔧 Техническая информация:</h4>
+            <p><strong>Ключевая команда переключения:</strong> <code>swapWithMain(thumb)</code></p>
+            <p><strong>Смена изображения:</strong> <code>mainImage.setAttribute('src', newSrc)</code></p>
+            <p><strong>Источник данных:</strong> <code>thumbImg.dataset.full</code></p>
+        </div>
+    </div>
+
+    <script>
+        // Проверяем, загружен ли product-gallery.js
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Страница проверки галерей загружена');
+            
+            // Добавляем информацию о текущем времени
+            const timeInfo = document.createElement('div');
+            timeInfo.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: rgba(0,0,0,0.8);
+                color: white;
+                padding: 10px;
+                border-radius: 5px;
+                font-size: 12px;
+                z-index: 1000;
+            `;
+            timeInfo.innerHTML = `
+                📅 ${new Date().toLocaleDateString('ru-RU')}<br>
+                🕐 ${new Date().toLocaleTimeString('ru-RU')}<br>
+                🌐 Сервер: localhost:8090
+            `;
+            document.body.appendChild(timeInfo);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Тест сдвига контента на 8px влево - RUSKY</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Стили для демонстрации сдвига на 8px влево */
+        .left-shift-overlay {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.9);
+            color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            z-index: 9999;
+            font-size: 13px;
+            max-height: 220px;
+            overflow-y: auto;
+        }
+        
+        .shift-guide-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 5;
+        }
+        
+        .original-position-line {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 2px;
+            background: rgba(255, 255, 0, 0.6);
+        }
+        
+        .shifted-position-line {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: -8px;
+            width: 2px;
+            background: rgba(0, 255, 255, 0.8);
+        }
+        
+        .center-reference-line {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 2px;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-50%);
+        }
+        
+        .success { color: #51cf66; }
+        .warning { color: #ffd43b; }
+        .error { color: #ff6b6b; }
+        .info { color: #74c0fc; }
+        
+        .test-section {
+            margin: 8px 0;
+            padding: 8px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 6px;
+        }
+        
+        .hide-on-desktop {
+            display: block;
+        }
+        
+        @media (min-width: 481px) {
+            .hide-on-desktop {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Информационная панель -->
+    <div class="left-shift-overlay hide-on-desktop" id="testOverlay">
+        <div><strong>📱 Тест сдвига на 8px влево (мобильная версия)</strong></div>
+        
+        <div class="test-section">
+            <div><strong>📏 Позиционирование</strong></div>
+            <div>Margin-left: <span id="itemMargin" class="info"></span></div>
+            <div>Факт. сдвиг: <span id="actualShift" class="info"></span>px</div>
+        </div>
+        
+        <div class="test-section">
+            <div><strong>📍 Элементы</strong></div>
+            <div>Число align: <span id="numberAlign" class="info"></span></div>
+            <div>Подпись align: <span id="labelAlign" class="info"></span></div>
+        </div>
+        
+        <div class="test-section">
+            <div><strong>✅ Результат</strong></div>
+            <div>Экран: <span id="screenWidth" class="info"></span>px</div>
+            <div>Статус: <span id="leftShiftResult"></span></div>
+        </div>
+        
+        <div style="margin-top: 12px; font-size: 11px; opacity: 0.8;">
+            <div><span style="color: yellow;">Желтая линия</span> - исходная позиция</div>
+            <div><span style="color: cyan;">Голубая линия</span> - сдвинутая позиция (-8px)</div>
+            <div><span style="color: rgba(255,255,255,0.3);">Белая линия</span> - центр контейнера</div>
+            <div><em>Двойной клик для скрытия панели</em></div>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="header-logo">RUSKY</div>
+        <nav class="header-nav">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="launches.html">ЗАПУСКИ</a>
+            <a href="documentation.html">ДОКУМЕНТАЦИЯ</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+        </nav>
+        <div class="burger-menu" onclick="toggleMobileMenu()">
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+        </div>
+    </header>
+
+    <nav class="mobile-nav" id="mobile-nav">
+        <div class="mobile-nav-list">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="launches.html">ЗАПУСКИ</a>
+            <a href="documentation.html">ДОКУМЕНТАЦИЯ</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+        </div>
+    </nav>
+
+    <!-- Основная секция статистики -->
+    <section class="stats-section" style="background-image: url('img 3.png'); background-size: cover; background-position: center;">
+        <div class="stats-overlay"></div>
+        <div class="stats-content">
+            <div class="stats-left" id="statsLeft">
+                <div class="stats-header">
+                    <h2>Почему именно мы?</h2>
+                </div>
+                <div class="stats-numbers" id="statsNumbers">
+                    <div class="stat-item" id="testStatItem">
+                        <div class="shift-guide-lines">
+                            <div class="original-position-line"></div>
+                            <div class="shifted-position-line"></div>
+                            <div class="center-reference-line"></div>
+                        </div>
+                        <span class="stat-number" id="testNumber">50+</span>
+                        <span class="stat-label" id="testLabel">Успешных запуска</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">42+</span>
+                        <span class="stat-label">Довольных клиентов</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">80+</span>
+                        <span class="stat-label">Изготовленных спутников</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">15+</span>
+                        <span class="stat-label">Лет опыта</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">25+</span>
+                        <span class="stat-label">Инженеров</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Качество</span>
+                    </div>
+                </div>
+                <div class="stats-features">
+                    <div class="feature-arrow">
+                        <span>Научная точность</span>
+                        <span class="arrow">→</span>
+                    </div>
+                    <div class="feature-arrow">
+                        <span>Быстрый запуск</span>
+                        <span class="arrow">→</span>
+                    </div>
+                    <div class="feature-arrow">
+                        <span>Гибкие конфигурации</span>
+                        <span class="arrow">→</span>
+                    </div>
+                    <div class="feature-arrow">
+                        <span>Глобальное покрытие</span>
+                        <span class="arrow">→</span>
+                    </div>
+                </div>
+            </div>
+            <div class="stats-right">
+                <div class="stats-year">2025</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Демо секция -->
+    <div style="background: #111; padding: 60px 20px; color: #fff;">
+        <h2 style="text-align: center; margin-bottom: 30px;">📱 Сдвиг контента на 8px влево</h2>
+        <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; color: #ccc;">
+            <h3 style="color: #00ff00; margin-bottom: 15px;">✅ Только для мобильной версии</h3>
+            <ul style="line-height: 1.8;">
+                <li><strong>Экраны ≤480px:</strong> добавлен margin-left: -8px к .stat-item</li>
+                <li><strong>Планшеты и десктоп:</strong> без изменений</li>
+                <li><strong>Эффект:</strong> весь контент внутри блоков сдвинут на 8px влево</li>
+                <li><strong>Сохранено:</strong> центрирование текста внутри блоков</li>
+            </ul>
+            
+            <h3 style="color: #4A9EFF; margin: 20px 0 15px;">🔧 CSS изменение</h3>
+            <pre style="background: #000; padding: 12px; border-radius: 6px; font-size: 12px; overflow-x: auto;">
+@media (max-width: 480px) {
+    .stat-item {
+        min-width: auto;
+        max-width: 100%;
+        text-align: center;
+        margin-left: -8px; /* новое свойство */
+    }
+}</pre>
+            
+            <h3 style="color: #ff9900; margin: 20px 0 15px;">🎨 Визуальный эффект</h3>
+            <ul style="line-height: 1.8;">
+                <li>Все блоки статистики сдвинуты на 8px влево</li>
+                <li>Создается более плотная компоновка на малых экранах</li>
+                <li>Сохраняется читаемость и структура</li>
+                <li>Работает только на мобильных устройствах</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+    <script>
+        function updateLeftShiftInfo() {
+            const screenWidth = window.innerWidth;
+            
+            document.getElementById('screenWidth').textContent = screenWidth;
+            
+            if (screenWidth > 480) {
+                document.getElementById('leftShiftResult').innerHTML = 
+                    '<span class="info">Тест активен только на мобильных (≤480px)</span>';
+                
+                // Скрыть направляющие на больших экранах
+                document.querySelectorAll('.shift-guide-lines').forEach(guide => {
+                    guide.style.display = 'none';
+                });
+                return;
+            } else {
+                // Показать направляющие на мобильных
+                document.querySelectorAll('.shift-guide-lines').forEach(guide => {
+                    guide.style.display = 'block';
+                });
+            }
+            
+            // Получаем элементы
+            const testStatItem = document.getElementById('testStatItem');
+            const testNumber = document.getElementById('testNumber');
+            const testLabel = document.getElementById('testLabel');
+            
+            if (!testStatItem || !testNumber || !testLabel) return;
+            
+            // Проверяем стили
+            const itemStyle = getComputedStyle(testStatItem);
+            const numberStyle = getComputedStyle(testNumber);
+            const labelStyle = getComputedStyle(testLabel);
+            
+            const itemMargin = itemStyle.marginLeft;
+            const numberAlign = numberStyle.textAlign;
+            const labelAlign = labelStyle.textAlign;
+            
+            // Вычисляем фактический сдвиг
+            const containerRect = testStatItem.closest('.stats-numbers').getBoundingClientRect();
+            const itemRect = testStatItem.getBoundingClientRect();
+            const actualShift = Math.round(itemRect.left - containerRect.left);
+            
+            // Обновление информации
+            document.getElementById('itemMargin').textContent = itemMargin;
+            document.getElementById('actualShift').textContent = actualShift;
+            document.getElementById('numberAlign').textContent = numberAlign;
+            document.getElementById('labelAlign').textContent = labelAlign;
+            
+            // Проверка корректности
+            const marginCorrect = itemMargin === '-8px';
+            const shiftCorrect = Math.abs(actualShift - 12) <= 3; // 20px base - 8px shift = ~12px
+            const alignmentCorrect = numberAlign === 'center' && labelAlign === 'center';
+            
+            const allCorrect = marginCorrect && shiftCorrect && alignmentCorrect;
+            
+            let statusHTML = '';
+            if (allCorrect) {
+                statusHTML = '<span class="success">✅ Контент сдвинут на 8px влево</span>';
+            } else {
+                const issues = [];
+                if (!marginCorrect) issues.push('margin неверный');
+                if (!shiftCorrect) issues.push('сдвиг неточный');
+                if (!alignmentCorrect) issues.push('выравнивание нарушено');
+                statusHTML = `<span class="warning">⚠️ Требует корректировки: ${issues.join(', ')}</span>`;
+            }
+            
+            document.getElementById('leftShiftResult').innerHTML = statusHTML;
+            
+            console.log('Left shift test:', {
+                screenWidth,
+                itemMargin,
+                actualShift,
+                numberAlign,
+                labelAlign,
+                marginCorrect,
+                shiftCorrect,
+                alignmentCorrect,
+                allCorrect
+            });
+        }
+        
+        // Обновляем при загрузке и изменении размера
+        window.addEventListener('load', updateLeftShiftInfo);
+        window.addEventListener('resize', updateLeftShiftInfo);
+        
+        // Скрыть/показать по двойному клику
+        document.addEventListener('dblclick', function() {
+            const overlay = document.getElementById('testOverlay');
+            const isVisible = overlay.style.display !== 'none';
+            
+            overlay.style.display = isVisible ? 'none' : 'block';
+            
+            // Также скрыть/показать направляющие
+            document.querySelectorAll('.shift-guide-lines').forEach(guide => {
+                guide.style.display = isVisible ? 'none' : 'block';
+            });
+        });
+        
+        console.log('📱 Left shift 8px test loaded');
+        console.log('🔍 Double-click to toggle guides');
+    </script>
+</body>
+</html>

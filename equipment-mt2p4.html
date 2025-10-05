@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RUSKY — MT-2.P4 Магнитный стержень</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo" onclick="location.href='index.html'" style="cursor:pointer">RUSKY</div>
+        <nav class="header-nav">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="#" onclick="openFilterModal()">ФИЛЬТР</a>
+            <a href="equipment.html" class="active">ОБОРУДОВАНИЕ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="#" onclick="openDocumentationModal()">ДОКУМЕНТАЦИЯ</a>
+            <a href="launches.html">ЗАПУСК</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+            <a href="cart.html">МОИ ЗАКАЗЫ</a>
+            <a href="about.html">О НАС</a>
+        </nav>
+        <div class="burger-menu" onclick="toggleMobileMenu()">
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+        </div>
+        <a href="cart.html" class="cart-icon" aria-label="Корзина">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="10" cy="26" r="3" fill="white"/>
+                <circle cx="24" cy="26" r="3" fill="white"/>
+                <path d="M4 7H7L10 20H25L28 11H9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+            <span class="cart-badge" style="display: none;">0</span>
+        </a>
+    </header>
+
+    <nav class="mobile-nav">
+        <div class="mobile-nav-list">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="#" onclick="openFilterModal()">ФИЛЬТР</a>
+            <a href="equipment.html">ОБОРУДОВАНИЕ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="#" onclick="openDocumentationModal()">ДОКУМЕНТАЦИЯ</a>
+            <a href="launches.html">ЗАПУСК</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+            <a href="cart.html">МОИ ЗАКАЗЫ</a>
+            <a href="about.html">О НАС</a>
+        </div>
+    </nav>
+
+    <main class="product-page">
+        <div class="product-container">
+            <aside class="product-gallery">
+                <div class="product-main-image">
+                    <img id="mainImage" src="1.png" alt="MT-2.P4 Магнитный стержень" loading="eager">
+                </div>
+                <div class="product-thumbs">
+                    <img src="1.png" alt="MT-2.P4 основной вид" class="thumb-active" onclick="changeMainImage('1.png', this)">
+                    <img src="2.png" alt="Сравнение с STR.P4" onclick="changeMainImage('2.png', this)">
+                    <img src="3.png" alt="Сравнение с Monopole2-UHF" onclick="changeMainImage('3.png', this)">
+                    <img src="1.png" alt="MT-2.P4 детали" onclick="changeMainImage('1.png', this)">
+                </div>
+            </aside>
+
+            <section class="product-info">
+                <h1 class="product-title">MT-2.P4<br>Магнитный стержень</h1>
+                <div class="product-price">
+                    <span class="price-value">45 000 ₽</span>
+                    <span class="price-note">В наличии</span>
+                </div>
+                <p class="product-lead">
+                    Многофункциональный магнитный стержень для сброса накопленной спутниковой энергии и создания дипольного эффекта. Идеальное решение для стабилизации и управления ориентацией малых спутников.
+                </p>
+
+                <div class="product-specs">
+                    <h3>Ключевые характеристики:</h3>
+                    <p><strong>Тип:</strong> Магнитный актуатор с ферритовым сердечником</p>
+                    <p><strong>Диапазон момента:</strong> ±0.2 А·м²</p>
+                    <p><strong>Потребляемая мощность:</strong> 0.5-2.0 Вт</p>
+                    <p><strong>Масса:</strong> 180 г</p>
+                    <p><strong>Размеры:</strong> 120×25×15 мм</p>
+                    <p><strong>Рабочая температура:</strong> -40°C до +85°C</p>
+                    <p><strong>Срок службы:</strong> 5+ лет в космосе</p>
+                </div>
+
+                <div class="product-advantages">
+                    <h3>Преимущества:</h3>
+                    <p>Низкое энергопотребление и высокая эффективность</p>
+                    <p>Компактный размер для CubeSat и SmallSat платформ</p>
+                    <p>Надёжная работа в условиях космической радиации</p>
+                    <p>Простая интеграция с системами управления ориентацией</p>
+                </div>
+
+                <div class="product-actions">
+                    <button class="btn btn-outline" onclick="window.location.href='delivery.html'">ОФОРМИТЬ ДОСТАВКУ</button>
+                    <button class="btn btn-outline btn-add-cart" onclick="addToCart('MT-2.P4', 'Магнитный стержень', 45000, '1.png')">ДОБАВИТЬ В КОРЗИНУ</button>
+                </div>
+
+                <div class="product-side-label">MT-2.P4</div>
+            </section>
+        </div>
+    </main>
+
+    <script src="main.js"></script>
+    <script>
+        function changeMainImage(src, element) {
+            // Обновляем главное изображение
+            document.getElementById('mainImage').src = src;
+            
+            // Убираем активный класс со всех миниатюр
+            document.querySelectorAll('.product-thumbs img').forEach(img => {
+                img.classList.remove('thumb-active');
+            });
+            
+            // Добавляем активный класс к выбранной миниатюре
+            element.classList.add('thumb-active');
+        }
+    </script>
+</body>
+</html>

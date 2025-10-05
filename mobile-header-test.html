@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест мобильных отступов от шапки</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Имитация фиксированной шапки */
+        .mock-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 72px;
+            background: #333;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        /* Визуальная индикация */
+        .product-page {
+            background: linear-gradient(45deg, #f0f0f0 25%, transparent 25%),
+                       linear-gradient(-45deg, #f0f0f0 25%, transparent 25%);
+            background-size: 20px 20px;
+            min-height: 100vh;
+            border: 3px solid #007acc;
+        }
+        
+        .product-gallery {
+            background: rgba(255, 165, 0, 0.3);
+            border: 2px solid orange;
+            min-height: 300px;
+            margin-bottom: 20px;
+        }
+        
+        .indicator {
+            background: rgba(255, 0, 0, 0.2);
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 4px solid red;
+            font-size: 14px;
+        }
+        
+        .safe-zone-indicator {
+            background: rgba(0, 255, 0, 0.2);
+            padding: 5px;
+            border: 1px dashed green;
+            font-size: 12px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Имитация фиксированной шапки -->
+    <div class="mock-header">
+        МОБИЛЬНАЯ ШАПКА (72px)
+    </div>
+
+    <!-- Основной контент -->
+    <div class="product-page">
+        <div class="safe-zone-indicator">
+            Safe Area Top: env(safe-area-inset-top)
+        </div>
+        
+        <div class="indicator">
+            📱 Это контейнер .product-page с padding-top: calc(72px + safe-area)
+        </div>
+
+        <aside class="product-gallery">
+            <div class="indicator">
+                🖼️ Это .product-gallery с margin-top: 12px (дополнительная прослойка)
+            </div>
+            <p>Содержимое галереи товара...</p>
+            <p>Изображения товара здесь</p>
+            <p>Thumbnails и прочее</p>
+        </aside>
+
+        <div class="product-info">
+            <div class="indicator">
+                📝 Информация о товаре
+            </div>
+            <h2>Название товара</h2>
+            <p>Описание товара и его характеристики.</p>
+            <p>Цена, кнопки добавления в корзину и т.д.</p>
+        </div>
+
+        <div style="height: 50vh; background: rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: center;">
+            <p>Дополнительный контент для проверки скролла</p>
+        </div>
+    </div>
+
+    <script>
+        // Показываем расчетные значения
+        document.addEventListener('DOMContentLoaded', function() {
+            const root = document.documentElement;
+            const headerHeight = getComputedStyle(root).getPropertyValue('--header-h-mob');
+            
+            console.log('Header height:', headerHeight);
+            console.log('Safe area top:', getComputedStyle(document.body).getPropertyValue('env(safe-area-inset-top)') || '0px');
+            
+            // Добавляем информацию на страницу
+            const info = document.createElement('div');
+            info.style.cssText = `
+                position: fixed; 
+                bottom: 10px; 
+                right: 10px; 
+                background: rgba(0,0,0,0.8); 
+                color: white; 
+                padding: 10px; 
+                border-radius: 5px; 
+                font-size: 12px;
+                z-index: 1001;
+            `;
+            info.innerHTML = `
+                📐 Header: ${headerHeight}<br>
+                📱 Viewport: ${window.innerWidth}×${window.innerHeight}<br>
+                🔧 Media Query: ${window.matchMedia('(max-width: 768px)').matches ? 'АКТИВЕН' : 'НЕ АКТИВЕН'}
+            `;
+            document.body.appendChild(info);
+        });
+    </script>
+</body>
+</html>

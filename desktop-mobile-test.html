@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест Desktop vs Mobile Layout</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .test-label {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 9999;
+            font-size: 14px;
+        }
+        .test-info {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 9999;
+            font-size: 12px;
+            max-width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-label">
+        <div>Screen: <span id="screenSize"></span></div>
+        <div>Layout: <span id="layoutType"></span></div>
+    </div>
+    
+    <div class="test-info">
+        <strong>Тест разделения Desktop vs Mobile:</strong><br>
+        - Desktop (>768px): Левое выравнивание<br>
+        - Tablet (481-768px): Центрирование<br>
+        - Mobile (≤480px): Центрирование
+    </div>
+
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>RUSKY</h1>
+            <div class="hero-subtitle">Надёжные спутниковые системы</div>
+            <div class="hero-desc">Разработка и производство компонентов для космических аппаратов с применением передовых технологий</div>
+            <a href="#" class="hero-btn">Узнать больше</a>
+        </div>
+    </section>
+
+    <script>
+        function updateScreenInfo() {
+            const width = window.innerWidth;
+            document.getElementById('screenSize').textContent = width + 'px';
+            
+            let layoutType = '';
+            if (width > 768) {
+                layoutType = 'Desktop (левое выравнивание)';
+            } else if (width >= 481) {
+                layoutType = 'Tablet (центрирование)';
+            } else {
+                layoutType = 'Mobile (центрирование)';
+            }
+            document.getElementById('layoutType').textContent = layoutType;
+        }
+        
+        updateScreenInfo();
+        window.addEventListener('resize', updateScreenInfo);
+    </script>
+</body>
+</html>

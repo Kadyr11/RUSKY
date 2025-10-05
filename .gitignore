@@ -1,0 +1,49 @@
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Node / JS
+node_modules/
+npm-debug.log
+package-lock.json
+yarn.lock
+
+# Python
+__pycache__/
+*.pyc
+
+# IDEs
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# macOS
+*.DS_Store
+
+# Images (you may want to keep images, adjust if needed)
+# *.png
+# *.jpg
+
+# OneDrive temp files
+~$*
+
+# Build outputs
+dist/
+build/
+
+# Logs
+logs/
+*.log
+
+# Environment
+.env
+
+# Others
+Thumbs.db
+
+# Keep this repo clean: exclude large assets you don't want in Git
+# Add any other large files here if necessary

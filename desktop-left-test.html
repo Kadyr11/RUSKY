@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desktop Left Align Test</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .test-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            z-index: 9999;
+            font-size: 14px;
+            max-width: 300px;
+        }
+        .status {
+            margin-top: 10px;
+            padding: 5px;
+            border-radius: 3px;
+        }
+        .desktop { background: #2d5a27; }
+        .tablet { background: #8b4513; }
+        .mobile { background: #4a4a4a; }
+    </style>
+</head>
+<body>
+    <div class="test-indicator">
+        <strong>Layout Test</strong><br>
+        Размер экрана: <span id="size"></span><br>
+        <div id="layout-status" class="status">...</div>
+        <div style="margin-top: 10px; font-size: 12px;">
+            Desktop (&gt;768px): Левое выравнивание с отступом 80px<br>
+            Tablet/Mobile (≤768px): Центрирование
+        </div>
+    </div>
+
+    <section class="hero-section" style="background-image: url('img-1.png'); background-size: cover; background-position: center;">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Хотите купить спутник?</h1>
+            <p class="hero-subtitle">
+                Разработка, производство и внедрение космических спутников нового поколения.
+            </p>
+            <p class="hero-desc">
+                RUSKY — это инжиниринговая платформа, специализирующаяся на создании космических спутников и модулей различной сложности.
+                Мы объединяем экспертов в аэрокосмической отрасли для реализации космических решений.
+            </p>
+            <a href="#" class="hero-btn">ПОДРОБНЕЕ</a>
+        </div>
+    </section>
+
+    <script>
+        function updateStatus() {
+            const width = window.innerWidth;
+            document.getElementById('size').textContent = width + 'px';
+            
+            const statusEl = document.getElementById('layout-status');
+            
+            if (width > 768) {
+                statusEl.textContent = 'Desktop - Левое выравнивание (80px)';
+                statusEl.className = 'status desktop';
+            } else if (width >= 481) {
+                statusEl.textContent = 'Tablet - Центрирование';
+                statusEl.className = 'status tablet';
+            } else {
+                statusEl.textContent = 'Mobile - Центрирование';
+                statusEl.className = 'status mobile';
+            }
+        }
+        
+        updateStatus();
+        window.addEventListener('resize', updateStatus);
+    </script>
+</body>
+</html>

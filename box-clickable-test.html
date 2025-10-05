@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Тест заполнения box.clickable контейнера - RUSKY</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .box-container-test {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.9);
+            color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            z-index: 9999;
+            font-size: 13px;
+            max-height: 220px;
+            overflow-y: auto;
+        }
+        
+        .container-outline-box {
+            position: relative;
+        }
+        
+        .container-outline-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 3px solid rgba(255, 165, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            border-radius: 24px;
+        }
+        
+        .image-outline::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 2px solid rgba(0, 255, 255, 0.6);
+            pointer-events: none;
+            z-index: 15;
+            border-radius: 24px;
+        }
+        
+        .test-section {
+            margin: 8px 0;
+            padding: 8px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 6px;
+        }
+        
+        .success { color: #51cf66; }
+        .warning { color: #ffd43b; }
+        .error { color: #ff6b6b; }
+        .info { color: #74c0fc; }
+        
+        .hide-on-desktop {
+            display: block;
+        }
+        
+        @media (min-width: 769px) {
+            .hide-on-desktop {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Информационная панель -->
+    <div class="box-container-test" id="testOverlay">
+        <div><strong>📦 Тест заполнения box.clickable контейнера</strong></div>
+        
+        <div class="test-section">
+            <div><strong>📊 Проверка заполнения</strong></div>
+            <div>Коробка 1: <span id="box1Result" class="info"></span></div>
+            <div>Коробка 2: <span id="box2Result" class="info"></span></div>
+            <div>Коробка 3: <span id="box3Result" class="info"></span></div>
+            <div>Коробка 4: <span id="box4Result" class="info"></span></div>
+        </div>
+        
+        <div class="test-section">
+            <div><strong>✅ Общий статус</strong></div>
+            <div>Экран: <span id="screenWidth" class="info"></span>px</div>
+            <div>Статус: <span id="overallResult"></span></div>
+        </div>
+        
+        <div style="margin-top: 12px; font-size: 11px; opacity: 0.8;">
+            <div><span style="color: orange;">Оранжевая рамка</span> - внешний box.clickable</div>
+            <div><span style="color: cyan;">Голубая рамка</span> - область изображения</div>
+            <div><em>Двойной клик для скрытия панели</em></div>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="header-logo">RUSKY</div>
+        <nav class="header-nav">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="launches.html">ЗАПУСКИ</a>
+            <a href="documentation.html">ДОКУМЕНТАЦИЯ</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+        </nav>
+        <div class="burger-menu" onclick="toggleMobileMenu()">
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+        </div>
+    </header>
+
+    <nav class="mobile-nav" id="mobile-nav">
+        <div class="mobile-nav-list">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="launches.html">ЗАПУСКИ</a>
+            <a href="documentation.html">ДОКУМЕНТАЦИЯ</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+        </div>
+    </nav>
+
+    <!-- Демонстрация grid с box.clickable -->
+    <div style="background: #111; padding: 60px 20px; color: #fff; margin-top: 80px;">
+        <h2 style="text-align: center; margin-bottom: 30px;">📦 Тест заполнения внешнего контейнера box.clickable</h2>
+        
+        <!-- Grid контейнер -->
+        <div class="grid-container" style="max-width: 1200px; margin: 0 auto;">
+            
+            <!-- Текстовая коробка для контраста -->
+            <div class="box box-text" style="grid-area: box-1; padding: 60px; background-color: black; border-radius: 24px;">
+                <h1>ТИПЫ<br>СПУТНИКОВ</h1>
+                <p>Разработка, производство и внедрение космических спутников нового поколения.</p>
+            </div>
+            
+            <!-- Clickable boxes с изображениями -->
+            <div class="box clickable container-outline-box image-outline" style="grid-area: box-2;" id="testBox1" onclick="goToSatelliteDetail('CLAY-NAV')">
+                <img src="card 4.png" alt="CLAY-NAV" id="testImg1">
+                <div class="card-label">CLAY-NAV</div>
+            </div>
+            
+            <div class="box clickable container-outline-box image-outline" style="grid-area: box-3;" id="testBox2" onclick="goToSatelliteDetail('CLAY-CUBE')">
+                <img src="card 1.png" alt="CLAY-CUBE" id="testImg2">
+                <div class="card-label">CLAY-CUBE</div>
+            </div>
+            
+            <div class="box clickable container-outline-box image-outline" style="grid-area: box-4;" id="testBox3" onclick="goToSatelliteDetail('CLAY-COM')">
+                <img src="card 2.png" alt="CLAY-COM" id="testImg3">
+                <div class="card-label">CLAY-COM</div>
+            </div>
+            
+            <div class="box clickable container-outline-box image-outline" style="grid-area: box-5;" id="testBox4" onclick="goToSatelliteDetail('CLAY-SCI')">
+                <img src="card 3.png" alt="CLAY-SCI" id="testImg4">
+                <div class="card-label">CLAY-SCI</div>
+            </div>
+        </div>
+
+        <!-- Демо раздел с объяснением -->
+        <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; color: #ccc; margin-top: 40px; max-width: 1200px; margin-left: auto; margin-right: auto;">
+            <h3 style="color: #00ff00; margin-bottom: 15px;">✅ Новые CSS правила для box.clickable</h3>
+            <pre style="background: #000; padding: 12px; border-radius: 6px; font-size: 12px; overflow-x: auto;">
+/* Изображения заполняют весь внешний контейнер box.clickable */
+.box.clickable img {
+    border-radius: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Подписи поверх изображений */
+.card-label,
+.card-label-1 {
+    z-index: 2;
+}</pre>
+            
+            <h3 style="color: #4A9EFF; margin: 20px 0 15px;">🎯 Результат</h3>
+            <ul style="line-height: 1.8;">
+                <li>Изображения заполняют весь внешний контейнер .box.clickable</li>
+                <li>Border-radius наследуется от внешнего контейнера</li>
+                <li>Подписи отображаются поверх изображений</li>
+                <li>Сохраняются все hover эффекты</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+    <script>
+        function checkBoxImageFill(boxId, imgId) {
+            const box = document.getElementById(boxId);
+            const img = document.getElementById(imgId);
+            
+            if (!box || !img) return false;
+            
+            const boxRect = box.getBoundingClientRect();
+            const imgRect = img.getBoundingClientRect();
+            
+            // Проверяем, что изображение заполняет весь box
+            const widthMatch = Math.abs(imgRect.width - boxRect.width) <= 3;
+            const heightMatch = Math.abs(imgRect.height - boxRect.height) <= 3;
+            const positionMatch = Math.abs(imgRect.left - boxRect.left) <= 3 && Math.abs(imgRect.top - boxRect.top) <= 3;
+            
+            return widthMatch && heightMatch && positionMatch;
+        }
+        
+        function updateBoxContainerTest() {
+            const screenWidth = window.innerWidth;
+            document.getElementById('screenWidth').textContent = screenWidth;
+            
+            // Проверяем каждую коробку
+            const boxes = [
+                { boxId: 'testBox1', imgId: 'testImg1', name: 'Box 1 (CLAY-NAV)' },
+                { boxId: 'testBox2', imgId: 'testImg2', name: 'Box 2 (CLAY-CUBE)' },
+                { boxId: 'testBox3', imgId: 'testImg3', name: 'Box 3 (CLAY-COM)' },
+                { boxId: 'testBox4', imgId: 'testImg4', name: 'Box 4 (CLAY-SCI)' }
+            ];
+            
+            let correctCount = 0;
+            
+            boxes.forEach((box, index) => {
+                const isCorrect = checkBoxImageFill(box.boxId, box.imgId);
+                const resultElement = document.getElementById(`box${index + 1}Result`);
+                
+                if (isCorrect) {
+                    correctCount++;
+                    resultElement.innerHTML = '<span class="success">✅ Заполняет контейнер</span>';
+                } else {
+                    resultElement.innerHTML = '<span class="warning">⚠️ Не заполняет полностью</span>';
+                }
+            });
+            
+            // Общий результат
+            const overallElement = document.getElementById('overallResult');
+            if (correctCount === boxes.length) {
+                overallElement.innerHTML = '<span class="success">✅ Все изображения заполняют контейнеры</span>';
+            } else {
+                overallElement.innerHTML = `<span class="warning">⚠️ ${correctCount}/${boxes.length} изображений корректны</span>`;
+            }
+            
+            console.log('Box container test:', {
+                screenWidth,
+                correctCount,
+                totalBoxes: boxes.length,
+                results: boxes.map(box => ({
+                    name: box.name,
+                    correct: checkBoxImageFill(box.boxId, box.imgId)
+                }))
+            });
+        }
+        
+        // Обновляем при загрузке и изменении размера
+        window.addEventListener('load', () => {
+            setTimeout(updateBoxContainerTest, 500); // Даем время изображениям загрузиться
+        });
+        window.addEventListener('resize', updateBoxContainerTest);
+        
+        // Скрыть/показать по двойному клику
+        document.addEventListener('dblclick', function() {
+            const overlay = document.getElementById('testOverlay');
+            const isVisible = overlay.style.display !== 'none';
+            
+            overlay.style.display = isVisible ? 'none' : 'block';
+            
+            // Также скрыть/показать рамки контейнеров
+            document.querySelectorAll('.container-outline-box, .image-outline').forEach(container => {
+                if (isVisible) {
+                    container.classList.remove('container-outline-box', 'image-outline');
+                } else {
+                    if (!container.classList.contains('container-outline-box')) {
+                        container.classList.add('container-outline-box', 'image-outline');
+                    }
+                }
+            });
+        });
+        
+        // Placeholder функция для перехода к спутнику
+        function goToSatelliteDetail(satellite) {
+            console.log('Переход к спутнику:', satellite);
+        }
+        
+        console.log('📦 Box clickable container test loaded');
+        console.log('🔍 Double-click to toggle container outlines');
+    </script>
+</body>
+</html>

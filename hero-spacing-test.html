@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Тест отступов и центрирования hero-секции - RUSKY</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .spacing-test-overlay {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.9);
+            color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            z-index: 9999;
+            font-size: 13px;
+            max-height: 250px;
+            overflow-y: auto;
+        }
+        
+        .element-spacing-guide {
+            position: relative;
+        }
+        
+        .element-spacing-guide::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 2px;
+            background: rgba(255, 255, 0, 0.6);
+            pointer-events: none;
+        }
+        
+        .centering-guide {
+            position: relative;
+        }
+        
+        .centering-guide::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: rgba(0, 255, 255, 0.6);
+            transform: translateX(-50%);
+            pointer-events: none;
+            z-index: 5;
+        }
+        
+        .test-section {
+            margin: 8px 0;
+            padding: 8px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 6px;
+        }
+        
+        .success { color: #51cf66; }
+        .warning { color: #ffd43b; }
+        .error { color: #ff6b6b; }
+        .info { color: #74c0fc; }
+        
+        .hide-on-desktop {
+            display: block;
+        }
+        
+        @media (min-width: 481px) {
+            .hide-on-desktop {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Информационная панель -->
+    <div class="spacing-test-overlay hide-on-desktop" id="testOverlay">
+        <div><strong>📐 Тест отступов и центрирования hero-секции</strong></div>
+        
+        <div class="test-section">
+            <div><strong>📏 Отступы элементов</strong></div>
+            <div>H1 margin-bottom: <span id="h1Margin" class="info"></span></div>
+            <div>Subtitle margin-bottom: <span id="subtitleMargin" class="info"></span></div>
+            <div>Desc margin-bottom: <span id="descMargin" class="info"></span></div>
+        </div>
+        
+        <div class="test-section">
+            <div><strong>📍 Центрирование</strong></div>
+            <div>Hero content: <span id="heroAlignment" class="info"></span></div>
+            <div>Button: <span id="buttonAlignment" class="info"></span></div>
+        </div>
+        
+        <div class="test-section">
+            <div><strong>✅ Общий статус</strong></div>
+            <div>Экран: <span id="screenWidth" class="info"></span>px</div>
+            <div>Статус: <span id="overallResult"></span></div>
+        </div>
+        
+        <div style="margin-top: 12px; font-size: 11px; opacity: 0.8;">
+            <div><span style="color: yellow;">Желтые линии</span> - отступы элементов</div>
+            <div><span style="color: cyan;">Голубая линия</span> - центральная ось</div>
+            <div><em>Двойной клик для скрытия панели</em></div>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="header-logo">RUSKY</div>
+        <nav class="header-nav">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="launches.html">ЗАПУСКИ</a>
+            <a href="documentation.html">ДОКУМЕНТАЦИЯ</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+        </nav>
+        <div class="burger-menu" onclick="toggleMobileMenu()">
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+        </div>
+    </header>
+
+    <nav class="mobile-nav" id="mobile-nav">
+        <div class="mobile-nav-list">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="launches.html">ЗАПУСКИ</a>
+            <a href="documentation.html">ДОКУМЕНТАЦИЯ</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+        </div>
+    </nav>
+
+    <!-- Hero секция с тестируемым контентом -->
+    <section class="hero-section" style="background-image: url('img 4.png'); background-size: cover; background-position: center; min-height: 100vh;">
+        <div class="overlay"></div>
+        <div class="hero-content centering-guide" id="heroContent">
+            <h1 class="element-spacing-guide" id="heroTitle">Хотите купить спутник?</h1>
+            <p class="hero-subtitle element-spacing-guide" id="heroSubtitle">Разработка, производство и внедрение космических спутников нового поколения.</p>
+            <p class="hero-desc element-spacing-guide" id="heroDesc">
+                RUSKY — это инжиниринговая платформа, специализирующаяся на создании космических спутников и модулей различной сложности.<br>
+                Мы объединяем экспертов в аэрокосмической отрасли, проектные группы и стартапы для реализации космических решений от идеи до вывода на орбиту.
+            </p>
+            <a href="satellites.html" class="hero-btn" id="heroButton">ПОДРОБНЕЕ</a>
+        </div>
+    </section>
+
+    <!-- Демо раздел с объяснением -->
+    <div style="background: #111; padding: 60px 20px; color: #fff;">
+        <h2 style="text-align: center; margin-bottom: 30px;">📐 Улучшенные отступы и центрирование</h2>
+        <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; color: #ccc; max-width: 800px; margin: 0 auto;">
+            <h3 style="color: #00ff00; margin-bottom: 15px;">✅ Изменения для мобильной версии</h3>
+            <pre style="background: #000; padding: 12px; border-radius: 6px; font-size: 12px; overflow-x: auto;">
+@media (max-width: 480px) {
+    .hero-section .hero-content {
+        text-align: center !important; /* центрируем весь контент */
+    }
+    
+    .hero-section h1 {
+        margin-bottom: 24px; /* было 15px */
+    }
+    
+    .hero-subtitle {
+        margin-bottom: 32px; /* было 20px */
+    }
+    
+    .hero-desc {
+        margin-bottom: 40px; /* было 25px */
+        max-width: none; /* убираем ограничение ширины */
+    }
+    
+    .hero-btn {
+        margin: 0 auto;
+        display: block; /* центрируем кнопку */
+    }
+}</pre>
+            
+            <h3 style="color: #4A9EFF; margin: 20px 0 15px;">🎯 Результат улучшений</h3>
+            <ul style="line-height: 1.8;">
+                <li><strong>Больше воздуха:</strong> увеличены отступы между блоками (24px, 32px, 40px)</li>
+                <li><strong>Центрирование контента:</strong> весь текст выровнен по центру</li>
+                <li><strong>Центрирование кнопки:</strong> кнопка призыва к действию в центре</li>
+                <li><strong>Улучшенная читаемость:</strong> убрано ограничение ширины для описания</li>
+            </ul>
+            
+            <h3 style="color: #ff9900; margin: 20px 0 15px;">📱 Визуальные улучшения</h3>
+            <ul style="line-height: 1.8;">
+                <li>Элементы больше не "слипаются" друг с другом</li>
+                <li>Создан ритм и иерархия между блоками</li>
+                <li>Контент легче сканируется глазом</li>
+                <li>Кнопка привлекает внимание в центре</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+    <script>
+        function checkElementSpacing() {
+            // Получаем элементы
+            const heroTitle = document.getElementById('heroTitle');
+            const heroSubtitle = document.getElementById('heroSubtitle');
+            const heroDesc = document.getElementById('heroDesc');
+            const heroButton = document.getElementById('heroButton');
+            const heroContent = document.getElementById('heroContent');
+            
+            if (!heroTitle || !heroSubtitle || !heroDesc || !heroButton || !heroContent) return false;
+            
+            // Проверяем отступы
+            const titleStyle = getComputedStyle(heroTitle);
+            const subtitleStyle = getComputedStyle(heroSubtitle);
+            const descStyle = getComputedStyle(heroDesc);
+            const buttonStyle = getComputedStyle(heroButton);
+            const contentStyle = getComputedStyle(heroContent);
+            
+            const h1MarginBottom = titleStyle.marginBottom;
+            const subtitleMarginBottom = subtitleStyle.marginBottom;
+            const descMarginBottom = descStyle.marginBottom;
+            
+            // Проверяем выравнивание
+            const contentTextAlign = contentStyle.textAlign;
+            const buttonDisplay = buttonStyle.display;
+            const buttonMargin = buttonStyle.marginLeft;
+            
+            return {
+                h1MarginBottom,
+                subtitleMarginBottom,
+                descMarginBottom,
+                contentTextAlign,
+                buttonDisplay,
+                buttonMargin
+            };
+        }
+        
+        function updateSpacingTest() {
+            const screenWidth = window.innerWidth;
+            document.getElementById('screenWidth').textContent = screenWidth;
+            
+            if (screenWidth > 480) {
+                document.getElementById('overallResult').innerHTML = 
+                    '<span class="info">Тест активен только на мобильных (≤480px)</span>';
+                
+                // Скрыть направляющие на больших экранах
+                document.querySelectorAll('.element-spacing-guide, .centering-guide').forEach(element => {
+                    element.style.position = 'static';
+                });
+                return;
+            }
+            
+            const spacing = checkElementSpacing();
+            if (!spacing) return;
+            
+            // Обновление информации об отступах
+            document.getElementById('h1Margin').textContent = spacing.h1MarginBottom;
+            document.getElementById('subtitleMargin').textContent = spacing.subtitleMarginBottom;
+            document.getElementById('descMargin').textContent = spacing.descMarginBottom;
+            
+            // Проверка выравнивания
+            const contentCentered = spacing.contentTextAlign === 'center';
+            const buttonCentered = spacing.buttonDisplay === 'block' && spacing.buttonMargin === '0px';
+            
+            document.getElementById('heroAlignment').innerHTML = 
+                contentCentered ? '<span class="success">✅ Центрировано</span>' : '<span class="warning">⚠️ Не центрировано</span>';
+            
+            document.getElementById('buttonAlignment').innerHTML = 
+                buttonCentered ? '<span class="success">✅ Центрирована</span>' : '<span class="warning">⚠️ Не центрирована</span>';
+            
+            // Проверка отступов
+            const marginsCorrect = 
+                spacing.h1MarginBottom === '24px' && 
+                spacing.subtitleMarginBottom === '32px' && 
+                spacing.descMarginBottom === '40px';
+            
+            // Общий результат
+            const allCorrect = contentCentered && buttonCentered && marginsCorrect;
+            
+            let overallStatus = '';
+            if (allCorrect) {
+                overallStatus = '<span class="success">✅ Отступы увеличены, контент центрирован</span>';
+            } else {
+                const issues = [];
+                if (!marginsCorrect) issues.push('отступы неверные');
+                if (!contentCentered) issues.push('контент не центрирован');
+                if (!buttonCentered) issues.push('кнопка не центрирована');
+                overallStatus = `<span class="warning">⚠️ Требует корректировки: ${issues.join(', ')}</span>`;
+            }
+            
+            document.getElementById('overallResult').innerHTML = overallStatus;
+            
+            console.log('Spacing and centering test:', {
+                screenWidth,
+                spacing,
+                contentCentered,
+                buttonCentered,
+                marginsCorrect,
+                allCorrect
+            });
+        }
+        
+        // Обновляем при загрузке и изменении размера
+        window.addEventListener('load', updateSpacingTest);
+        window.addEventListener('resize', updateSpacingTest);
+        
+        // Скрыть/показать по двойному клику
+        document.addEventListener('dblclick', function() {
+            const overlay = document.getElementById('testOverlay');
+            const isVisible = overlay.style.display !== 'none';
+            
+            overlay.style.display = isVisible ? 'none' : 'block';
+            
+            // Также скрыть/показать направляющие
+            document.querySelectorAll('.element-spacing-guide, .centering-guide').forEach(element => {
+                if (isVisible) {
+                    element.classList.remove('element-spacing-guide', 'centering-guide');
+                } else {
+                    if (element.tagName === 'DIV' && element.classList.contains('hero-content')) {
+                        element.classList.add('centering-guide');
+                    } else {
+                        element.classList.add('element-spacing-guide');
+                    }
+                }
+            });
+        });
+        
+        console.log('📐 Spacing and centering test loaded');
+        console.log('🔍 Double-click to toggle spacing guides');
+    </script>
+</body>
+</html>

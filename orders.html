@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RUSKY — Мои заказы</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="cart-page-body">
+  <header class="header">
+    <div class="header-logo" onclick="location.href='index.html'" style="cursor:pointer">RUSKY</div>
+    <nav class="header-nav">
+      <a href="index.html">ГЛАВНАЯ</a>
+      <a href="#" onclick="openFilterModal()">ФИЛЬТР</a>
+      <a href="equipment.html">ОБОРУДОВАНИЕ</a>
+      <a href="satellites.html">СПУТНИКИ</a>
+      <a href="#" onclick="openDocumentationModal()">ДОКУМЕНТАЦИЯ</a>
+      <div class="dropdown">
+          <a href="#" class="dropdown-toggle">ЗАПУСК</a>
+          <div class="dropdown-content">
+              <a href="launch-process.html">Процесс запуска</a>
+              <a href="launch-help.html">Помощь с запуском</a>
+          </div>
+      </div>
+      <a href="support.html">ПОДДЕРЖКА</a>
+      <a href="orders.html" class="active">МОИ ЗАКАЗЫ</a>
+      <a href="about.html">О НАС</a>
+    </nav>
+    <a href="cart.html" class="cart-icon" aria-label="Корзина">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="10" cy="26" r="3" fill="white"/>
+        <circle cx="24" cy="26" r="3" fill="white"/>
+        <path d="M4 7H7L10 20H25L28 11H9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      <span class="cart-badge" id="cartBadge" style="display: none;">0</span>
+    </a>
+      <div class="burger-menu">
+      <div class="burger-line"></div>
+      <div class="burger-line"></div>
+      <div class="burger-line"></div>
+    </div>
+  </header>
+  <!-- Mobile Navigation -->
+  <nav class="mobile-nav">
+    <div class="mobile-nav-list">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="#" onclick="openFilterModal()">ФИЛЬТР</a>
+            <a href="equipment.html">ОБОРУДОВАНИЕ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="#" onclick="openDocumentationModal()">ДОКУМЕНТАЦИЯ</a>
+            <a href="launch-process.html">ПРОЦЕСС ЗАПУСКА</a>
+            <a href="launch-help.html">ПОМОЩЬ С ЗАПУСКОМ</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+            <a href="orders.html">МОИ ЗАКАЗЫ</a>
+            <a href="about.html">О НАС</a>
+            <a href="cart.html" class="mobile-cart-link" aria-label="Корзина">
+                <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="10" cy="26" r="3" fill="white"/>
+                    <circle cx="24" cy="26" r="3" fill="white"/>
+                    <path d="M4 7H7L10 20H25L28 11H9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
+                КОРЗИНА
+            </a>
+        </div>
+  </nav>
+  <div class="mobile-nav-overlay"></div>
+
+  <main class="cart-page">
+    <div class="cart-breadcrumbs">
+      <a href="index.html">ГЛАВНАЯ</a> 
+      <span>›</span> 
+      <span>МОИ ЗАКАЗЫ</span>
+    </div>
+
+    <div class="cart-box">
+      <div id="ordersEmpty" class="cart-empty" style="display: none;">
+        <div class="cart-empty-title">У вас пока нет заказов</div>
+        <div class="cart-empty-illustration">
+          <svg width="180" height="120" viewBox="0 0 180 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="1" y="1" width="178" height="118" rx="18" stroke="#9A9A9A" stroke-opacity="0.6"/>
+            <circle cx="70" cy="90" r="10" stroke="#9A9A9A"/>
+            <circle cx="120" cy="90" r="10" stroke="#9A9A9A"/>
+            <path d="M40 45H55L65 80H130L140 55H70" stroke="#9A9A9A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M150 26c-6 0-9 4-9 8 0 6 7 9 11 11 4-2 11-5 11-11 0-4-3-8-9-8-1 0-3 0-4 1-1-1-3-1-4-1z" fill="#9A9A9A" fill-opacity="0.5"/>
+          </svg>
+        </div>
+      </div>
+
+      <div id="ordersItems" class="cart-items">
+        <!-- Заказ 1 -->
+        <div class="order-block">
+          <div class="order-header">
+            <div class="order-info">
+              <h3>Заказ #12345</h3>
+              <div class="order-meta">
+                <span class="order-date">15 сентября 2025</span>
+                <span class="order-status status-processing">В обработке</span>
+              </div>
+            </div>
+            <div class="order-total">125 000 ₽</div>
+          </div>
+          
+          <div class="cart-table-header">
+            <div class="cart-header-cell">Наименование</div>
+            <div class="cart-header-cell">Количество</div>
+            <div class="cart-header-cell">Цена</div>
+          </div>
+          
+          <div class="cart-table-row">
+            <div class="cart-item-info">
+              <img src="2.png" alt="STR.P4 Звездный датчик" class="cart-item-image">
+              <span class="cart-item-name">STR.P4 Звездный датчик</span>
+            </div>
+            <div class="cart-item-quantity">
+              <span class="quantity-display">01</span>
+            </div>
+            <div class="cart-item-price">
+              <span class="price-amount">125 000 ₽</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Заказ 2 -->
+        <div class="order-block">
+          <div class="order-header">
+            <div class="order-info">
+              <h3>Заказ #12344</h3>
+              <div class="order-meta">
+                <span class="order-date">12 сентября 2025</span>
+                <span class="order-status status-shipped">Отправлен</span>
+              </div>
+            </div>
+            <div class="order-total">Цена по запросу</div>
+          </div>
+          
+          <div class="cart-table-header">
+            <div class="cart-header-cell">Наименование</div>
+            <div class="cart-header-cell">Количество</div>
+            <div class="cart-header-cell">Цена</div>
+          </div>
+          
+          <div class="cart-table-row">
+            <div class="cart-item-info">
+              <img src="card 3.png" alt="Геостационарный спутник R-GeoSat Pro" class="cart-item-image">
+              <span class="cart-item-name">Геостационарный спутник R-GeoSat Pro</span>
+            </div>
+            <div class="cart-item-quantity">
+              <span class="quantity-display">01</span>
+            </div>
+            <div class="cart-item-price">
+              <span class="price-request">Цена по запросу</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Заказ 3 -->
+        <div class="order-block">
+          <div class="order-header">
+            <div class="order-info">
+              <h3>Заказ #12343</h3>
+              <div class="order-meta">
+                <span class="order-date">10 сентября 2025</span>
+                <span class="order-status status-delivered">Доставлен</span>
+              </div>
+            </div>
+            <div class="order-total">123 000 ₽</div>
+          </div>
+          
+          <div class="cart-table-header">
+            <div class="cart-header-cell">Наименование</div>
+            <div class="cart-header-cell">Количество</div>
+            <div class="cart-header-cell">Цена</div>
+          </div>
+          
+          <div class="cart-table-row">
+            <div class="cart-item-info">
+              <img src="1.png" alt="MT-2.P4" class="cart-item-image">
+              <span class="cart-item-name">MT-2.P4</span>
+            </div>
+            <div class="cart-item-quantity">
+              <span class="quantity-display">01</span>
+            </div>
+            <div class="cart-item-price">
+              <span class="price-amount">45 000 ₽</span>
+            </div>
+          </div>
+          
+          <div class="cart-table-row">
+            <div class="cart-item-info">
+              <img src="3.png" alt="Monopole2-UHF" class="cart-item-image">
+              <span class="cart-item-name">Monopole2-UHF</span>
+            </div>
+            <div class="cart-item-quantity">
+              <span class="quantity-display">01</span>
+            </div>
+            <div class="cart-item-price">
+              <span class="price-amount">78 000 ₽</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-block">
+      <h3>О нашей компании</h3>
+      <p>RUSKY — команда энтузиастов, разработчиков, инженеров и учёных, создающих спутники нового поколения.<br>
+      Мы обеспечиваем полный цикл работ: от проектирования до вывода на орбиту.</p>
+    </div>
+    <div class="footer-block">
+      <h3>Информация</h3>
+      <p>Политика конфиденциальности</p>
+    </div>
+    <div class="footer-block">
+      <h3>Контакты</h3>
+      <p>Телефон: +7 (999) 123-45-67<br>
+      Адрес: Россия, 119234<br>
+      г. Москва, ул. Космическая, д. 1<br>
+      E-mail: <a href="mailto:info@rusky.ru">info@rusky.ru</a></p>
+    </div>
+    <div class="footer-copyright">
+      © 2025. Все права защищены.
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

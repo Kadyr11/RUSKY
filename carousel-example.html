@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Carousel Component - Usage Example</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            padding: 20px;
+        }
+
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .demo-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .demo-subtitle {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Carousel container styling */
+        .my-carousel {
+            margin-bottom: 3rem;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .control-btn {
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .info {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .info h3 {
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .info p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .feature h4 {
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        code {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Consolas', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <h1 class="demo-title">Advanced Image Carousel</h1>
+        <p class="demo-subtitle">
+            A fully-featured image carousel with smooth animations, infinite scroll, touch support, and preview bubble with pointer
+        </p>
+
+        <!-- Carousel Container -->
+        <div class="carousel-container my-carousel"></div>
+
+        <!-- External Controls -->
+        <div class="controls">
+            <button class="control-btn" onclick="carousel.previous()">← Previous</button>
+            <button class="control-btn" onclick="carousel.goto(0)">Go to First</button>
+            <button class="control-btn" onclick="carousel.play()">Start Autoplay</button>
+            <button class="control-btn" onclick="carousel.pause()">Pause Autoplay</button>
+            <button class="control-btn" onclick="carousel.next()">Next →</button>
+        </div>
+
+        <!-- Component Information -->
+        <div class="info">
+            <h3>Features & Usage</h3>
+            <p>
+                This advanced image carousel component provides a complete solution for displaying images with smooth transitions,
+                infinite scrolling, touch support, and an elegant preview system with a moving pointer indicator.
+            </p>
+
+            <div class="features">
+                <div class="feature">
+                    <h4>🎯 Infinite Scroll</h4>
+                    <p>Seamless looping with smooth transitions. Never reaches an "end" - just keeps cycling through images.</p>
+                </div>
+                <div class="feature">
+                    <h4>📱 Touch Support</h4>
+                    <p>Full swipe gesture support for mobile devices. Swipe left/right to navigate between slides.</p>
+                </div>
+                <div class="feature">
+                    <h4>🎨 Preview Bubble</h4>
+                    <p>Shows a preview of the next image with a white border and shadow. Includes a moving pointer that indicates the active slide.</p>
+                </div>
+                <div class="feature">
+                    <h4>⌨️ Keyboard Navigation</h4>
+                    <p>Arrow keys (←/→) for navigation. Accessible and user-friendly.</p>
+                </div>
+                <div class="feature">
+                    <h4>🎪 Autoplay</h4>
+                    <p>Optional autoplay functionality with pause on hover. Configurable delay between slides.</p>
+                </div>
+                <div class="feature">
+                    <h4>📊 Progress Indicators</h4>
+                    <p>Clickable progress bars showing current position. Active indicator is highlighted with a glow effect.</p>
+                </div>
+            </div>
+
+            <h3>Basic Usage</h3>
+            <p>Initialize the carousel with your images and configuration:</p>
+            <code>
+                const carousel = new ImageCarousel({
+                    container: '.my-carousel',
+                    slides: [
+                        { src: 'image1.jpg', alt: 'Description 1' },
+                        { src: 'image2.jpg', alt: 'Description 2' },
+                        { src: 'image3.jpg', alt: 'Description 3' }
+                    ],
+                    autoplay: true,
+                    autoplayDelay: 5000
+                });
+            </code>
+
+            <h3>API Methods</h3>
+            <p>
+                <code>carousel.next()</code> - Go to next slide<br>
+                <code>carousel.previous()</code> - Go to previous slide<br>
+                <code>carousel.goto(index)</code> - Go to specific slide<br>
+                <code>carousel.play()</code> - Start autoplay<br>
+                <code>carousel.pause()</code> - Stop autoplay<br>
+                <code>carousel.getCurrentIndex()</code> - Get current slide index<br>
+                <code>carousel.destroy()</code> - Clean up and remove carousel
+            </p>
+        </div>
+    </div>
+
+    <!-- Include the carousel component -->
+    <script src="image-carousel.js"></script>
+
+    <script>
+        // Initialize carousel when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sample slides data - you can replace with your own images
+            const slides = [
+                { src: "img 4.png", alt: "RUSKY Satellite Launch" },
+                { src: "img 3.png", alt: "Communication Satellite" },
+                { src: "img 2.png", alt: "Space Station Module" }
+            ];
+
+            // Create carousel instance with full configuration
+            window.carousel = new ImageCarousel({
+                container: '.my-carousel',
+                slides: slides,
+                autoplay: false, // Set to true for auto-rotation
+                autoplayDelay: 4000,
+                infinite: true,
+                showPreview: true,
+                showIndicators: true,
+                animationDuration: 400
+            });
+
+            // Listen for slide changes
+            document.querySelector('.my-carousel').addEventListener('slide-change', function(e) {
+                console.log('Slide changed to index:', e.detail.index);
+            });
+
+            console.log('Carousel initialized successfully!');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест: Заголовок с отступами 20px</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .test-header {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 15px;
+            border-radius: 8px;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 320px;
+            font-size: 12px;
+        }
+        
+        .screen-indicator {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 255, 0, 0.8);
+            color: #000;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 1000;
+        }
+        
+        .test-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 999;
+        }
+        
+        .padding-guide {
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            right: 20px;
+            height: 60px;
+            transform: translateY(-50%);
+            border: 2px dashed rgba(255, 0, 0, 0.7);
+            background: rgba(255, 0, 0, 0.1);
+        }
+        
+        .padding-guide::before {
+            content: "20px отступы";
+            position: absolute;
+            top: -25px;
+            left: 0;
+            background: rgba(255, 0, 0, 0.8);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+        
+        .padding-markers {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            height: 60px;
+            transform: translateY(-50%);
+        }
+        
+        .marker-left,
+        .marker-right {
+            position: absolute;
+            top: 0;
+            width: 20px;
+            height: 100%;
+            background: rgba(255, 255, 0, 0.3);
+            border: 1px solid rgba(255, 255, 0, 0.7);
+        }
+        
+        .marker-left {
+            left: 0;
+        }
+        
+        .marker-right {
+            right: 0;
+        }
+        
+        .marker-left::after,
+        .marker-right::after {
+            content: "20px";
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 10px;
+            font-weight: bold;
+            color: #000;
+        }
+        
+        .marker-left::after {
+            left: 2px;
+        }
+        
+        .marker-right::after {
+            right: 2px;
+        }
+        
+        .test-results {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 15px;
+            border-radius: 8px;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 400px;
+            font-size: 12px;
+        }
+        
+        .status-good { color: #00ff00; }
+        .status-warning { color: #ffff00; }
+        .status-error { color: #ff0000; }
+        
+        .toggle-guides {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 123, 255, 0.8);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 1000;
+        }
+        
+        .toggle-guides:hover {
+            background: rgba(0, 123, 255, 1);
+        }
+    </style>
+</head>
+<body>
+    <div class="screen-indicator" id="screenIndicator">Loading...</div>
+    
+    <div class="test-header">
+        <h3 style="margin: 0 0 10px; font-size: 14px;">📏 Тест отступов заголовка</h3>
+        <ul style="margin: 0; padding-left: 15px; line-height: 1.4;">
+            <li>Отступы по 20px с каждой стороны</li>
+            <li>Адаптивные размеры шрифта</li>
+            <li>Центрированное расположение</li>
+            <li>Визуальные направляющие</li>
+        </ul>
+        <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.2);">
+            <strong>Текущий экран:</strong><br>
+            <span id="screenInfo">-</span>
+        </div>
+    </div>
+    
+    <div class="test-overlay" id="testOverlay">
+        <div class="padding-guide"></div>
+        <div class="padding-markers">
+            <div class="marker-left"></div>
+            <div class="marker-right"></div>
+        </div>
+    </div>
+    
+    <button class="toggle-guides" onclick="toggleGuides()">Скрыть направляющие</button>
+
+    <!-- Hero секция с тестируемыми изменениями -->
+    <section class="hero-section" style="background-image: url('img-1.png'); background-size: cover; background-position: center;">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 id="mainTitle">Хотите купить спутник?</h1>
+            <p class="hero-subtitle">
+                Разработка, производство и внедрение космических спутников нового поколения.
+            </p>
+            <p class="hero-desc">
+                RUSKY — это инжиниринговая платформа, специализирующаяся на создании космических спутников и модулей различной сложности.
+            </p>
+            <a href="#" class="hero-btn">ПОДРОБНЕЕ</a>
+        </div>
+    </section>
+    
+    <div class="test-results" id="testResults">
+        <h4 style="margin: 0 0 10px; font-size: 13px;">📋 Результаты анализа отступов</h4>
+        <div id="resultsContent">Проверяется...</div>
+    </div>
+
+    <script>
+        let guidesVisible = true;
+        
+        function toggleGuides() {
+            const overlay = document.getElementById('testOverlay');
+            const button = document.querySelector('.toggle-guides');
+            
+            if (guidesVisible) {
+                overlay.style.display = 'none';
+                button.textContent = 'Показать направляющие';
+                guidesVisible = false;
+            } else {
+                overlay.style.display = 'block';
+                button.textContent = 'Скрыть направляющие';
+                guidesVisible = true;
+            }
+        }
+        
+        function updateAnalysis() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            
+            let category = '';
+            let indicator = '';
+            
+            if (width <= 360) {
+                category = 'Очень маленький';
+                indicator = `📱 ${width}px (≤360px)`;
+            } else if (width <= 480) {
+                category = 'Мобильный';
+                indicator = `📱 ${width}px (361-480px)`;
+            } else if (width <= 768) {
+                category = 'Планшет';
+                indicator = `📊 ${width}px (481-768px)`;
+            } else if (width <= 1199) {
+                category = 'Маленький десктоп';
+                indicator = `💻 ${width}px (769-1199px)`;
+            } else {
+                category = 'Десктоп';
+                indicator = `🖥️ ${width}px (≥1200px)`;
+            }
+            
+            document.getElementById('screenIndicator').textContent = indicator;
+            document.getElementById('screenInfo').textContent = category + ` (${width}×${height})`;
+            
+            // Анализ заголовка
+            const title = document.getElementById('mainTitle');
+            
+            if (title) {
+                const titleRect = title.getBoundingClientRect();
+                const titleStyles = getComputedStyle(title);
+                const containerRect = title.parentElement.getBoundingClientRect();
+                
+                const fontSize = parseInt(titleStyles.fontSize);
+                const padding = titleStyles.padding;
+                const paddingLeft = parseInt(titleStyles.paddingLeft);
+                const paddingRight = parseInt(titleStyles.paddingRight);
+                
+                // Вычисляем реальные отступы от краев экрана
+                const leftOffset = titleRect.left;
+                const rightOffset = width - titleRect.right;
+                
+                let results = [];
+                
+                // Проверка CSS padding
+                if (paddingLeft === 20 && paddingRight === 20) {
+                    results.push('<span class="status-good">✅ CSS padding: 20px + 20px</span>');
+                } else {
+                    results.push('<span class="status-warning">⚠️ CSS padding: ' + paddingLeft + 'px + ' + paddingRight + 'px</span>');
+                }
+                
+                // Проверка реальных отступов от краев экрана
+                if (Math.abs(leftOffset - 20) <= 5 && Math.abs(rightOffset - 20) <= 5) {
+                    results.push('<span class="status-good">✅ Отступы от краев: ~20px</span>');
+                } else {
+                    results.push('<span class="status-warning">⚠️ Отступы: ' + Math.round(leftOffset) + 'px | ' + Math.round(rightOffset) + 'px</span>');
+                }
+                
+                // Проверка размера шрифта
+                let expectedSize = 48; // Базовый размер
+                if (width <= 360) expectedSize = 24;
+                else if (width <= 480) expectedSize = 28;
+                else if (width <= 768) expectedSize = 32;
+                else if (width <= 1199) expectedSize = 40;
+                
+                if (Math.abs(fontSize - expectedSize) <= 3) {
+                    results.push('<span class="status-good">✅ Размер шрифта: ' + fontSize + 'px</span>');
+                } else {
+                    results.push('<span class="status-warning">⚠️ Размер: ' + fontSize + 'px (ожидался ' + expectedSize + 'px)</span>');
+                }
+                
+                // Проверка центрирования
+                const textAlign = titleStyles.textAlign;
+                if (textAlign === 'center') {
+                    results.push('<span class="status-good">✅ Текст отцентрирован</span>');
+                } else {
+                    results.push('<span class="status-error">❌ Выравнивание: ' + textAlign + '</span>');
+                }
+                
+                // Проверка ширины текста
+                const titleWidth = titleRect.width;
+                const containerWidth = containerRect.width;
+                const utilizationPercent = Math.round((titleWidth / containerWidth) * 100);
+                
+                results.push('<span class="status-good">ℹ️ Ширина заголовка: ' + Math.round(titleWidth) + 'px (' + utilizationPercent + '% контейнера)</span>');
+                
+                // Проверка box-sizing
+                const boxSizing = titleStyles.boxSizing;
+                if (boxSizing === 'border-box') {
+                    results.push('<span class="status-good">✅ Box-sizing: border-box</span>');
+                } else {
+                    results.push('<span class="status-warning">⚠️ Box-sizing: ' + boxSizing + '</span>');
+                }
+                
+                // Проверка max-width
+                const maxWidth = titleStyles.maxWidth;
+                if (maxWidth.includes('calc(100% - 40px)')) {
+                    results.push('<span class="status-good">✅ Max-width: calc(100% - 40px)</span>');
+                } else {
+                    results.push('<span class="status-warning">⚠️ Max-width: ' + maxWidth + '</span>');
+                }
+                
+                document.getElementById('resultsContent').innerHTML = results.join('<br>');
+            }
+        }
+        
+        // Обновляем информацию при загрузке и изменении размера
+        updateAnalysis();
+        window.addEventListener('resize', updateAnalysis);
+        
+        // Обновляем каждые 200мс для точности
+        setInterval(updateAnalysis, 200);
+    </script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RUSKY — О компании</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="header-logo" onclick="location.href='index.html'" style="cursor:pointer">RUSKY</div>
+    <nav class="header-nav">
+      <a href="index.html">ГЛАВНАЯ</a>
+      <a href="#" onclick="openFilterModal()">ФИЛЬТР</a>
+      <a href="equipment.html">ОБОРУДОВАНИЕ</a>
+      <a href="satellites.html">СПУТНИКИ</a>
+      <a href="#" onclick="openDocumentationModal()">ДОКУМЕНТАЦИЯ</a>
+      <div class="dropdown">
+          <a href="#" class="dropdown-toggle">ЗАПУСК</a>
+          <div class="dropdown-content">
+              <a href="launch-process.html">Процесс запуска</a>
+              <a href="launch-help.html">Помощь с запуском</a>
+          </div>
+      </div>
+      <a href="support.html">ПОДДЕРЖКА</a>
+      <a href="orders.html">МОИ ЗАКАЗЫ</a>
+      <a href="about.html" class="active">О НАС</a>
+    </nav>
+    <a href="cart.html" class="cart-icon" aria-label="Корзина">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="10" cy="26" r="3" fill="white"/>
+        <circle cx="24" cy="26" r="3" fill="white"/>
+        <path d="M4 7H7L10 20H25L28 11H9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      <span class="cart-badge" id="cartBadge" style="display: none;">0</span>
+    </a>
+      <div class="burger-menu">
+      <div class="burger-line"></div>
+      <div class="burger-line"></div>
+      <div class="burger-line"></div>
+    </div>
+  </header>
+  <!-- Mobile Navigation -->
+  <nav class="mobile-nav">
+    <div class="mobile-nav-list">
+      <a href="index.html">ГЛАВНАЯ</a>
+      <a href="#" onclick="openFilterModal()">ФИЛЬТР</a>
+      <a href="equipment.html">ОБОРУДОВАНИЕ</a>
+      <a href="satellites.html">СПУТНИКИ</a>
+      <a href="documentation.html">ДОКУМЕНТАЦИЯ</a>
+      <div class="dropdown">
+        <a href="launches.html">ЗАПУСК</a>
+        <div class="dropdown-content">
+          <a href="launch-process.html">ПРОЦЕСС ЗАПУСКА</a>
+          <a href="launch-help.html">ПОМОЩЬ С ЗАПУСКОМ</a>
+        </div>
+      </div>
+      <a href="support.html">ПОДДЕРЖКА</a>
+      <a href="cart.html">МОИ ЗАКАЗЫ</a>
+      <a href="about.html">О НАС</a>
+      <a href="cart.html" class="mobile-cart-link" aria-label="Корзина">
+        <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="10" cy="26" r="3" fill="white"/>
+          <circle cx="24" cy="26" r="3" fill="white"/>
+          <path d="M4 7H7L10 20H25L28 11H9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        КОРЗИНА
+      </a>
+    </div>
+  </nav>
+  <div class="mobile-nav-overlay"></div>
+
+  <main class="about-page">
+    <!-- Hero section с фоном -->
+    <section class="about-hero">
+      <img src="unsplash_JRu9UClgp_8.png" alt="Промышленный комплекс RUSKY" class="about-hero-bg">
+      <div class="about-hero-overlay"></div>
+    </section>
+
+    <!-- Заголовок под изображением -->
+    <section class="about-title-section">
+      <div class="about-title-container">
+        <h1>О компании RUSKY</h1>
+      </div>
+    </section>
+
+    <!-- Основной контент -->
+    <section class="about-content">
+      <div class="about-container">
+        <!-- Левая колонка -->
+        <div class="about-left">
+          <div class="about-description">
+            <p><strong>RUSKY</strong> — это инновационно-конструкторская компания, которая разрабатывает спутниковые и авионические системы, а также предлагает решения для науки, связи и навигации. Мы создаем технологии, которые являются гораздо более близки к доступным для бизнеса, образовательных организаций и исследователей по всему миру.</p>
+            
+            <p>Наша команда включает в себя инженеров, дизайнеров и исследователей в области аэрокосмических систем, телекоммуникаций и программного обеспечения спутниковой навигации. Мы стремимся обеспечить решения спутниками, способными решить самые инновационные задачи на орбите.</p>
+          </div>
+
+          <div class="about-section">
+            <h3>Наши ценности</h3>
+            <div class="values-grid">
+              <div class="value-item">
+                <h4>Инновации и качество.</h4>
+                <p>Мы постоянно совершенствуем наши конструкции и решения, чтобы предлагать наивысшие спутники мирового уровня.</p>
+              </div>
+              <div class="value-item">
+                <h4>Открытость и партнерство.</h4>
+                <p>Будем в сотрудничестве работать с университетами, стартапами и крупными компаниями на Земле.</p>
+              </div>
+              <div class="value-item">
+                <h4>Доступность технологий.</h4>
+                <p>Наша цель — сделать космические миссии реализуемыми для любого бюджета.</p>
+              </div>
+              <div class="value-item">
+                <h4>Ответственность.</h4>
+                <p>Мы придерживаемся принципов безопасности и этики в работе на всех этапах проектов.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-section">
+            <h3>Наша миссия</h3>
+            <p>Мы создаем платформы, которые позволяют исследовать, измерять и обогащать мир. Мы убеждены, что космос — это пространство возможностей для всех, кто мечтает может с будущими уже сегодня.</p>
+          </div>
+        </div>
+
+        <!-- Правая колонка -->
+        <div class="about-right">
+          <div class="about-section">
+            <h3>Наша история</h3>
+            <p><strong>CLAYSAT</strong> начинался как инициативный проект группы инженеров и энтузиастов космоса. Могли подумать, демонстрирующий выходы в эфирное и программное обеспечение спутников для обучения в политике в научно-образовательных учреждениях. 11 результатов деятельности, что привело к созданию продукта спутника по данным научных экспериментов и образовательных программ.</p>
+          </div>
+
+          <div class="about-section">
+            <h3>Наши достижения</h3>
+            <ul class="achievements-list">
+              <li>Более 30 изготовленных спутников, от кубсатов до полноразмерных аппаратов</li>
+              <li>Реализация 12 научных миссий по изучению климата и микрогравитации</li>
+              <li>География проектов — 5 континентов</li>
+              <li>35 успешных запусков на орбиту</li>
+              <li>Сотрудничество с ведущими глобальными провайдерами и исследовательскими институтами</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-block">
+      <h3>О нашей компании</h3>
+      <p>RUSKY — команда энтузиастов, разработчиков, инженеров и учёных, создающих спутники нового поколения.<br>
+      Мы обеспечиваем полный цикл работ: от проектирования до вывода на орбиту.</p>
+    </div>
+    <div class="footer-block">
+      <h3>Информация</h3>
+      <p>Политика конфиденциальности</p>
+    </div>
+    <div class="footer-block">
+      <h3>Контакты</h3>
+      <p>Телефон: +7 (999) 123-45-67<br>
+      Адрес: Россия, 119234<br>
+      г. Москва, ул. Космическая, д. 1<br>
+      E-mail: <a href="mailto:info@rusky.ru">info@rusky.ru</a></p>
+    </div>
+    <div class="footer-copyright">
+      © 2025. Все права защищены.
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

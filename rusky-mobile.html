@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Тест мобильного меню - iOS Оптимизированный</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Отладочные стили */
+        .mobile-nav {
+            border: 3px solid red !important;
+        }
+        .breadcrumbs {
+            border: 3px solid blue !important;
+        }
+        .debug-info {
+            position: fixed;
+            top: max(10px, env(safe-area-inset-top));
+            right: max(10px, env(safe-area-inset-right));
+            background: rgba(0,0,0,0.9);
+            padding: 12px;
+            z-index: 9999;
+            font-size: 12px;
+            color: #fff;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.3);
+            font-family: monospace;
+            min-width: 200px;
+        }
+        
+        .safe-zone-indicator {
+            position: fixed;
+            background: rgba(255,0,0,0.3);
+            pointer-events: none;
+            z-index: 10000;
+        }
+        
+        .safe-zone-top {
+            top: 0;
+            left: 0;
+            right: 0;
+            height: env(safe-area-inset-top);
+        }
+        
+        .safe-zone-bottom {
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: env(safe-area-inset-bottom);
+        }
+        
+        .safe-zone-left {
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: env(safe-area-inset-left);
+        }
+        
+        .safe-zone-right {
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: env(safe-area-inset-right);
+        }
+    </style>
+</head>
+<body>
+    <!-- Индикаторы безопасных зон -->
+    <div class="safe-zone-indicator safe-zone-top"></div>
+    <div class="safe-zone-indicator safe-zone-bottom"></div>
+    <div class="safe-zone-indicator safe-zone-left"></div>
+    <div class="safe-zone-indicator safe-zone-right"></div>
+
+    <div class="debug-info">
+        <div><strong>iOS Mobile Test</strong></div>
+        <div>Экран: <span id="screen-width"></span>px</div>
+        <div>Viewport: <span id="viewport-height"></span>px</div>
+        <div>Меню: <span id="menu-status">НЕТ</span></div>
+        <div>Safe Top: <span id="safe-top">0px</span></div>
+        <div>Safe Bottom: <span id="safe-bottom">0px</span></div>
+        <div>SVH Support: <span id="svh-support">—</span></div>
+    </div>
+
+    <header class="header">
+        <div class="header-logo">RUSKY</div>
+        <nav class="header-nav">
+            <a href="#top">ГЛАВНАЯ</a>
+            <a href="#">СПУТНИКИ</a>
+        </nav>
+        <div class="burger-menu" onclick="toggleMobileMenu()">
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" id="mobile-nav">
+        <div class="mobile-nav-list">
+            <a href="#top">ГЛАВНАЯ</a>
+            <a href="#">ФИЛЬТР</a>
+            <a href="#">СПУТНИКИ</a>
+            <a href="#">ДОКУМЕНТАЦИЯ</a>
+            <a href="#">ЗАПУСК</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+        </div>
+    </nav>
+
+    <!-- Хлебные крошки -->
+    <section class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">ГЛАВНАЯ</a>
+            <span class="breadcrumb-separator">></span>
+            <span class="breadcrumb-current">ТЕСТ</span>
+        </div>
+    </section>
+
+    <section style="background: #333; padding: 60px 20px; color: white;">
+        <h1>Тестовый контент</h1>
+        <p>Это тестовый контент для проверки отступов мобильного меню.</p>
+    </section>
+
+    <script src="main.js"></script>
+    <script>
+        // Расширенная отладочная информация для iOS
+        function updateDebugInfo() {
+            document.getElementById('screen-width').textContent = window.innerWidth;
+            document.getElementById('viewport-height').textContent = window.innerHeight;
+            
+            const mobileNav = document.getElementById('mobile-nav');
+            const isActive = mobileNav ? mobileNav.classList.contains('active') : false;
+            document.getElementById('menu-status').textContent = isActive ? 'ДА' : 'НЕТ';
+            document.getElementById('menu-status').style.color = isActive ? '#00ff00' : '#ff6666';
+            
+            // Безопасные зоны
+            const computedStyle = getComputedStyle(document.documentElement);
+            document.getElementById('safe-top').textContent = computedStyle.getPropertyValue('env(safe-area-inset-top)') || '0px';
+            document.getElementById('safe-bottom').textContent = computedStyle.getPropertyValue('env(safe-area-inset-bottom)') || '0px';
+            
+            // Поддержка svh
+            document.getElementById('svh-support').textContent = CSS.supports('height', '100svh') ? '✓' : '✗';
+            document.getElementById('svh-support').style.color = CSS.supports('height', '100svh') ? '#00ff00' : '#ff6666';
+        }
+
+        // Обновляем информацию при различных событиях
+        window.addEventListener('resize', updateDebugInfo);
+        window.addEventListener('orientationchange', () => {
+            setTimeout(updateDebugInfo, 100); // Небольшая задержка для iOS
+        });
+        
+        // Обновляем информацию при загрузке
+        document.addEventListener('DOMContentLoaded', updateDebugInfo);
+        
+        // Переопределяем функции для отладки
+        const originalToggle = window.toggleMobileMenu;
+        window.toggleMobileMenu = function() {
+            console.log('toggleMobileMenu вызвана');
+            if (originalToggle) {
+                originalToggle();
+            }
+            setTimeout(updateDebugInfo, 100);
+        };
+        
+        // Логирование iOS специфичной информации
+        console.log('iOS Debug Info:', {
+            userAgent: navigator.userAgent,
+            platform: navigator.platform,
+            isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent),
+            isSafari: /^((?!chrome|android).)*safari/i.test(navigator.userAgent),
+            devicePixelRatio: window.devicePixelRatio,
+            supportsSVH: CSS.supports('height', '100svh'),
+            supportsSafeArea: CSS.supports('padding', 'env(safe-area-inset-top)')
+        });
+    </script>
+</body>
+</html>

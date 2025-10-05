@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RUSKY — Связаться с нами</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo" onclick="location.href='index.html'" style="cursor:pointer">RUSKY</div>
+        <nav class="header-nav">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="#" onclick="openFilterModal()">ФИЛЬТР</a>
+            <a href="equipment.html">ОБОРУДОВАНИЕ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="#" onclick="openDocumentationModal()">ДОКУМЕНТАЦИЯ</a>
+            <a href="#">ЗАПУСК</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+            <a href="orders.html">МОИ ЗАКАЗЫ</a>
+            <a href="about.html">О НАС</a>
+        </nav>
+        <a href="cart.html" class="cart-icon" aria-label="Корзина">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="10" cy="26" r="3" fill="white"/>
+                <circle cx="24" cy="26" r="3" fill="white"/>
+                <path d="M4 7H7L10 20H25L28 11H9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+        </a>
+    </header>
+
+    <main class="contact-page">
+        <div class="contact-container">
+            <h1>Связаться с нами</h1>
+            <p class="contact-description">
+                Узнайте больше о возможностях платформы RUSKY-Next и наших спутниковых решениях. 
+                Заполните форму ниже, и наши специалисты свяжутся с вами в ближайшее время.
+            </p>
+
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <input type="text" id="name" name="name" required placeholder="Ваше имя">
+                </div>
+                
+                <div class="form-group">
+                    <input type="email" id="email" name="email" required placeholder="Email">
+                </div>
+                
+                <div class="form-group">
+                    <input type="tel" id="phone" name="phone" required placeholder="Телефон">
+                </div>
+                
+                <div class="form-group">
+                    <input type="text" id="company" name="company" placeholder="Компания (необязательно)">
+                </div>
+                
+                <div class="form-group">
+                    <textarea id="message" name="message" required placeholder="Ваше сообщение"></textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="agreement" name="agreement" required>
+                        <label for="agreement">Я согласен на обработку персональных данных</label>
+                    </div>
+                    <button type="submit" class="submit-button">ОТПРАВИТЬ</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-block">
+            <h3>О нашей компании</h3>
+            <p>RUSKY — команда энтузиастов, разработчиков, инженеров и учёных, создающих спутники нового поколения.<br>
+            Мы обеспечиваем полный цикл работ: от проектирования до вывода на орбиту.</p>
+        </div>
+        <div class="footer-block">
+            <h3>Информация</h3>
+            <p>Политика конфиденциальности</p>
+        </div>
+        <div class="footer-block">
+            <h3>Контакты</h3>
+            <p>Телефон: +7 (999) 123-45-67<br>
+            Адрес: Россия, 119234<br>
+            г. Москва, ул. Космическая, д. 1<br>
+            E-mail: <a href="mailto:info@rusky.ru">info@rusky.ru</a></p>
+        </div>
+        <div class="footer-copyright">
+            © 2025. Все права защищены.
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Здесь можно добавить логику отправки формы
+            
+            // Показываем уведомление об успешной отправке
+            showSuccessModal({
+                'Имя': document.getElementById('name').value,
+                'Email': document.getElementById('email').value,
+                'Телефон': document.getElementById('phone').value,
+                'Компания': document.getElementById('company').value || 'Не указана',
+                'Сообщение': document.getElementById('message').value
+            });
+            
+            // Очищаем форму
+            this.reset();
+        });
+    </script>
+</body>
+</html>

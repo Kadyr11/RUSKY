@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест: Заголовок 32px мобильная версия</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .test-panel {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.95);
+            padding: 15px;
+            border-radius: 8px;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 320px;
+            font-size: 12px;
+        }
+        
+        .size-indicator {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 150, 255, 0.9);
+            color: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            z-index: 1000;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 150, 255, 0.3);
+        }
+        
+        .comparison-table {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px;
+            border-radius: 6px;
+            margin: 10px 0;
+            font-size: 11px;
+            line-height: 1.4;
+        }
+        
+        .status-good { color: #00ff00; font-weight: bold; }
+        .status-warning { color: #ffff00; }
+        .status-change { color: #ff9900; font-weight: bold; }
+        .status-info { color: #00ddff; }
+        
+        .change-highlight {
+            background: rgba(255, 153, 0, 0.2);
+            padding: 8px;
+            border-left: 3px solid #ff9900;
+            margin: 8px 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="size-indicator" id="sizeIndicator">
+        <div id="currentSize">--px</div>
+        <div style="font-size: 10px; margin-top: 2px;" id="deviceType">Загрузка...</div>
+    </div>
+    
+    <div class="test-panel">
+        <h3 style="margin: 0 0 10px; font-size: 14px; color: #ff9900;">📏 Тест: Увеличение до 32px</h3>
+        
+        <div class="change-highlight">
+            <strong>Изменение:</strong> 28px → 32px<br>
+            <small>Увеличение на 4px для лучшей читаемости</small>
+        </div>
+        
+        <div id="testResults">Анализируется...</div>
+        
+        <div class="comparison-table">
+            <strong>Размеры по экранам:</strong><br>
+            <table style="width: 100%; font-size: 10px; margin-top: 5px;">
+                <tr style="color: #ccc;">
+                    <td>≤360px:</td>
+                    <td>24px</td>
+                    <td style="color: #00ddff;">(без изменений)</td>
+                </tr>
+                <tr style="color: #ff9900;">
+                    <td>361-480px:</td>
+                    <td><strong>32px</strong></td>
+                    <td><strong>(было 28px)</strong></td>
+                </tr>
+                <tr style="color: #ff9900;">
+                    <td>481-768px:</td>
+                    <td><strong>32px</strong></td>
+                    <td><strong>(было 28px)</strong></td>
+                </tr>
+                <tr style="color: #ccc;">
+                    <td>>768px:</td>
+                    <td>40px+</td>
+                    <td style="color: #00ddff;">(без изменений)</td>
+                </tr>
+            </table>
+        </div>
+        
+        <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 8px; margin-top: 8px; font-size: 10px;">
+            <span class="status-info">💡 Все мобильные размеры увеличены на 4px для улучшения читаемости</span>
+        </div>
+    </div>
+
+    <!-- Hero секция для тестирования -->
+    <section class="hero-section" style="background-image: url('img-1.png'); background-size: cover; background-position: center;">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 id="testTitle">Хотите купить спутник?</h1>
+            <p class="hero-subtitle">
+                Тестирование увеличенного размера заголовка с 28px до 32px
+            </p>
+            <p class="hero-desc">
+                Заголовок теперь должен быть больше и лучше читаться на мобильных устройствах.
+            </p>
+            <a href="#" class="hero-btn">ПРОВЕРИТЬ</a>
+        </div>
+    </section>
+
+    <script>
+        function updateAnalysis() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            const title = document.getElementById('testTitle');
+            
+            if (!title) return;
+            
+            // Определяем категорию устройства
+            let deviceType = '';
+            let expectedSize = 32;
+            
+            if (width <= 360) {
+                deviceType = 'Очень маленький';
+                expectedSize = 24;
+            } else if (width <= 480) {
+                deviceType = 'Мобильный';
+                expectedSize = 32;
+            } else if (width <= 768) {
+                deviceType = 'Планшет';
+                expectedSize = 32;
+            } else if (width <= 1199) {
+                deviceType = 'Маленький десктоп';
+                expectedSize = 40;
+            } else {
+                deviceType = 'Десктоп';
+                expectedSize = 44; // clamp максимум
+            }
+            
+            // Получаем фактический размер
+            const computedStyles = getComputedStyle(title);
+            const actualSize = parseInt(computedStyles.fontSize);
+            
+            // Обновляем индикатор
+            document.getElementById('currentSize').textContent = actualSize + 'px';
+            document.getElementById('deviceType').textContent = deviceType + ` (${width}px)`;
+            
+            // Обновляем цвет индикатора
+            const indicator = document.getElementById('sizeIndicator');
+            if (actualSize === expectedSize) {
+                indicator.style.background = 'rgba(0, 200, 0, 0.9)';
+            } else if (Math.abs(actualSize - expectedSize) <= 2) {
+                indicator.style.background = 'rgba(255, 150, 0, 0.9)';
+            } else {
+                indicator.style.background = 'rgba(255, 50, 50, 0.9)';
+            }
+            
+            // Результаты анализа
+            let results = [];
+            
+            if (actualSize === expectedSize) {
+                results.push(`<span class="status-good">✅ Размер корректный: ${actualSize}px</span>`);
+            } else {
+                results.push(`<span class="status-warning">⚠️ Размер: ${actualSize}px (ожидался ${expectedSize}px)</span>`);
+            }
+            
+            // Проверяем, увеличился ли размер для мобильных
+            if (width <= 768 && width > 360) {
+                if (actualSize >= 32) {
+                    results.push(`<span class="status-change">🎯 Увеличение применено: ${actualSize}px ≥ 32px</span>`);
+                } else {
+                    results.push(`<span class="status-warning">⚠️ Увеличение не применилось: ${actualSize}px < 32px</span>`);
+                }
+            }
+            
+            results.push(`<span class="status-info">📱 Экран: ${width}×${height}px</span>`);
+            results.push(`<span class="status-info">🎯 Ожидаемый размер: ${expectedSize}px</span>`);
+            
+            // Дополнительная информация о CSS
+            const textAlign = computedStyles.textAlign;
+            const padding = computedStyles.padding;
+            
+            results.push(`<span class="status-info">📐 Выравнивание: ${textAlign}</span>`);
+            results.push(`<span class="status-info">📦 Отступы: ${padding}</span>`);
+            
+            document.getElementById('testResults').innerHTML = results.join('<br>');
+        }
+        
+        // Запускаем анализ
+        updateAnalysis();
+        window.addEventListener('resize', updateAnalysis);
+        
+        // Обновляем каждые 500мс
+        setInterval(updateAnalysis, 500);
+    </script>
+</body>
+</html>

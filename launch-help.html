@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RUSKY — Помощь с запуском</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo" onclick="location.href='index.html'" style="cursor:pointer">RUSKY</div>
+        <nav class="header-nav">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="#" onclick="openFilterModal()">ФИЛЬТР</a>
+            <a href="equipment.html">ОБОРУДОВАНИЕ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="#" onclick="openDocumentationModal()">ДОКУМЕНТАЦИЯ</a>
+            <div class="dropdown">
+                <a href="#" class="dropdown-toggle active">ЗАПУСК</a>
+                <div class="dropdown-content">
+                    <a href="launch-process.html">Процесс запуска</a>
+                    <a href="launch-help.html" class="active">Помощь с запуском</a>
+                </div>
+            </div>
+            <a href="support.html">ПОДДЕРЖКА</a>
+            <a href="orders.html">МОИ ЗАКАЗЫ</a>
+            <a href="about.html">О НАС</a>
+        </nav>
+        <a href="cart.html" class="cart-icon" aria-label="Корзина">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="10" cy="26" r="3" fill="white"/>
+                <circle cx="24" cy="26" r="3" fill="white"/>
+                <path d="M4 7H7L10 20H25L28 11H9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+        </a>
+        <div class="burger-menu">
+      <div class="burger-line"></div>
+      <div class="burger-line"></div>
+      <div class="burger-line"></div>
+    </div>
+  </header>
+  <!-- Mobile Navigation -->
+  <nav class="mobile-nav">
+    <div class="mobile-nav-list">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="#" onclick="openFilterModal()">ФИЛЬТР</a>
+            <a href="equipment.html">ОБОРУДОВАНИЕ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="#" onclick="openDocumentationModal()">ДОКУМЕНТАЦИЯ</a>
+            <a href="launch-process.html">ПРОЦЕСС ЗАПУСКА</a>
+            <a href="launch-help.html">ПОМОЩЬ С ЗАПУСКОМ</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+            <a href="orders.html">МОИ ЗАКАЗЫ</a>
+            <a href="about.html">О НАС</a>
+            <a href="cart.html" class="mobile-cart-link" aria-label="Корзина">
+                <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="10" cy="26" r="3" fill="white"/>
+                    <circle cx="24" cy="26" r="3" fill="white"/>
+                    <path d="M4 7H7L10 20H25L28 11H9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
+                КОРЗИНА
+            </a>
+        </div>
+  </nav>
+  <div class="mobile-nav-overlay"></div>
+
+    <main class="launch-help-page">
+        <section class="launch-help-hero">
+            <div class="launch-help-content">
+                <h1>Какую помощь мы оказываем покупателям</h1>
+                <p class="subtitle">RUSKY сопровождает клиентов на всех этапах:</p>
+            </div>
+        </section>
+
+        <section class="launch-help-services">
+            <div class="services-grid">
+                <div class="service-card">
+                    <h2>Техническое консультирование</h2>
+                    <ul>
+                        <li>Помогаем выбрать конфигурацию спутника под задачи.</li>
+                        <li>Готовим индивидуальный проект миссии.</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h2>Организация запуска</h2>
+                    <ul>
+                        <li>Бронируем слот на ракете-носителе.</li>
+                        <li>Осуществляем интеграцию и подготовку к пуску.</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h2>Оформление документации</h2>
+                    <ul>
+                        <li>Помогаем с разрешительными и экспортными документами.</li>
+                        <li>Сопровождаем сертификацию и страхование.</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h2>Тестирование и проверка</h2>
+                    <ul>
+                        <li>Проводим комплексные испытания спутника.</li>
+                        <li>Контролируем соответствие техническим требованиям.</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h2>Обучение и поддержка</h2>
+                    <ul>
+                        <li>Обучаем персонал работе с наземным сегментом.</li>
+                        <li>Обеспечиваем техническую поддержку 24/7.</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h2>Сопровождение эксплуатации</h2>
+                    <ul>
+                        <li>Предоставляем программное обеспечение и обновления.</li>
+                        <li>Проводим мониторинг состояния аппарата.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="launch-help-cta">
+            <h2>Готовы обсудить ваш проект?</h2>
+            <p>Наши специалисты помогут подобрать оптимальное решение для ваших задач</p>
+            <a href="request.html" class="cta-button">Оставить заявку</a>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-block">
+            <h3>О нашей компании</h3>
+            <p>RUSKY — команда энтузиастов, разработчиков, инженеров и учёных, создающих спутники нового поколения.<br>
+            Мы обеспечиваем полный цикл работ: от проектирования до вывода на орбиту.</p>
+        </div>
+        <div class="footer-block">
+            <h3>Информация</h3>
+            <p>Политика конфиденциальности</p>
+        </div>
+        <div class="footer-block">
+            <h3>Контакты</h3>
+            <p>Телефон: +7 (999) 123-45-67<br>
+            Адрес: Россия, 119234<br>
+            г. Москва, ул. Космическая, д. 1<br>
+            E-mail: <a href="mailto:info@rusky.ru">info@rusky.ru</a></p>
+        </div>
+        <div class="footer-copyright">
+            © 2025. Все права защищены.
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>

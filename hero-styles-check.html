@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Проверка Hero стилей - RUSKY</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Визуальная проверка стилей */
+        .status-check {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.9);
+            color: #fff;
+            padding: 16px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            z-index: 10000;
+            border: 1px solid #333;
+        }
+        
+        .check-item {
+            margin: 4px 0;
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+        }
+        
+        .check-pass { color: #00ff00; }
+        .check-fail { color: #ff0000; }
+    </style>
+</head>
+<body>
+    <!-- Статус проверки -->
+    <div class="status-check">
+        <div><strong>CSS Проверка:</strong></div>
+        <div class="check-item">
+            <span>Overlay градиент:</span>
+            <span id="overlay-check" class="check-fail">❌</span>
+        </div>
+        <div class="check-item">
+            <span>H1 line-height:</span>
+            <span id="h1-check" class="check-fail">❌</span>
+        </div>
+        <div class="check-item">
+            <span>P max-width:</span>
+            <span id="p-check" class="check-fail">❌</span>
+        </div>
+        <div class="check-item">
+            <span>Btn padding:</span>
+            <span id="btn-check" class="check-fail">❌</span>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="header-logo">RUSKY</div>
+        <nav class="header-nav">
+            <a href="#">ПРОВЕРКА</a>
+            <a href="#">СТИЛИ</a>
+        </nav>
+        <div class="burger-menu" onclick="toggleMobileMenu()">
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+        </div>
+    </header>
+
+    <!-- Мобильное меню -->
+    <nav class="mobile-nav" id="mobile-nav">
+        <div class="mobile-nav-list">
+            <a href="#">ПРОВЕРКА</a>
+            <a href="#">СТИЛИ</a>
+        </div>
+    </nav>
+
+    <!-- Hero секция для проверки стилей -->
+    <section class="hero-section" style="background-image: url('CLAY-COM.png');">
+        <div class="overlay" id="test-overlay"></div>
+        <div class="hero-content safe-pad">
+            <h1 id="test-h1">Проверка Hero стилей</h1>
+            <p class="hero-subtitle">Тестирование всех улучшений</p>
+            <p class="hero-desc" id="test-p">
+                Этот параграф должен использовать адаптивный размер шрифта и быть ограничен до 42 символов в ширину для оптимальной читаемости текста.
+            </p>
+            <button class="btn-primary" id="test-btn">Тестовая кнопка</button>
+        </div>
+    </section>
+
+    <!-- Информационная секция -->
+    <main style="padding: 40px 20px; background: #000; color: #fff;">
+        <section style="max-width: 800px; margin: 0 auto;">
+            <h2>🔍 Результаты проверки стилей</h2>
+            <div id="results" style="margin: 20px 0; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 12px;">
+                <!-- Будет заполнено JavaScript -->
+            </div>
+            
+            <h3>📋 Что проверяется:</h3>
+            <ul style="line-height: 1.8; color: #ccc;">
+                <li><strong>Overlay:</strong> Наличие градиентного фона</li>
+                <li><strong>H1:</strong> line-height равен 1.15</li>
+                <li><strong>Параграф:</strong> max-width равен 42ch</li>
+                <li><strong>Кнопка:</strong> padding равен 14px 18px</li>
+            </ul>
+        </section>
+    </main>
+
+    <script src="main.js"></script>
+    <script>
+        function checkStyles() {
+            const results = {
+                overlay: false,
+                h1: false,
+                p: false,
+                btn: false
+            };
+            
+            // Проверка overlay
+            const overlay = document.getElementById('test-overlay');
+            const overlayStyle = getComputedStyle(overlay);
+            const bgImage = overlayStyle.backgroundImage;
+            if (bgImage.includes('gradient')) {
+                results.overlay = true;
+                document.getElementById('overlay-check').textContent = '✅';
+                document.getElementById('overlay-check').className = 'check-pass';
+            }
+            
+            // Проверка H1
+            const h1 = document.getElementById('test-h1');
+            const h1Style = getComputedStyle(h1);
+            if (parseFloat(h1Style.lineHeight) / parseFloat(h1Style.fontSize) <= 1.16) {
+                results.h1 = true;
+                document.getElementById('h1-check').textContent = '✅';
+                document.getElementById('h1-check').className = 'check-pass';
+            }
+            
+            // Проверка параграфа
+            const p = document.getElementById('test-p');
+            const pStyle = getComputedStyle(p);
+            if (pStyle.maxWidth === '42ch') {
+                results.p = true;
+                document.getElementById('p-check').textContent = '✅';
+                document.getElementById('p-check').className = 'check-pass';
+            }
+            
+            // Проверка кнопки
+            const btn = document.getElementById('test-btn');
+            const btnStyle = getComputedStyle(btn);
+            const paddingTop = parseFloat(btnStyle.paddingTop);
+            const paddingLeft = parseFloat(btnStyle.paddingLeft);
+            if (paddingTop >= 13 && paddingTop <= 15 && paddingLeft >= 17 && paddingLeft <= 19) {
+                results.btn = true;
+                document.getElementById('btn-check').textContent = '✅';
+                document.getElementById('btn-check').className = 'check-pass';
+            }
+            
+            // Отображение подробных результатов
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = `
+                <h4>Подробные результаты:</h4>
+                <div style="font-family: monospace; font-size: 14px; line-height: 1.6;">
+                    <div><strong>Overlay background:</strong> ${bgImage}</div>
+                    <div><strong>H1 line-height:</strong> ${h1Style.lineHeight} (${(parseFloat(h1Style.lineHeight) / parseFloat(h1Style.fontSize)).toFixed(2)})</div>
+                    <div><strong>P max-width:</strong> ${pStyle.maxWidth}</div>
+                    <div><strong>Btn padding:</strong> ${btnStyle.padding}</div>
+                    <div><strong>Btn border-radius:</strong> ${btnStyle.borderRadius}</div>
+                </div>
+                <div style="margin-top: 16px;">
+                    <strong>Общий результат:</strong> 
+                    <span style="color: ${Object.values(results).every(r => r) ? '#00ff00' : '#ff9900'}">
+                        ${Object.values(results).filter(r => r).length}/4 проверок пройдено
+                    </span>
+                </div>
+            `;
+            
+            console.log('Результаты проверки стилей:', results);
+        }
+        
+        // Запускаем проверку после загрузки
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(checkStyles, 500);
+        });
+    </script>
+</body>
+</html>

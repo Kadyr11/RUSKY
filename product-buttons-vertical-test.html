@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест кнопок товара - Вертикальное расположение</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .test-indicator {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.9);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            z-index: 9999;
+            font-size: 12px;
+            max-width: 300px;
+            font-family: monospace;
+        }
+        .layout-status {
+            margin-top: 10px;
+            padding: 8px;
+            border-radius: 4px;
+        }
+        .desktop { background: rgba(0, 100, 255, 0.3); }
+        .mobile { background: rgba(255, 100, 0, 0.3); }
+        
+        /* Демо контейнер */
+        .demo-product {
+            background: #000;
+            color: #fff;
+            min-height: 100vh;
+            padding: 120px 20px 60px;
+        }
+        
+        .demo-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            gap: 40px;
+        }
+        
+        .demo-product-info {
+            background: rgba(255,255,255,0.05);
+            padding: 30px;
+            border-radius: 16px;
+        }
+        
+        @media (min-width: 769px) {
+            .demo-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-indicator">
+        <strong>🔘 Тест кнопок товара</strong><br>
+        Размер экрана: <span id="size"></span><br>
+        <div id="layout-status" class="layout-status">...</div>
+        <div style="margin-top: 10px; font-size: 11px; line-height: 1.4;">
+            <strong>Desktop (>768px):</strong> Горизонтально<br>
+            <strong>Mobile (≤768px):</strong> Вертикально, полная ширина<br>
+            <strong>Extra Mobile (≤480px):</strong> Больше отступы
+        </div>
+    </div>
+
+    <div class="demo-product">
+        <div class="demo-container">
+            <!-- Галерея товара -->
+            <div style="background: #111; border-radius: 16px; padding: 20px; display: flex; align-items: center; justify-content: center; min-height: 300px;">
+                <div style="color: #666; text-align: center;">
+                    📷<br>
+                    <strong>Изображение товара</strong><br>
+                    (Демо галерея)
+                </div>
+            </div>
+            
+            <!-- Информация о товаре -->
+            <div class="demo-product-info">
+                <h1 style="font-size: 32px; margin: 0 0 20px 0; font-family: 'Inter', sans-serif;">
+                    Кубсат CLAY-CUBE
+                </h1>
+                
+                <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px;">
+                    <span style="font-size: 24px; font-weight: 700; color: #00D4FF;">₽2,450,000</span>
+                    <span style="background: rgba(76, 175, 80, 0.1); color: #4CAF50; padding: 4px 12px; border-radius: 20px; font-size: 12px; border: 1px solid #4CAF50;">В НАЛИЧИИ</span>
+                </div>
+                
+                <p style="color: #cfcfcf; font-size: 16px; line-height: 1.6; margin-bottom: 30px;">
+                    Компактный кубический спутник для научных исследований и коммерческих задач. 
+                    Поддерживает форматы 3U, 6U и 12U с возможностью кастомизации.
+                </p>
+                
+                <!-- Кнопки товара -->
+                <div class="product-actions">
+                    <button class="btn">ЗАПРОСИТЬ ЦЕНУ</button>
+                    <button class="btn">ДОБАВИТЬ В КОРЗИНУ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateStatus() {
+            const width = window.innerWidth;
+            document.getElementById('size').textContent = width + 'px';
+            
+            const statusEl = document.getElementById('layout-status');
+            
+            if (width > 768) {
+                statusEl.textContent = 'Desktop - Кнопки горизонтально';
+                statusEl.className = 'layout-status desktop';
+            } else if (width > 480) {
+                statusEl.textContent = 'Mobile - Кнопки вертикально';
+                statusEl.className = 'layout-status mobile';
+            } else {
+                statusEl.textContent = 'Extra Mobile - Увеличенные отступы';
+                statusEl.className = 'layout-status mobile';
+            }
+        }
+        
+        updateStatus();
+        window.addEventListener('resize', updateStatus);
+    </script>
+</body>
+</html>

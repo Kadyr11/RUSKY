@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RUSKY — Оформление доставки</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="cart-page-body">
+  <header class="header">
+    <div class="header-logo" onclick="location.href='index.html'" style="cursor:pointer">RUSKY</div>
+    <nav class="header-nav">
+      <a href="index.html">ГЛАВНАЯ</a>
+      <a href="#" onclick="openFilterModal()">ФИЛЬТР</a>
+      <a href="equipment.html">ОБОРУДОВАНИЕ</a>
+      <a href="satellites.html">СПУТНИКИ</a>
+      <a href="#" onclick="openDocumentationModal()">ДОКУМЕНТАЦИЯ</a>
+      <a href="launches.html">ЗАПУСК</a>
+      <a href="support.html">ПОДДЕРЖКА</a>
+      <a href="orders.html">МОИ ЗАКАЗЫ</a>
+      <a href="about.html">О НАС</a>
+    </nav>
+    <a href="cart.html" class="cart-icon" aria-label="Корзина">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="10" cy="26" r="3" fill="white"/>
+        <circle cx="24" cy="26" r="3" fill="white"/>
+        <path d="M4 7H7L10 20H25L28 11H9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      <span class="cart-badge" id="cartBadge" style="display: none;">0</span>
+    </a>
+  </header>
+
+  <main class="cart-page">
+    <div class="cart-breadcrumbs">
+      <a href="index.html">ГЛАВНАЯ</a> 
+      <span>›</span> 
+      <span>ОФОРМЛЕНИЕ ДОСТАВКИ</span>
+    </div>
+
+    <div class="cart-form" id="deliveryForm">
+      <h2>Данные получателя:</h2>
+      <form id="deliveryRequestForm">
+      <div class="form-row">
+        <input type="text" placeholder="Фамилия" class="form-input" required>
+        <input type="text" placeholder="Имя" class="form-input" required>
+      </div>
+      <div class="form-row">
+        <input type="text" placeholder="Отчество" class="form-input">
+        <input type="tel" placeholder="Телефон *" class="form-input" required>
+      </div>
+      <div class="form-row">
+        <input type="email" placeholder="Email *" class="form-input" required>
+        <input type="text" placeholder="Компания/Организация" class="form-input">
+      </div>
+      
+      <h3>Адрес доставки:</h3>
+      <div class="form-row">
+        <input type="text" placeholder="Страна" class="form-input" value="Россия">
+        <input type="text" placeholder="Регион/Область *" class="form-input" required>
+      </div>
+      <div class="form-row">
+        <input type="text" placeholder="Город *" class="form-input" required>
+        <input type="text" placeholder="Индекс *" class="form-input" required>
+      </div>
+      <div class="form-row">
+        <input type="text" placeholder="Улица *" class="form-input" required>
+        <input type="text" placeholder="Дом *" class="form-input" required>
+      </div>
+      <div class="form-row">
+        <input type="text" placeholder="Квартира/Офис" class="form-input">
+        <input type="text" placeholder="Подъезд" class="form-input">
+      </div>
+      
+      <h3>Дополнительная информация:</h3>
+      <div class="form-row">
+        <select class="form-select">
+          <option value="">Способ доставки</option>
+          <option value="courier">Курьерская доставка</option>
+          <option value="pickup">Самовывоз</option>
+          <option value="transport">Транспортная компания</option>
+          <option value="special">Специальная доставка</option>
+        </select>
+        <input type="date" placeholder="Желаемая дата доставки" class="form-input">
+      </div>
+      <div class="form-row">
+        <textarea placeholder="Комментарий к заказу" class="form-textarea"></textarea>
+      </div>
+      
+      <div class="form-footer">
+        <button type="submit" class="submit-order-btn">Оформить доставку</button>
+        <div class="privacy-agreement">
+          <input type="checkbox" id="privacy" class="privacy-checkbox" required>
+          <label for="privacy">Отправляя заявку, я даю согласие на обработку своих персональных данных, а также подтверждаю, что ознакомлен с Политикой обработки персональных данных.</label>
+        </div>
+      </div>
+      </form>
+    </div>
+  </main>
+
+  <script src="main.js"></script>
+</body>
+</html>

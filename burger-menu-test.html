@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Тест бургер-меню - RUSKY</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Дополнительные стили для отладки */
+        .debug-info {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.8);
+            color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            z-index: 9999;
+        }
+        
+        .test-content {
+            padding: 120px 20px;
+            min-height: 100vh;
+            background: #000;
+            color: #fff;
+        }
+        
+        .burger-menu {
+            border: 2px solid red !important; /* Для отладки - видимая граница */
+        }
+        
+        @media (max-width: 480px) {
+            .burger-menu {
+                border: 2px solid yellow !important; /* Для мобильной версии */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo">RUSKY</div>
+        <nav class="header-nav">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="launches.html">ЗАПУСКИ</a>
+            <a href="documentation.html">ДОКУМЕНТАЦИЯ</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+            <a href="orders.html">МОИ ЗАКАЗЫ</a>
+            <a href="about.html">О НАС</a>
+        </nav>
+        <div class="burger-menu" onclick="toggleMobileMenu()">
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+        </div>
+        <a href="cart.html" class="cart-icon" aria-label="Корзина">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="10" cy="26" r="3" fill="white"/>
+                <circle cx="24" cy="26" r="3" fill="white"/>
+                <path d="M4 7H7L10 20H25L28 11H9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+            <span class="cart-badge" style="display: none;">0</span>
+        </a>
+    </header>
+
+    <nav class="mobile-nav" id="mobile-nav">
+        <div class="mobile-nav-list">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="launches.html">ЗАПУСКИ</a>
+            <a href="documentation.html">ДОКУМЕНТАЦИЯ</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+            <a href="orders.html">МОИ ЗАКАЗЫ</a>
+            <a href="about.html">О НАС</a>
+            <a href="cart.html">КОРЗИНА</a>
+        </div>
+    </nav>
+
+    <div class="test-content">
+        <h1>Тест бургер-меню</h1>
+        <p>Эта страница предназначена для тестирования работы бургер-меню на мобильных устройствах.</p>
+        
+        <h2>Что проверяем:</h2>
+        <ul>
+            <li>✅ Видимость бургер-меню на мобильных экранах</li>
+            <li>✅ Возможность клика по кнопке</li>
+            <li>✅ Открытие/закрытие мобильного меню</li>
+            <li>✅ Touch-friendly размеры (44x44px)</li>
+            <li>✅ Z-index и позиционирование</li>
+        </ul>
+        
+        <h2>Инструкции для тестирования:</h2>
+        <ol>
+            <li>Откройте страницу на мобильном устройстве или эмулируйте мобильный экран</li>
+            <li>Убедитесь, что бургер-меню видно в правом верхнем углу</li>
+            <li>Нажмите на бургер-меню</li>
+            <li>Проверьте, что мобильное меню открывается</li>
+            <li>Нажмите еще раз - меню должно закрыться</li>
+        </ol>
+        
+        <div style="margin-top: 40px; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 12px;">
+            <h3>Размеры экрана и breakpoints:</h3>
+            <p>• <strong>Desktop:</strong> > 768px - бургер-меню скрыто</p>
+            <p>• <strong>Tablet:</strong> 481px - 768px - бургер-меню видимо</p>
+            <p>• <strong>Mobile:</strong> ≤ 480px - бургер-меню видимо с yellow border</p>
+        </div>
+    </div>
+
+    <div class="debug-info" id="debug-info">
+        <div>Screen: <span id="screen-width"></span>px</div>
+        <div>Device: <span id="device-type"></span></div>
+        <div>Menu state: <span id="menu-state">closed</span></div>
+        <div>Burger visible: <span id="burger-visible"></span></div>
+    </div>
+
+    <script src="main.js"></script>
+    <script>
+        // Отладочная информация
+        function updateDebugInfo() {
+            const width = window.innerWidth;
+            const screenWidth = document.getElementById('screen-width');
+            const deviceType = document.getElementById('device-type');
+            const burgerVisible = document.getElementById('burger-visible');
+            
+            screenWidth.textContent = width;
+            
+            if (width <= 480) {
+                deviceType.textContent = 'Mobile';
+            } else if (width <= 768) {
+                deviceType.textContent = 'Tablet';
+            } else {
+                deviceType.textContent = 'Desktop';
+            }
+            
+            const burger = document.querySelector('.burger-menu');
+            const computedStyle = getComputedStyle(burger);
+            burgerVisible.textContent = computedStyle.display !== 'none' ? 'YES' : 'NO';
+        }
+        
+        // Отслеживание состояния меню
+        const originalToggle = window.toggleMobileMenu;
+        window.toggleMobileMenu = function() {
+            originalToggle();
+            const menuState = document.getElementById('menu-state');
+            const burger = document.querySelector('.burger-menu');
+            menuState.textContent = burger.classList.contains('active') ? 'open' : 'closed';
+        };
+        
+        // Тест клика
+        document.querySelector('.burger-menu').addEventListener('click', function(e) {
+            console.log('Burger menu clicked!', e);
+            console.log('Event target:', e.target);
+            console.log('Current target:', e.currentTarget);
+        });
+        
+        // Обновляем информацию при загрузке и изменении размера
+        window.addEventListener('load', updateDebugInfo);
+        window.addEventListener('resize', updateDebugInfo);
+        
+        // Инициализация
+        updateDebugInfo();
+        
+        console.log('Test page loaded. Check burger menu functionality.');
+    </script>
+</body>
+</html>

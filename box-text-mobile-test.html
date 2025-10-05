@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест: Box-text сдвиг влево мобильная версия</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .test-header {
+            background: rgba(0, 0, 0, 0.95);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .test-info {
+            background: rgba(20, 20, 20, 0.9);
+            padding: 20px;
+            margin: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+        }
+        
+        .screen-indicator {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 255, 100, 0.8);
+            color: #000;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 1000;
+        }
+        
+        .guide-overlay {
+            position: absolute;
+            top: 0;
+            left: 20px;
+            bottom: 0;
+            width: 2px;
+            background: rgba(255, 0, 0, 0.6);
+            z-index: 10;
+            pointer-events: none;
+        }
+        
+        .guide-overlay::before {
+            content: "20px отступ";
+            position: absolute;
+            top: 10px;
+            left: 5px;
+            color: rgba(255, 0, 0, 0.8);
+            font-size: 10px;
+            font-weight: bold;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .demo-box {
+            position: relative;
+        }
+        
+        .status-good { color: #00ff00; }
+        .status-warning { color: #ffff00; }
+        .status-info { color: #00ddff; }
+        
+        @media (min-width: 769px) {
+            .comparison-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="screen-indicator" id="screenIndicator">Loading...</div>
+    
+    <div class="test-header">
+        <h1>📱 Тест: Box-text сдвиг влево</h1>
+        <p>Проверка отступа 20px и размещения подзаголовка в 2 ряда</p>
+    </div>
+    
+    <div class="test-info">
+        <h2>📋 Что тестируем:</h2>
+        <ul>
+            <li><strong>Сдвиг влево:</strong> текст прижат к левому краю с отступом 20px</li>
+            <li><strong>Grid layout:</strong> заголовок и подзаголовок в 2 ряда</li>
+            <li><strong>Выравнивание:</strong> text-align: left для контента</li>
+            <li><strong>Адаптивность:</strong> разные отступы для мобильных и планшетов</li>
+        </ul>
+        
+        <div style="background: rgba(255, 255, 255, 0.05); padding: 15px; border-radius: 8px; margin-top: 15px;">
+            <h3>Размеры экранов:</h3>
+            <ul style="font-size: 12px; line-height: 1.6;">
+                <li><strong>≤480px (мобильные):</strong> padding-left: 20px, grid 2 ряда</li>
+                <li><strong>481-768px (планшеты):</strong> padding-left: 20px, grid 2 ряда</li>
+                <li><strong>>768px (десктоп):</strong> стандартное поведение</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="comparison-grid">
+        <!-- Обычный box для сравнения -->
+        <div class="demo-box">
+            <h3 style="margin-bottom: 15px; color: #ccc;">Обычный .box</h3>
+            <div class="box">
+                <h1>Обычный заголовок</h1>
+                <p>Этот контент центрирован как обычно в стандартном box контейнере.</p>
+            </div>
+        </div>
+        
+        <!-- Box-text с изменениями -->
+        <div class="demo-box">
+            <div class="guide-overlay"></div>
+            <h3 style="margin-bottom: 15px; color: #00ff00;">Измененный .box.box-text</h3>
+            <div class="box box-text">
+                <h1>ТИПЫ СПУТНИКОВ</h1>
+                <p>Разработка, производство и внедрение космических спутников нового поколения.</p>
+            </div>
+        </div>
+        
+        <!-- Еще один пример -->
+        <div class="demo-box">
+            <div class="guide-overlay"></div>
+            <h3 style="margin-bottom: 15px; color: #00ff00;">Еще один .box.box-text</h3>
+            <div class="box box-text">
+                <h1>ТЕХНОЛОГИИ</h1>
+                <p>Инновационные решения для космической индустрии с использованием передовых технологий.</p>
+            </div>
+        </div>
+        
+        <!-- Третий пример -->
+        <div class="demo-box">
+            <div class="guide-overlay"></div>
+            <h3 style="margin-bottom: 15px; color: #00ff00;">Длинный текст .box.box-text</h3>
+            <div class="box box-text">
+                <h1>РАЗРАБОТКА</h1>
+                <p>Полный цикл разработки от концепции до запуска. Наша команда экспертов обеспечивает качество на каждом этапе.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div style="background: rgba(20, 20, 20, 0.9); padding: 20px; margin: 20px; border-radius: 12px;">
+        <h3>📊 Результаты анализа:</h3>
+        <div id="analysisResults">Анализируется...</div>
+    </div>
+
+    <script>
+        function updateAnalysis() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            
+            let category = '';
+            let indicator = '';
+            
+            if (width <= 480) {
+                category = 'Мобильный';
+                indicator = `📱 ${width}px (≤480px)`;
+            } else if (width <= 768) {
+                category = 'Планшет';
+                indicator = `📊 ${width}px (481-768px)`;
+            } else {
+                category = 'Десктоп';
+                indicator = `🖥️ ${width}px (>768px)`;
+            }
+            
+            document.getElementById('screenIndicator').textContent = indicator;
+            
+            // Анализ box-text элементов
+            const boxTextElements = document.querySelectorAll('.box.box-text');
+            let results = [];
+            
+            if (boxTextElements.length > 0) {
+                const firstBox = boxTextElements[0];
+                const styles = getComputedStyle(firstBox);
+                const h1 = firstBox.querySelector('h1');
+                const p = firstBox.querySelector('p');
+                
+                // Проверка padding-left
+                const paddingLeft = parseInt(styles.paddingLeft);
+                if (width <= 768) {
+                    if (paddingLeft >= 20) {
+                        results.push(`<span class="status-good">✅ Отступ слева: ${paddingLeft}px</span>`);
+                    } else {
+                        results.push(`<span class="status-warning">⚠️ Отступ слева: ${paddingLeft}px (ожидался ≥20px)</span>`);
+                    }
+                } else {
+                    results.push(`<span class="status-info">ℹ️ Десктоп режим - стандартные отступы</span>`);
+                }
+                
+                // Проверка display
+                const display = styles.display;
+                if (width <= 768) {
+                    if (display === 'grid') {
+                        results.push(`<span class="status-good">✅ Layout: ${display}</span>`);
+                    } else {
+                        results.push(`<span class="status-warning">⚠️ Layout: ${display} (ожидался grid)</span>`);
+                    }
+                }
+                
+                // Проверка выравнивания текста
+                if (h1) {
+                    const h1Styles = getComputedStyle(h1);
+                    const textAlign = h1Styles.textAlign;
+                    if (width <= 768) {
+                        if (textAlign === 'left' || textAlign === 'start') {
+                            results.push(`<span class="status-good">✅ H1 выравнивание: ${textAlign}</span>`);
+                        } else {
+                            results.push(`<span class="status-warning">⚠️ H1 выравнивание: ${textAlign} (ожидался left)</span>`);
+                        }
+                    }
+                }
+                
+                if (p) {
+                    const pStyles = getComputedStyle(p);
+                    const textAlign = pStyles.textAlign;
+                    if (width <= 768) {
+                        if (textAlign === 'left' || textAlign === 'start') {
+                            results.push(`<span class="status-good">✅ P выравнивание: ${textAlign}</span>`);
+                        } else {
+                            results.push(`<span class="status-warning">⚠️ P выравнивание: ${textAlign} (ожидался left)</span>`);
+                        }
+                    }
+                }
+                
+                // Информация о grid
+                if (width <= 768 && display === 'grid') {
+                    const gridTemplateRows = styles.gridTemplateRows;
+                    results.push(`<span class="status-info">📐 Grid rows: ${gridTemplateRows}</span>`);
+                }
+                
+                results.push(`<span class="status-info">📱 Экран: ${width}×${height}px (${category})</span>`);
+                
+            } else {
+                results.push(`<span class="status-warning">⚠️ Элементы .box.box-text не найдены</span>`);
+            }
+            
+            document.getElementById('analysisResults').innerHTML = results.join('<br>');
+        }
+        
+        // Запускаем анализ
+        updateAnalysis();
+        window.addEventListener('resize', updateAnalysis);
+        
+        // Обновляем каждые 500мс
+        setInterval(updateAnalysis, 500);
+    </script>
+</body>
+</html>

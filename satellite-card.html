@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Коммуникационный спутник CLAY-COM - RUSKY</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        @media (max-width: 967px) {
+            .satellite-card-section {
+                grid-template-columns: 1fr !important;
+                gap: 40px !important;
+            }
+            
+            .satellite-card-container {
+                padding: 20px !important;
+            }
+            
+            .satellite-info-section h1 {
+                font-size: 32px !important;
+            }
+            
+            .action-buttons {
+                flex-direction: column !important;
+            }
+            
+            .action-buttons button {
+                width: 100%;
+            }
+            
+            .header-nav {
+                display: none !important;
+            }
+            
+            .char-item {
+                flex-direction: column !important;
+                gap: 5px;
+            }
+            
+            .char-item span:first-child {
+                min-width: auto !important;
+                margin-left: 0 !important;
+            }
+        }
+
+        /* Стили для бейджа корзины */
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ff4444;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .cart-icon {
+            position: relative;
+        }
+    </style>
+</head>
+<body style="background: #000; margin: 0; padding: 0; font-family: 'Inter', sans-serif;">
+    
+    <!-- Хедер -->
+    <header class="header" style="position: fixed; top: 0; width: 100%; z-index: 1000; backdrop-filter: blur(10px); background: rgba(0, 0, 0, 0.9); border-bottom: 1px solid #333;">
+        <div class="header-content" style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 15px 20px;">
+            <div class="header-left">
+                <div class="logo" style="color: #fff; font-size: 24px; font-weight: 700;">
+                    <a href="index.html" style="color: inherit; text-decoration: none;">RUSKY</a>
+                </div>
+            </div>
+            <nav class="header-nav" style="display: flex; gap: 30px;">
+                <a href="index.html" style="color: #fff; text-decoration: none; font-size: 14px; font-weight: 500;">ГЛАВНАЯ</a>
+                <a href="#filter" onclick="openFilterModal()" style="color: #fff; text-decoration: none; font-size: 14px; font-weight: 500;">ФИЛЬТР</a>
+                <a href="equipment.html" style="color: #fff; text-decoration: none; font-size: 14px; font-weight: 500;">ОБОРУДОВАНИЕ</a>
+                <a href="satellites.html" style="color: #fff; text-decoration: none; font-size: 14px; font-weight: 500;">СПУТНИКИ</a>
+                <a href="#documentation" onclick="openDocumentationModal()" style="color: #fff; text-decoration: none; font-size: 14px; font-weight: 500;">ДОКУМЕНТАЦИЯ</a>
+                <a href="request.html" style="color: #fff; text-decoration: none; font-size: 14px; font-weight: 500;">ЗАПРОС</a>
+                <a href="support.html" style="color: #fff; text-decoration: none; font-size: 14px; font-weight: 500;">ПОДДЕРЖКА</a>
+                <a href="orders.html" style="color: #fff; text-decoration: none; font-size: 14px; font-weight: 500;">МОИ ЗАКАЗЫ</a>
+                <a href="about.html" style="color: #fff; text-decoration: none; font-size: 14px; font-weight: 500;">О НАС</a>
+            </nav>
+            <div class="header-right">
+                <a href="cart.html" class="cart-icon" style="color: #fff; cursor: pointer; text-decoration: none;">
+                    <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 8L8.5 8L11.5 22L24 22L27 12L10 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="12" cy="26" r="2" stroke="currentColor" stroke-width="2"/>
+                        <circle cx="24" cy="26" r="2" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    <span class="cart-badge" style="display: none;">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main style="padding-top: 80px; min-height: 100vh;">
+        <div class="satellite-card-container" style="max-width: 1400px; margin: 0 auto; padding: 40px 20px;">
+            
+            <!-- Основная секция с информацией о спутнике -->
+            <div class="satellite-card-section" style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;">
+                
+                <!-- Левая часть - изображение -->
+                <div class="satellite-image-section">
+                    <div class="satellite-main-image" style="background: linear-gradient(135deg, #1a1a1a, #2a2a2a); border-radius: 24px; padding: 60px; text-align: center; margin-bottom: 20px; position: relative;">
+                        <img src="CLAY-COM.png" alt="Коммуникационный спутник CLAY-COM" style="max-width: 100%; height: auto; filter: brightness(1.1) contrast(1.1);">
+                        <!-- Водяной знак -->
+                        <div style="position: absolute; top: 20px; right: 20px; color: #555; font-size: 12px; font-weight: 600; transform: rotate(90deg); transform-origin: center;">
+                            CLAY-COM
+                        </div>
+                    </div>
+                    
+                    <!-- Миниатюры -->
+                    <div class="satellite-thumbnails" style="display: flex; gap: 12px; justify-content: flex-start;">
+                        <div class="thumbnail active" style="width: 80px; height: 80px; border-radius: 12px; border: 2px solid #4A9EFF; background: #1a1a1a; padding: 12px; cursor: pointer; transition: all 0.3s ease;">
+                            <img src="CLAY-COM.png" alt="CLAY-COM вид 1" style="width: 100%; height: 100%; object-fit: contain; filter: brightness(0.8);">
+                        </div>
+                        <div class="thumbnail" style="width: 80px; height: 80px; border-radius: 12px; border: 2px solid #333; background: #1a1a1a; padding: 12px; cursor: pointer; transition: all 0.3s ease;">
+                            <img src="CLAY-COM.png" alt="CLAY-COM вид 2" style="width: 100%; height: 100%; object-fit: contain; filter: brightness(0.8);">
+                        </div>
+                        <div class="thumbnail" style="width: 80px; height: 80px; border-radius: 12px; border: 2px solid #333; background: #1a1a1a; padding: 12px; cursor: pointer; transition: all 0.3s ease;">
+                            <img src="CLAY-COM.png" alt="CLAY-COM вид 3" style="width: 100%; height: 100%; object-fit: contain; filter: brightness(0.8);">
+                        </div>
+                        <div class="thumbnail" style="width: 80px; height: 80px; border-radius: 12px; border: 2px solid #333; background: #1a1a1a; padding: 12px; cursor: pointer; transition: all 0.3s ease;">
+                            <img src="CLAY-COM.png" alt="CLAY-COM вид 4" style="width: 100%; height: 100%; object-fit: contain; filter: brightness(0.8);">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Правая часть - информация -->
+                <div class="satellite-info-section" style="color: #fff;">
+                    <h1 style="font-size: 48px; font-weight: 600; margin: 0 0 30px 0; line-height: 1.1; color: #fff;">
+                        Коммуникационный спутник<br>CLAY-COM
+                    </h1>
+                    
+                    <p style="color: #ccc; font-size: 16px; line-height: 1.6; margin-bottom: 40px;">
+                        Предназначен для организации широкополосной связи в труднодоступных и удалённых регионах (горные районы, острова, сельская местность), а также в условиях чрезвычайных ситуаций.
+                    </p>
+                    
+                    <!-- Характеристики -->
+                    <div class="characteristics" style="margin-bottom: 50px;">
+                        <h3 style="color: #fff; font-size: 18px; font-weight: 600; margin: 0 0 25px 0;">Ключевые характеристики:</h3>
+                        
+                        <div class="char-list">
+                            <div class="char-item" style="margin-bottom: 12px; display: flex; align-items: flex-start;">
+                                <span style="color: #888; font-weight: 500; min-width: 120px; font-size: 14px;">Диапазоны:</span>
+                                <span style="color: #fff; margin-left: 15px; font-size: 14px; line-height: 1.5;">Поддержка Ku/Ka диапазонов (высокая пропускная способность)</span>
+                            </div>
+                            
+                            <div class="char-item" style="margin-bottom: 12px; display: flex; align-items: flex-start;">
+                                <span style="color: #888; font-weight: 500; min-width: 120px; font-size: 14px;">Орбиты:</span>
+                                <span style="color: #fff; margin-left: 15px; font-size: 14px; line-height: 1.5;">Возможна работа как на GEO (геостационарной), так и на LEO (низкой) орбите</span>
+                            </div>
+                            
+                            <div class="char-item" style="margin-bottom: 12px; display: flex; align-items: flex-start;">
+                                <span style="color: #888; font-weight: 500; min-width: 120px; font-size: 14px;">Пропускная способность:</span>
+                                <span style="color: #fff; margin-left: 15px; font-size: 14px; line-height: 1.5;">до 1 Гбит/с</span>
+                            </div>
+                            
+                            <div class="char-item" style="margin-bottom: 12px; display: flex; align-items: flex-start;">
+                                <span style="color: #888; font-weight: 500; min-width: 120px; font-size: 14px;">Покрытие:</span>
+                                <span style="color: #fff; margin-left: 15px; font-size: 14px; line-height: 1.5;">динамически управляемая зона покрытия до 2000 км в диаметре</span>
+                            </div>
+                            
+                            <div class="char-item" style="margin-bottom: 12px; display: flex; align-items: flex-start;">
+                                <span style="color: #888; font-weight: 500; min-width: 120px; font-size: 14px;">Наземная инфраструктура:</span>
+                                <span style="color: #fff; margin-left: 15px; font-size: 14px; line-height: 1.5;">совместим с VSAT-станциями и портативными терминалами</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Преимущества -->
+                    <div class="advantages" style="margin-bottom: 50px;">
+                        <h3 style="color: #fff; font-size: 18px; font-weight: 600; margin: 0 0 20px 0;">Преимущества:</h3>
+                        <div style="color: #ccc; line-height: 1.7; font-size: 14px;">
+                            <div style="margin-bottom: 8px;">Быстрое развёртывание сетей в регионах без инфраструктуры</div>
+                            <div style="margin-bottom: 8px;">Подходит для военных, правительственных и коммерческих проектов</div>
+                            <div>Поддержка защищённой связи (опционально)</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Кнопки действий -->
+                    <div class="action-buttons" style="display: flex; gap: 20px;">
+                        <button class="btn-primary" id="requestPriceBtn" style="background: #fff; color: #000; border: none; padding: 16px 32px; border-radius: 8px; font-weight: 600; font-size: 16px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 0.5px;">
+                            ЗАПРОСИТЬ ЦЕНУ
+                        </button>
+                        <button class="btn-secondary" id="addToCartBtn" style="background: transparent; color: #fff; border: 2px solid #fff; padding: 14px 30px; border-radius: 8px; font-weight: 600; font-size: 16px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 0.5px;">
+                            ДОБАВИТЬ В КОРЗИНУ
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="main.js"></script>
+    <script>
+        // Обработчики для миниатюр
+        document.querySelectorAll('.thumbnail').forEach(thumb => {
+            thumb.addEventListener('click', function() {
+                // Убираем активный класс у всех миниатюр
+                document.querySelectorAll('.thumbnail').forEach(t => {
+                    t.classList.remove('active');
+                    t.style.borderColor = '#333';
+                });
+                // Добавляем активный класс к текущей
+                this.classList.add('active');
+                this.style.borderColor = '#4A9EFF';
+            });
+            
+            // Эффект наведения
+            thumb.addEventListener('mouseenter', function() {
+                if (!this.classList.contains('active')) {
+                    this.style.borderColor = '#666';
+                    this.style.transform = 'scale(1.05)';
+                }
+            });
+            
+            thumb.addEventListener('mouseleave', function() {
+                if (!this.classList.contains('active')) {
+                    this.style.borderColor = '#333';
+                    this.style.transform = 'scale(1)';
+                }
+            });
+        });
+
+        // Эффекты для кнопок
+        document.querySelector('.btn-primary').addEventListener('mouseenter', function() {
+            this.style.background = '#f0f0f0';
+            this.style.transform = 'translateY(-2px)';
+        });
+
+        document.querySelector('.btn-primary').addEventListener('mouseleave', function() {
+            this.style.background = '#fff';
+            this.style.transform = 'translateY(0)';
+        });
+
+        document.querySelector('.btn-secondary').addEventListener('mouseenter', function() {
+            this.style.background = 'rgba(255, 255, 255, 0.1)';
+            this.style.transform = 'translateY(-2px)';
+        });
+
+        document.querySelector('.btn-secondary').addEventListener('mouseleave', function() {
+            this.style.background = 'transparent';
+            this.style.transform = 'translateY(0)';
+        });
+
+        // Обработчики для кнопок действий
+        document.addEventListener('DOMContentLoaded', function() {
+            // Обновляем бейдж корзины при загрузке страницы
+            updateCartBadgeOnPage();
+
+            // Кнопка "Запросить цену"
+            const requestPriceBtn = document.getElementById('requestPriceBtn');
+            if (requestPriceBtn) {
+                requestPriceBtn.addEventListener('click', function() {
+                    window.location.href = 'request.html';
+                });
+            }
+
+            // Кнопка "Добавить в корзину"
+            const addToCartBtn = document.getElementById('addToCartBtn');
+            if (addToCartBtn) {
+                addToCartBtn.addEventListener('click', function() {
+                    // Данные товара
+                    const productId = 'clay-com-satellite';
+                    const productName = 'Коммуникационный спутник CLAY-COM';
+                    const productPrice = 0; // Цена по запросу для спутников
+                    const productImage = 'CLAY-COM.png';
+                    const productType = 'satellite';
+
+                    // Добавляем товар в корзину
+                    if (typeof addToCart === 'function') {
+                        addToCart(productId, productName, productPrice, productImage, productType);
+                        updateCartBadgeOnPage(); // Обновляем бейдж
+                    } else {
+                        console.error('Функция addToCart не найдена');
+                        // Запасной вариант - прямо в localStorage
+                        try {
+                            const cart = JSON.parse(localStorage.getItem('rusky_cart') || '[]');
+                            const existingItem = cart.find(item => item.id === productId);
+                            
+                            if (existingItem) {
+                                existingItem.qty = (existingItem.qty || 1) + 1;
+                            } else {
+                                cart.push({
+                                    id: productId,
+                                    name: productName,
+                                    price: productPrice,
+                                    image: productImage,
+                                    type: productType,
+                                    qty: 1
+                                });
+                            }
+                            
+                            localStorage.setItem('rusky_cart', JSON.stringify(cart));
+                            updateCartBadgeOnPage(); // Обновляем бейдж
+                            
+                            // Показываем уведомление
+                            alert('Товар добавлен в корзину!');
+                        } catch (e) {
+                            console.error('Ошибка при добавлении товара в корзину:', e);
+                            alert('Произошла ошибка при добавлении товара в корзину');
+                        }
+                    }
+                });
+            }
+        });
+
+        // Функция для обновления бейджа корзины на текущей странице
+        function updateCartBadgeOnPage() {
+            try {
+                const cart = JSON.parse(localStorage.getItem('rusky_cart') || '[]');
+                const totalQty = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+                const badge = document.querySelector('.cart-badge');
+                
+                if (badge) {
+                    if (totalQty > 0) {
+                        badge.style.display = 'flex';
+                        badge.textContent = totalQty;
+                    } else {
+                        badge.style.display = 'none';
+                    }
+                }
+            } catch (e) {
+                console.error('Ошибка при обновлении бейджа корзины:', e);
+            }
+        }
+    </script>
+</body>
+</html>

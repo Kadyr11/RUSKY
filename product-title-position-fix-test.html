@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест исправления позиции Product Title</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .debug-indicator {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(0,255,0,0.9);
+            color: black;
+            padding: 15px;
+            border-radius: 8px;
+            z-index: 9999;
+            font-size: 12px;
+            max-width: 300px;
+            font-family: monospace;
+        }
+        .status-info {
+            margin-top: 10px;
+            padding: 8px;
+            border-radius: 4px;
+            background: rgba(0,0,0,0.2);
+            color: white;
+        }
+        
+        /* Визуальные границы для debug */
+        .product-gallery {
+            border: 2px solid red !important;
+        }
+        .product-info {
+            border: 2px solid blue !important;
+            position: relative;
+        }
+        .product-title {
+            background: rgba(255,255,0,0.3) !important;
+            border: 1px solid orange !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="debug-indicator">
+        <strong>🔧 Debug Title Position</strong><br>
+        Размер: <span id="size"></span><br>
+        <div id="status-info" class="status-info">...</div>
+        <div style="margin-top: 10px; font-size: 11px; line-height: 1.4;">
+            <strong>Рамки для debug:</strong><br>
+            🔴 Красная = product-gallery<br>
+            🔵 Синяя = product-info<br>
+            🟡 Желтая = product-title<br>
+            <div style="margin-top: 5px; color: white;">
+                Заголовок должен быть ВНУТРИ синей рамки
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Page -->
+    <main class="product-page">
+        <div class="product-container">
+            <!-- Галерея товара -->
+            <aside class="product-gallery">
+                <div class="product-main-image">
+                    <img src="card 1.png" alt="Исследовательский спутник" style="width: 100%; height: 100%; object-fit: cover;" 
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div style="display: none; width: 100%; height: 100%; background: #333; align-items: center; justify-content: center; color: #666;">
+                        🛰️ Спутник R-Research
+                    </div>
+                </div>
+                <div class="product-thumbs">
+                    <img src="card 1.png" alt="thumb 1" onerror="this.style.background='#444'">
+                    <img src="card 2.png" alt="thumb 2" onerror="this.style.background='#444'">
+                    <img src="card 3.png" alt="thumb 3" onerror="this.style.background='#444'">
+                    <img src="card 4.png" alt="thumb 4" onerror="this.style.background='#444'">
+                </div>
+            </aside>
+            
+            <!-- Информация о товаре -->
+            <section class="product-info">
+                <h1 class="product-title">Исследовательский спутник R-Research</h1>
+                
+                <div class="product-price">
+                    <span class="price-value">₽4,750,000</span>
+                    <span class="price-note">В НАЛИЧИИ</span>
+                </div>
+                
+                <p class="product-lead">
+                    Многофункциональный исследовательский спутник для проведения научных экспериментов 
+                    в космическом пространстве и изучения поверхности Земли.
+                </p>
+                
+                <div class="product-specs">
+                    <h3>Технические характеристики</h3>
+                    <p><strong>Тип:</strong> Исследовательский спутник</p>
+                    <p><strong>Масса:</strong> 2400 кг</p>
+                    <p><strong>Орбита:</strong> LEO 500-1200 км</p>
+                    <p><strong>Приборы:</strong> Телескопы, спектрометры, камеры высокого разрешения</p>
+                    <p><strong>Срок службы:</strong> 7-10 лет</p>
+                </div>
+                
+                <div class="product-actions">
+                    <button class="btn">ЗАПРОСИТЬ ЦЕНУ</button>
+                    <button class="btn">ДОБАВИТЬ В КОРЗИНУ</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        function updateStatus() {
+            const width = window.innerWidth;
+            document.getElementById('size').textContent = width + 'px';
+            
+            const statusEl = document.getElementById('status-info');
+            const title = document.querySelector('.product-title');
+            const titleStyles = getComputedStyle(title);
+            const marginTop = parseInt(titleStyles.marginTop);
+            const marginBottom = parseInt(titleStyles.marginBottom);
+            
+            if (width > 768) {
+                statusEl.innerHTML = `Desktop<br>margin: ${marginTop}px 0 ${marginBottom}px 0`;
+            } else if (width > 480) {
+                statusEl.innerHTML = `Tablet ≤768px<br>margin: ${marginTop}px 0 ${marginBottom}px 0<br><span style="color: #90EE90;">Исправлено: минимальные отступы</span>`;
+            } else {
+                statusEl.innerHTML = `Mobile ≤480px<br>margin: ${marginTop}px 0 ${marginBottom}px 0<br><span style="color: #90EE90;">Исправлено: минимальные отступы</span>`;
+            }
+        }
+        
+        updateStatus();
+        window.addEventListener('resize', updateStatus);
+        
+        // Проверяем позицию заголовка относительно галереи
+        function checkTitlePosition() {
+            const gallery = document.querySelector('.product-gallery');
+            const title = document.querySelector('.product-title');
+            const info = document.querySelector('.product-info');
+            
+            if (gallery && title && info) {
+                const galleryRect = gallery.getBoundingClientRect();
+                const titleRect = title.getBoundingClientRect();
+                const infoRect = info.getBoundingClientRect();
+                
+                // Проверяем, не пересекается ли заголовок с галереей
+                const isOverlapping = !(titleRect.right < galleryRect.left || 
+                                       titleRect.left > galleryRect.right || 
+                                       titleRect.bottom < galleryRect.top || 
+                                       titleRect.top > galleryRect.bottom);
+                
+                if (isOverlapping && window.innerWidth <= 768) {
+                    console.warn('⚠️ Заголовок пересекается с галереей!');
+                    title.style.border = '3px solid red';
+                } else {
+                    title.style.border = '1px solid orange';
+                }
+            }
+        }
+        
+        // Проверяем позицию при загрузке и изменении размера
+        document.addEventListener('DOMContentLoaded', checkTitlePosition);
+        window.addEventListener('resize', checkTitlePosition);
+        setTimeout(checkTitlePosition, 500);
+    </script>
+</body>
+</html>

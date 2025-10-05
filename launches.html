@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RUSKY — Запуски</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="header-logo" onclick="location.href='index.html'" style="cursor:pointer">RUSKY</div>
+    <nav class="header-nav">
+      <a href="index.html">ГЛАВНАЯ</a>
+      <a href="#" onclick="openFilterModal()">ФИЛЬТР</a>
+      <a href="equipment.html">ОБОРУДОВАНИЕ</a>
+      <a href="satellites.html">СПУТНИКИ</a>
+      <a href="documentation.html">ДОКУМЕНТАЦИЯ</a>
+      <div class="dropdown">
+        <a href="launches.html" class="active">ЗАПУСК</a>
+        <div class="dropdown-content">
+          <a href="launch-process.html">ПРОЦЕСС ЗАПУСКА</a>
+          <a href="launch-help.html">ПОМОЩЬ С ЗАПУСКОМ</a>
+        </div>
+      </div>
+      <a href="support.html">ПОДДЕРЖКА</a>
+      <a href="cart.html">МОИ ЗАКАЗЫ</a>
+      <a href="about.html">О НАС</a>
+    </nav>
+    <div class="burger-menu">
+      <div class="burger-line"></div>
+      <div class="burger-line"></div>
+      <div class="burger-line"></div>
+    </div>
+    <a href="cart.html" class="cart-icon" aria-label="Корзина">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="10" cy="26" r="3" fill="white"/>
+        <circle cx="24" cy="26" r="3" fill="white"/>
+        <path d="M4 7H7L10 20H25L28 11H9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+    </a>
+  </header>
+
+  <main class="launches-page">
+    <!-- Hero space background -->
+    <section class="launch-hero">
+      <img src="img 4.png" alt="Запуск спутника" class="hero-bg">
+      <div class="hero-overlay"></div>
+      
+      <!-- Navigation controls -->
+      <div class="launch-controls">
+        <button class="nav-btn prev-btn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M15 18L9 12L15 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button class="nav-btn next-btn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M9 18L15 12L9 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+      
+      <!-- Preview container (movable) -->
+      <div class="launch-preview-wrapper">
+        <div class="launch-preview">
+          <img src="img 4.png" alt="Preview">
+        </div>
+        <div class="preview-arrow"></div>
+      </div>
+      
+      <!-- Slider indicator (fixed) -->
+      <div class="slider-indicator">
+        <div class="indicator-dot"></div>
+        <div class="indicator-dot active"></div>
+        <div class="indicator-dot"></div>
+      </div>
+    </section>
+
+    <!-- Launch information card -->
+    <section class="launch-info">
+      <h1 class="launch-title">Последние запуски</h1>
+      
+      <div class="launch-card">
+        <h2 class="mission-name">RUSKY-1</h2>
+        
+        <div class="mission-details">
+          <div class="detail-item">
+            <span class="detail-label">Дата запуска:</span>
+            <span class="detail-value">12 июня 2025</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Тип орбиты:</span>
+            <span class="detail-value">Солнечно-синхронная (SSO), высота ~500 км</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Масса спутника:</span>
+            <span class="detail-value">150 кг</span>
+          </div>
+        </div>
+        
+        <div class="mission-objectives">
+          <h3>Цели миссии:</h3>
+          <ul>
+            <li>Высокоточное дистанционное зондирование Земли</li>
+            <li>Сбор данных для экологического мониторинга, картографии и сельского хозяйства</li>
+          </ul>
+        </div>
+        
+        <div class="mission-features">
+          <h3>Особенности:</h3>
+          <ul>
+            <li>Камера высокого разрешения 0.5 м/пиксель</li>
+            <li>Спектрометр для мониторинга растительности</li>
+            <li>Срок активной эксплуатации: 5 лет</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="mobile-nav">
+    <div class="mobile-nav-list">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="#" onclick="openFilterModal()">ФИЛЬТР</a>
+            <a href="equipment.html">ОБОРУДОВАНИЕ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="#" onclick="openDocumentationModal()">ДОКУМЕНТАЦИЯ</a>
+            <a href="launch-process.html">ПРОЦЕСС ЗАПУСКА</a>
+            <a href="launch-help.html">ПОМОЩЬ С ЗАПУСКОМ</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+            <a href="orders.html">МОИ ЗАКАЗЫ</a>
+            <a href="about.html">О НАС</a>
+            <a href="cart.html" class="mobile-cart-link" aria-label="Корзина">
+                <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="10" cy="26" r="3" fill="white"/>
+                    <circle cx="24" cy="26" r="3" fill="white"/>
+                    <path d="M4 7H7L10 20H25L28 11H9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
+                КОРЗИНА
+            </a>
+        </div>
+  </nav>
+
+  <footer class="footer">
+    <div class="footer-block">
+      <h3>О нашей компании</h3>
+      <p>RUSKY — команда энтузиастов, разработчиков, инженеров и учёных, создающих спутники нового поколения.<br>
+      Мы обеспечиваем полный цикл работ: от проектирования до вывода на орбиту.</p>
+    </div>
+    <div class="footer-block">
+      <h3>Информация</h3>
+      <p>Политика конфиденциальности</p>
+    </div>
+    <div class="footer-block">
+      <h3>Контакты</h3>
+      <p>Телефон: +7 (999) 123-45-67<br>
+      Адрес: Россия, 119234<br>
+      г. Москва, ул. Космическая, д. 1<br>
+      E-mail: <a href="mailto:info@rusky.ru">info@rusky.ru</a></p>
+    </div>
+    <div class="footer-copyright">
+      © 2025. Все права защищены.
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Простой тест мобильного меню</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: #000;
+            color: #fff;
+        }
+        
+        .header {
+            background: #111;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .burger-menu {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+        
+        .burger-line {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            transition: 0.3s;
+        }
+        
+        .burger-menu.active .burger-line:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        
+        .burger-menu.active .burger-line:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .burger-menu.active .burger-line:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+        
+        .mobile-nav {
+            display: none;
+            background: rgba(0, 100, 0, 0.9); /* Зеленый для видимости */
+            padding: 20px;
+            margin: 20px 0;
+            border: 3px solid red;
+        }
+        
+        .mobile-nav.active {
+            display: block;
+        }
+        
+        .mobile-nav a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 0;
+            border-bottom: 1px solid #333;
+        }
+        
+        .breadcrumbs {
+            background: rgba(0, 0, 100, 0.5); /* Синий для видимости */
+            padding: 40px 20px;
+            border: 3px solid blue;
+        }
+        
+        .content {
+            padding: 40px 20px;
+            background: #333;
+            min-height: 300px;
+        }
+        
+        .debug {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: yellow;
+            color: black;
+            padding: 10px;
+            font-size: 12px;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+    <div class="debug">
+        <div>Ширина: <span id="width"></span>px</div>
+        <div>Меню: <span id="status">ЗАКРЫТО</span></div>
+        <div>Клики: <span id="clicks">0</span></div>
+    </div>
+
+    <header class="header">
+        <div class="logo">RUSKY</div>
+        <div class="burger-menu" id="burger" onclick="toggleMenu()">
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+        </div>
+    </header>
+
+    <nav class="mobile-nav" id="mobile-nav">
+        <a href="#">ГЛАВНАЯ</a>
+        <a href="#">СПУТНИКИ</a>
+        <a href="#">ДОКУМЕНТАЦИЯ</a>
+        <a href="support.html">ПОДДЕРЖКА</a>
+    </nav>
+
+    <section class="breadcrumbs">
+        <div>ГЛАВНАЯ > ТЕСТ</div>
+    </section>
+
+    <div class="content">
+        <h1>Тестовый контент</h1>
+        <p>Проверяем работу мобильного меню</p>
+        <button onclick="toggleMenu()">Переключить меню</button>
+        <button onclick="showInfo()">Показать информацию</button>
+    </div>
+
+    <script>
+        let clicks = 0;
+        
+        function toggleMenu() {
+            clicks++;
+            console.log('toggleMenu вызвана, клик №' + clicks);
+            
+            const burger = document.getElementById('burger');
+            const nav = document.getElementById('mobile-nav');
+            
+            burger.classList.toggle('active');
+            nav.classList.toggle('active');
+            
+            updateDebug();
+        }
+        
+        function updateDebug() {
+            document.getElementById('width').textContent = window.innerWidth;
+            document.getElementById('clicks').textContent = clicks;
+            
+            const nav = document.getElementById('mobile-nav');
+            const isActive = nav.classList.contains('active');
+            document.getElementById('status').textContent = isActive ? 'ОТКРЫТО' : 'ЗАКРЫТО';
+            document.getElementById('status').style.color = isActive ? 'green' : 'red';
+        }
+        
+        function showInfo() {
+            const nav = document.getElementById('mobile-nav');
+            const computedStyle = getComputedStyle(nav);
+            
+            console.log('Информация о мобильном меню:', {
+                display: computedStyle.display,
+                visibility: computedStyle.visibility,
+                opacity: computedStyle.opacity,
+                height: computedStyle.height,
+                marginTop: computedStyle.marginTop,
+                marginBottom: computedStyle.marginBottom,
+                classList: Array.from(nav.classList),
+                offsetHeight: nav.offsetHeight,
+                scrollHeight: nav.scrollHeight
+            });
+        }
+        
+        window.addEventListener('resize', updateDebug);
+        document.addEventListener('DOMContentLoaded', updateDebug);
+    </script>
+</body>
+</html>

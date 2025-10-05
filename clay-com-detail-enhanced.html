@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>RUSKY — Коммуникационный спутник CLAY-COM (Улучшенная версия)</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Стили для бейджа корзины */
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ff4444;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .cart-icon {
+            position: relative;
+        }
+        
+        /* Обновленные стили для улучшенной страницы */
+        .enhanced-product-page {
+            background: #000;
+            color: #fff;
+            padding: 120px 20px 60px;
+            min-height: 100vh;
+        }
+        
+        .enhanced-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .product-breadcrumbs {
+            margin-bottom: 40px;
+            font-size: 14px;
+            color: #ccc;
+        }
+        
+        .product-breadcrumbs a {
+            color: #ccc;
+            text-decoration: none;
+        }
+        
+        .product-breadcrumbs a:hover {
+            color: #fff;
+        }
+        
+        .enhanced-product-info h1 {
+            font-size: var(--fs-h1);
+            line-height: 1.15;
+            margin-bottom: 16px;
+        }
+        
+        .enhanced-product-info p {
+            font-size: var(--fs-body);
+            max-width: 42ch;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .specs-grid {
+            display: grid;
+            gap: 12px;
+            margin: 24px 0;
+        }
+        
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .spec-item:last-child {
+            border-bottom: none;
+        }
+        
+        .spec-label {
+            font-weight: 600;
+            color: #ccc;
+        }
+        
+        .spec-value {
+            color: #fff;
+            text-align: right;
+            max-width: 60%;
+        }
+        
+        .status-badges {
+            display: flex;
+            gap: 12px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .badge {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 1px solid;
+        }
+        
+        .badge-unavailable {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+            border-color: #dc3545;
+        }
+        
+        .badge-price {
+            background: rgba(0, 123, 255, 0.1);
+            color: #007bff;
+            border-color: #007bff;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 16px;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+        
+        @media (max-width: 480px) {
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .action-buttons button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo" onclick="location.href='index.html'" style="cursor:pointer">RUSKY</div>
+        <nav class="header-nav">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="#" onclick="openFilterModal()">ФИЛЬТР</a>
+            <a href="equipment.html">ОБОРУДОВАНИЕ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="#" onclick="openDocumentationModal()">ДОКУМЕНТАЦИЯ</a>
+            <a href="request.html">ЗАПРОС</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+            <a href="orders.html">МОИ ЗАКАЗЫ</a>
+            <a href="about.html">О НАС</a>
+        </nav>
+        <div class="burger-menu" onclick="toggleMobileMenu()">
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+        </div>
+        <div class="cart-icon" onclick="window.location.href='cart.html'">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                <path d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.7 15.3C4.3 15.7 4.6 16.5 5.1 16.5H17M17 13V16.5M9 19.5A1.5 1.5 0 1 0 9 22.5A1.5 1.5 0 0 0 9 19.5ZM20 19.5A1.5 1.5 0 1 0 20 22.5A1.5 1.5 0 0 0 20 19.5Z"/>
+            </svg>
+            <span class="cart-badge" id="cart-badge" style="display: none;">0</span>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" id="mobile-nav">
+        <div class="mobile-nav-list">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="#" onclick="openFilterModal()">ФИЛЬТР</a>
+            <a href="equipment.html">ОБОРУДОВАНИЕ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="#" onclick="openDocumentationModal()">ДОКУМЕНТАЦИЯ</a>
+            <a href="request.html">ЗАПРОС</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+            <a href="orders.html">МОИ ЗАКАЗЫ</a>
+            <a href="about.html">О НАС</a>
+        </div>
+    </nav>
+
+    <main class="enhanced-product-page">
+        <div class="enhanced-container">
+            <!-- Хлебные крошки -->
+            <nav class="product-breadcrumbs">
+                <a href="index.html">Главная</a> > 
+                <a href="satellites.html">Спутники</a> > 
+                <span>CLAY-COM</span>
+            </nav>
+            
+            <!-- Основной контент с новой сеткой -->
+            <div class="satellite-detail">
+                <!-- Левая колонка с изображениями -->
+                <div>
+                    <img 
+                        src="wmremove-transformed-5.png" 
+                        alt="CLAY-COM Коммуникационный спутник" 
+                        class="main-image"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
+                    >
+                    <div style="background: linear-gradient(45deg, #333, #666); display: none; align-items: center; justify-content: center; color: #fff; font-weight: bold; text-align: center; width: 100%; aspect-ratio: 4/3; border-radius: 16px;">
+                        CLAY-COM<br>Главное изображение
+                    </div>
+                    
+                    <div style="margin-top: 16px;">
+                        <h3 style="margin-bottom: 12px; font-size: 18px;">Галерея изображений</h3>
+                        <div class="thumbs">
+                            <img src="wmremove-transformed-5.png" alt="Основной вид" onclick="changeMainImage(this.src)">
+                            <img src="wmremove-transformed-4.png" alt="Боковой вид" onclick="changeMainImage(this.src)">
+                            <img src="card 2.png" alt="Вид сверху" onclick="changeMainImage(this.src)">
+                            <img src="img 4.png" alt="Техническая схема" onclick="changeMainImage(this.src)">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Правая колонка с информацией -->
+                <div class="enhanced-product-info">
+                    <h1>Коммуникационный спутник CLAY-COM</h1>
+                    
+                    <!-- Статус и цена -->
+                    <div class="status-badges">
+                        <span class="badge badge-unavailable">Нет в наличии</span>
+                        <span class="badge badge-price">Цена по запросу</span>
+                    </div>
+                    
+                    <p>
+                        Предназначен для организации широкополосной связи в труднодоступных и удалённых регионах. 
+                        Идеально подходит для горных районов, островов, сельской местности и чрезвычайных ситуаций.
+                    </p>
+
+                    <!-- Технические характеристики -->
+                    <h3 style="margin: 32px 0 16px 0; font-size: var(--fs-h2);">Технические характеристики</h3>
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <span class="spec-label">Диапазоны связи</span>
+                            <span class="spec-value">Ku- и Ka-диапазоны</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Типы орбит</span>
+                            <span class="spec-value">GEO / LEO</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Пропускная способность</span>
+                            <span class="spec-value">до 1 Гбит/с</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Зона покрытия</span>
+                            <span class="spec-value">до 2000 км в диаметре</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Совместимость</span>
+                            <span class="spec-value">VSAT-станции, портативные терминалы</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Срок эксплуатации</span>
+                            <span class="spec-value">15+ лет</span>
+                        </div>
+                    </div>
+
+                    <!-- Преимущества -->
+                    <h3 style="margin: 32px 0 16px 0; font-size: var(--fs-h2);">Ключевые преимущества</h3>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="margin-bottom: 12px; padding-left: 24px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #00ff00;">✓</span>
+                            Быстрое развертывание связи в регионах без инфраструктуры
+                        </li>
+                        <li style="margin-bottom: 12px; padding-left: 24px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #00ff00;">✓</span>
+                            Подходит для военных, правительственных и коммерческих проектов
+                        </li>
+                        <li style="margin-bottom: 12px; padding-left: 24px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #00ff00;">✓</span>
+                            Поддержка защищённой связи (опционально)
+                        </li>
+                        <li style="margin-bottom: 12px; padding-left: 24px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #00ff00;">✓</span>
+                            Высокая надёжность и отказоустойчивость
+                        </li>
+                    </ul>
+
+                    <!-- Кнопки действий -->
+                    <div class="action-buttons">
+                        <button class="btn-primary" id="requestPriceBtnClaycom">
+                            Запросить цену
+                        </button>
+                        <button class="btn-primary" style="background: transparent; border: 2px solid #fff; color: #fff;" id="addToCartBtnClaycom" data-add-to-cart>
+                            Добавить в корзину
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="main.js"></script>
+    <script>
+        // Функция смены главного изображения
+        function changeMainImage(src) {
+            const mainImage = document.querySelector('.main-image');
+            if (mainImage) {
+                mainImage.src = src;
+                
+                // Подсветка активной миниатюры
+                document.querySelectorAll('.thumbs img').forEach(thumb => {
+                    thumb.style.border = '2px solid transparent';
+                });
+                event.target.style.border = '2px solid #4A9EFF';
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Обновляем бейдж корзины при загрузке страницы
+            updateCartBadge();
+            
+            // Выделяем первую миниатюру по умолчанию
+            const firstThumb = document.querySelector('.thumbs img');
+            if (firstThumb) {
+                firstThumb.style.border = '2px solid #4A9EFF';
+            }
+
+            // Привязываем обработчик для кнопки "Добавить в корзину"
+            const addToCartBtn = document.getElementById('addToCartBtnClaycom');
+            if (addToCartBtn) {
+                addToCartBtn.addEventListener('click', function() {
+                    const item = {
+                        id: 'clay-com-satellite',
+                        name: 'Коммуникационный спутник CLAY-COM',
+                        price: 0, // Цена по запросу
+                        image: 'wmremove-transformed-5.png',
+                        type: 'satellite'
+                    };
+                    
+                    addToCart(item.id, item.name, item.price, item.image, item.type);
+                    
+                    // Показываем уведомление
+                    alert('Спутник CLAY-COM добавлен в корзину!');
+                });
+            }
+
+            // Привязываем обработчик для кнопки "Запросить цену"
+            const requestPriceBtn = document.getElementById('requestPriceBtnClaycom');
+            if (requestPriceBtn) {
+                requestPriceBtn.addEventListener('click', function() {
+                    window.location.href = 'request.html?product=clay-com-satellite';
+                });
+            }
+            
+            // Логирование загрузки улучшенной версии
+            console.log('Улучшенная страница CLAY-COM загружена с новыми стилями!');
+            console.log('Responsive grid:', CSS.supports('display', 'grid'));
+            console.log('Aspect ratio support:', CSS.supports('aspect-ratio', '4/3'));
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Тест мобильных отступов 20px - RUSKY</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Стили для визуализации отступов */
+        .debug-container {
+            position: relative;
+            margin: 20px 0;
+        }
+        
+        .debug-ruler {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+        
+        .debug-ruler::before,
+        .debug-ruler::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 20px;
+            background: rgba(255, 0, 0, 0.3);
+            border: 2px solid red;
+        }
+        
+        .debug-ruler::before {
+            left: 0;
+        }
+        
+        .debug-ruler::after {
+            right: 0;
+        }
+        
+        .test-content {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .measurement-info {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            font-size: 14px;
+            z-index: 9999;
+            max-width: 300px;
+            text-align: center;
+            display: none;
+        }
+        
+        .toggle-debug {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #4A9EFF;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            z-index: 9998;
+        }
+        
+        /* Дополнительные тестовые стили */
+        .page-container {
+            background: #000;
+            color: #fff;
+            min-height: 100vh;
+            padding-top: 120px;
+        }
+        
+        .mock-product-gallery {
+            background: #111;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .mock-product-info {
+            background: #111;
+            border-radius: 16px;
+            padding: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .debug-ruler::before,
+            .debug-ruler::after {
+                background: rgba(0, 255, 0, 0.4);
+                border-color: lime;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo">RUSKY</div>
+        <nav class="header-nav">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="launches.html">ЗАПУСКИ</a>
+            <a href="documentation.html">ДОКУМЕНТАЦИЯ</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+        </nav>
+        <div class="burger-menu" onclick="toggleMobileMenu()">
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+        </div>
+    </header>
+
+    <nav class="mobile-nav" id="mobile-nav">
+        <div class="mobile-nav-list">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="launches.html">ЗАПУСКИ</a>
+            <a href="documentation.html">ДОКУМЕНТАЦИЯ</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <div class="debug-container">
+            <div class="debug-ruler"></div>
+            
+            <h1 style="text-align: center; margin-bottom: 30px;">📏 Тест мобильных отступов 20px</h1>
+            
+            <!-- Тест 1: Container класс -->
+            <section class="debug-container">
+                <div class="debug-ruler"></div>
+                <div class="container">
+                    <div class="test-content">
+                        <h2>🔹 Тест .container класса</h2>
+                        <p>Этот блок использует класс .container и должен иметь отступы 20px с каждой стороны на мобильных устройствах (≤768px).</p>
+                        <div style="background: rgba(74, 158, 255, 0.2); padding: 10px; border-radius: 6px;">
+                            Внутренний контент для проверки выравнивания
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Тест 2: Product-page стили -->
+            <section class="debug-container">
+                <div class="debug-ruler"></div>
+                <div class="product-page" style="padding-top: 40px; padding-bottom: 40px;">
+                    <div class="test-content">
+                        <h2>🔹 Тест .product-page стилей</h2>
+                        <p>Имитация страницы товара с отступами 20px.</p>
+                        
+                        <div class="mock-product-gallery">
+                            <h3>Галерея продукта</h3>
+                            <div style="width: 100%; height: 200px; background: #333; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                📷 Изображение товара
+                            </div>
+                        </div>
+                        
+                        <div class="mock-product-info">
+                            <h3>Информация о товаре</h3>
+                            <p>Кубсат (3U / 6U / 12U) CLAY-CUBE</p>
+                            <div style="display: flex; gap: 10px; margin: 15px 0;">
+                                <span style="background: rgba(40, 167, 69, 0.2); color: #28a745; padding: 4px 12px; border-radius: 20px; font-size: 12px;">В НАЛИЧИИ</span>
+                                <span style="background: rgba(0, 123, 255, 0.2); color: #007bff; padding: 4px 12px; border-radius: 20px; font-size: 12px;">ЦЕНА ПО ЗАПРОСУ</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Тест 3: Section класс -->
+            <section class="debug-container">
+                <div class="debug-ruler"></div>
+                <div class="section">
+                    <div class="test-content">
+                        <h2>🔹 Тест .section класса</h2>
+                        <p>Секция с вертикальными отступами и общими мобильными стилями.</p>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 15px;">
+                            <div style="background: rgba(255, 255, 255, 0.05); padding: 15px; border-radius: 8px;">
+                                <h4>Блок 1</h4>
+                                <p style="font-size: 14px; margin: 0;">Содержимое блока</p>
+                            </div>
+                            <div style="background: rgba(255, 255, 255, 0.05); padding: 15px; border-radius: 8px;">
+                                <h4>Блок 2</h4>
+                                <p style="font-size: 14px; margin: 0;">Содержимое блока</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Информационный блок -->
+            <section class="debug-container">
+                <div class="debug-ruler"></div>
+                <div class="container">
+                    <div style="background: rgba(74, 158, 255, 0.1); border: 1px solid rgba(74, 158, 255, 0.3); padding: 20px; border-radius: 12px; margin: 30px 0;">
+                        <h3 style="margin-top: 0; color: #74c0fc;">ℹ️ Информация о тестировании</h3>
+                        <ul style="line-height: 1.6; margin: 0;">
+                            <li><strong>Красные полосы</strong> (desktop) - показывают зоны 20px отступов</li>
+                            <li><strong>Зеленые полосы</strong> (≤768px) - мобильные отступы активны</li>
+                            <li><strong>Размер экрана:</strong> <span id="screen-size"></span></li>
+                            <li><strong>Режим:</strong> <span id="device-mode"></span></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Кнопка переключения визуализации -->
+    <button class="toggle-debug" onclick="toggleDebugMode()">
+        <span id="debug-btn-text">Скрыть отступы</span>
+    </button>
+
+    <!-- Информационное окно -->
+    <div class="measurement-info" id="measurementInfo">
+        <h4>📏 Измерения</h4>
+        <div id="measurements"></div>
+        <button onclick="hideMeasurements()" style="margin-top: 15px; padding: 8px 16px; background: #868e96; color: white; border: none; border-radius: 6px; cursor: pointer;">Закрыть</button>
+    </div>
+
+    <script src="main.js"></script>
+    <script>
+        let debugMode = true;
+        
+        function updateScreenInfo() {
+            const width = window.innerWidth;
+            const screenSizeEl = document.getElementById('screen-size');
+            const deviceModeEl = document.getElementById('device-mode');
+            
+            if (screenSizeEl) screenSizeEl.textContent = `${width}px`;
+            
+            if (deviceModeEl) {
+                if (width <= 480) {
+                    deviceModeEl.textContent = 'Extra Mobile';
+                    deviceModeEl.style.color = '#ff6b6b';
+                } else if (width <= 768) {
+                    deviceModeEl.textContent = 'Mobile/Tablet';
+                    deviceModeEl.style.color = '#51cf66';
+                } else {
+                    deviceModeEl.textContent = 'Desktop';
+                    deviceModeEl.style.color = '#74c0fc';
+                }
+            }
+        }
+        
+        function toggleDebugMode() {
+            debugMode = !debugMode;
+            const rulers = document.querySelectorAll('.debug-ruler');
+            const btnText = document.getElementById('debug-btn-text');
+            
+            rulers.forEach(ruler => {
+                ruler.style.display = debugMode ? 'block' : 'none';
+            });
+            
+            btnText.textContent = debugMode ? 'Скрыть отступы' : 'Показать отступы';
+        }
+        
+        function showMeasurements() {
+            const info = document.getElementById('measurementInfo');
+            const measurements = document.getElementById('measurements');
+            
+            const width = window.innerWidth;
+            const containerEl = document.querySelector('.container');
+            const containerRect = containerEl.getBoundingClientRect();
+            
+            const leftPadding = containerRect.left;
+            const rightPadding = width - containerRect.right;
+            
+            measurements.innerHTML = `
+                <div>Ширина экрана: ${width}px</div>
+                <div>Левый отступ: ${Math.round(leftPadding)}px</div>
+                <div>Правый отступ: ${Math.round(rightPadding)}px</div>
+                <div>Ширина контента: ${Math.round(containerRect.width)}px</div>
+            `;
+            
+            info.style.display = 'block';
+        }
+        
+        function hideMeasurements() {
+            document.getElementById('measurementInfo').style.display = 'none';
+        }
+        
+        // Event listeners
+        window.addEventListener('load', updateScreenInfo);
+        window.addEventListener('resize', updateScreenInfo);
+        
+        // Двойной клик для показа измерений
+        document.addEventListener('dblclick', showMeasurements);
+        
+        console.log('🔧 Страница тестирования отступов загружена');
+        console.log('📱 Двойной клик для показа точных измерений');
+        console.log('📏 Зеленые полосы = мобильные отступы активны');
+    </script>
+</body>
+</html>

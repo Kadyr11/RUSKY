@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Диагностика бургер-меню - RUSKY</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Дополнительные стили для диагностики */
+        .diagnostic-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        
+        .touch-indicator {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: red;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.3s ease;
+        }
+        
+        .touch-indicator.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .debug-panel {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.9);
+            color: #fff;
+            padding: 15px;
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 9998;
+        }
+        
+        .log-entry {
+            margin: 2px 0;
+            padding: 2px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .log-error { color: #ff6b6b; }
+        .log-success { color: #51cf66; }
+        .log-info { color: #74c0fc; }
+        
+        .test-section {
+            padding: 120px 20px 250px;
+            background: #000;
+            color: #fff;
+            min-height: 100vh;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .status-ok { background: #51cf66; }
+        .status-error { background: #ff6b6b; }
+        .status-warning { background: #ffd43b; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo">RUSKY</div>
+        <nav class="header-nav">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="launches.html">ЗАПУСКИ</a>
+            <a href="documentation.html">ДОКУМЕНТАЦИЯ</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+            <a href="orders.html">МОИ ЗАКАЗЫ</a>
+            <a href="about.html">О НАС</a>
+        </nav>
+        <div class="burger-menu" onclick="toggleMobileMenu()">
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+        </div>
+        <a href="cart.html" class="cart-icon" aria-label="Корзина">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="10" cy="26" r="3" fill="white"/>
+                <circle cx="24" cy="26" r="3" fill="white"/>
+                <path d="M4 7H7L10 20H25L28 11H9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+        </a>
+    </header>
+
+    <nav class="mobile-nav" id="mobile-nav">
+        <div class="mobile-nav-list">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="launches.html">ЗАПУСКИ</a>
+            <a href="documentation.html">ДОКУМЕНТАЦИЯ</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+            <a href="orders.html">МОИ ЗАКАЗЫ</a>
+            <a href="about.html">О НАС</a>
+            <a href="cart.html">КОРЗИНА</a>
+        </div>
+    </nav>
+
+    <div class="diagnostic-overlay">
+        <div class="touch-indicator" id="touchIndicator"></div>
+    </div>
+
+    <div class="test-section">
+        <h1>🔧 Диагностика бургер-меню</h1>
+        
+        <div style="margin-bottom: 30px;">
+            <h2>Статус системы:</h2>
+            <div id="systemStatus">
+                <div><span class="status-indicator status-warning"></span>Проверка...</div>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 30px;">
+            <h2>Тесты:</h2>
+            <button onclick="runDiagnostics()" style="padding: 12px 24px; background: #4A9EFF; color: white; border: none; border-radius: 8px; cursor: pointer; margin-right: 10px;">Запустить диагностику</button>
+            <button onclick="testBurgerMenuClick()" style="padding: 12px 24px; background: #51cf66; color: white; border: none; border-radius: 8px; cursor: pointer; margin-right: 10px;">Тест клика</button>
+            <button onclick="clearLog()" style="padding: 12px 24px; background: #868e96; color: white; border: none; border-radius: 8px; cursor: pointer;">Очистить лог</button>
+        </div>
+        
+        <div style="margin-bottom: 30px;">
+            <h2>Что проверяем:</h2>
+            <ul style="line-height: 1.8;">
+                <li>✅ Загрузка main.js и функции toggleMobileMenu</li>
+                <li>✅ Видимость бургер-меню на мобильных экранах</li>
+                <li>✅ CSS стили и z-index</li>
+                <li>✅ Обработка событий клика</li>
+                <li>✅ Позиционирование и размеры</li>
+                <li>✅ Touch события для мобильных устройств</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="debug-panel" id="debugPanel">
+        <div style="font-weight: bold; margin-bottom: 10px;">🐛 Debug Console:</div>
+        <div id="logContainer"></div>
+    </div>
+
+    <script src="main.js"></script>
+    <script>
+        let logContainer;
+        let touchIndicator;
+        
+        function log(message, type = 'info') {
+            if (!logContainer) logContainer = document.getElementById('logContainer');
+            
+            const time = new Date().toLocaleTimeString();
+            const entry = document.createElement('div');
+            entry.className = `log-entry log-${type}`;
+            entry.textContent = `[${time}] ${message}`;
+            logContainer.appendChild(entry);
+            logContainer.scrollTop = logContainer.scrollHeight;
+            
+            console.log(`[${type.toUpperCase()}] ${message}`);
+        }
+        
+        function clearLog() {
+            if (logContainer) logContainer.innerHTML = '';
+        }
+        
+        function updateSystemStatus() {
+            const statusDiv = document.getElementById('systemStatus');
+            let status = [];
+            
+            // Проверка загрузки main.js
+            if (typeof toggleMobileMenu === 'function') {
+                status.push('<div><span class="status-indicator status-ok"></span>main.js загружен ✓</div>');
+            } else {
+                status.push('<div><span class="status-indicator status-error"></span>main.js НЕ загружен ✗</div>');
+            }
+            
+            // Проверка видимости бургер-меню
+            const burger = document.querySelector('.burger-menu');
+            const computedStyle = getComputedStyle(burger);
+            if (computedStyle.display !== 'none') {
+                status.push('<div><span class="status-indicator status-ok"></span>Бургер-меню видимо ✓</div>');
+            } else {
+                status.push('<div><span class="status-indicator status-error"></span>Бургер-меню скрыто ✗</div>');
+            }
+            
+            // Проверка размера экрана
+            const width = window.innerWidth;
+            if (width <= 768) {
+                status.push(`<div><span class="status-indicator status-ok"></span>Мобильный экран: ${width}px ✓</div>`);
+            } else {
+                status.push(`<div><span class="status-indicator status-warning"></span>Десктоп экран: ${width}px</div>`);
+            }
+            
+            statusDiv.innerHTML = status.join('');
+        }
+        
+        function testBurgerMenuClick() {
+            log('Тестирование клика по бургер-меню...', 'info');
+            
+            const burger = document.querySelector('.burger-menu');
+            if (!burger) {
+                log('Бургер-меню не найдено!', 'error');
+                return;
+            }
+            
+            // Симуляция клика
+            const clickEvent = new MouseEvent('click', {
+                bubbles: true,
+                cancelable: true,
+                view: window
+            });
+            
+            burger.dispatchEvent(clickEvent);
+            log('Клик событие отправлено', 'success');
+            
+            // Проверка через небольшую задержку
+            setTimeout(() => {
+                const isActive = burger.classList.contains('active');
+                const mobileNav = document.querySelector('.mobile-nav');
+                const isNavActive = mobileNav && mobileNav.classList.contains('active');
+                
+                if (isActive && isNavActive) {
+                    log('✅ Бургер-меню работает корректно!', 'success');
+                } else {
+                    log('❌ Бургер-меню не отвечает на клики', 'error');
+                    log(`Burger active: ${isActive}, Nav active: ${isNavActive}`, 'info');
+                }
+            }, 100);
+        }
+        
+        function runDiagnostics() {
+            log('🔍 Запуск полной диагностики...', 'info');
+            
+            // 1. Проверка функций
+            log(`toggleMobileMenu function: ${typeof toggleMobileMenu}`, 'info');
+            
+            // 2. Проверка элементов
+            const burger = document.querySelector('.burger-menu');
+            const mobileNav = document.querySelector('.mobile-nav');
+            
+            log(`Burger menu element: ${burger ? 'найден' : 'НЕ найден'}`, burger ? 'success' : 'error');
+            log(`Mobile nav element: ${mobileNav ? 'найден' : 'НЕ найден'}`, mobileNav ? 'success' : 'error');
+            
+            // 3. Проверка CSS стилей
+            if (burger) {
+                const style = getComputedStyle(burger);
+                log(`Burger display: ${style.display}`, 'info');
+                log(`Burger z-index: ${style.zIndex}`, 'info');
+                log(`Burger position: ${style.position}`, 'info');
+                log(`Burger pointer-events: ${style.pointerEvents}`, 'info');
+                log(`Burger cursor: ${style.cursor}`, 'info');
+            }
+            
+            // 4. Проверка событий
+            const events = getEventListeners ? getEventListeners(burger) : 'DevTools required';
+            log(`Event listeners: ${typeof events}`, 'info');
+            
+            updateSystemStatus();
+            log('🏁 Диагностика завершена', 'success');
+        }
+        
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', function() {
+            logContainer = document.getElementById('logContainer');
+            touchIndicator = document.getElementById('touchIndicator');
+            
+            log('🚀 Диагностическая система загружена', 'success');
+            updateSystemStatus();
+            
+            // Отслеживание кликов по бургер-меню
+            const burger = document.querySelector('.burger-menu');
+            if (burger) {
+                // Множественные обработчики для надежности
+                burger.addEventListener('click', function(e) {
+                    log('👆 Click event на burger-menu', 'success');
+                    log(`Event target: ${e.target.tagName}`, 'info');
+                    log(`Current target: ${e.currentTarget.className}`, 'info');
+                });
+                
+                burger.addEventListener('touchstart', function(e) {
+                    log('👋 Touch start event', 'success');
+                    
+                    // Показать индикатор касания
+                    if (touchIndicator && e.touches[0]) {
+                        const touch = e.touches[0];
+                        touchIndicator.style.left = (touch.clientX - 10) + 'px';
+                        touchIndicator.style.top = (touch.clientY - 10) + 'px';
+                        touchIndicator.classList.add('active');
+                        
+                        setTimeout(() => {
+                            touchIndicator.classList.remove('active');
+                        }, 300);
+                    }
+                });
+                
+                burger.addEventListener('mousedown', function() {
+                    log('🖱️ Mouse down event', 'success');
+                });
+                
+                log(`✅ Event listeners добавлены к бургер-меню`, 'success');
+            } else {
+                log('❌ Бургер-меню не найдено для добавления listeners', 'error');
+            }
+        });
+        
+        // Отслеживание изменений размера экрана
+        window.addEventListener('resize', updateSystemStatus);
+        
+        // Переопределение toggleMobileMenu для логирования
+        if (typeof toggleMobileMenu === 'function') {
+            const originalToggle = toggleMobileMenu;
+            window.toggleMobileMenu = function() {
+                log('🔄 toggleMobileMenu вызвана', 'success');
+                try {
+                    originalToggle();
+                    log('✅ toggleMobileMenu выполнена успешно', 'success');
+                } catch (error) {
+                    log(`❌ Ошибка в toggleMobileMenu: ${error.message}`, 'error');
+                }
+                updateSystemStatus();
+            };
+        }
+        
+        log('📱 Диагностическая страница готова к работе', 'info');
+    </script>
+</body>
+</html>

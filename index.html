@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RUSKY</title>
+    <link rel="stylesheet" href="style.css?v=2025-10-05-2">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="img-1.png" as="image">
+    <link rel="preload" href="img 2.png" as="image">
+    <link rel="preload" href="img 3.png" as="image">
+</head>
+<body id="top">
+
+    <header class="header">
+        <div class="header-logo">RUSKY</div>
+        <nav class="header-nav">
+            <a href="#top">ГЛАВНАЯ</a>
+            <a href="#" onclick="openFilterModal()">ФИЛЬТР</a>
+            <a href="equipment.html">ОБОРУДОВАНИЕ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="#" onclick="openDocumentationModal()">ДОКУМЕНТАЦИЯ</a>
+            <div class="dropdown">
+                <a href="#" class="dropdown-toggle">ЗАПУСК</a>
+                <div class="dropdown-content">
+                    <a href="launch-process.html">Процесс запуска</a>
+                    <a href="launch-help.html">Помощь с запуском</a>
+                </div>
+            </div>
+            <a href="support.html">ПОДДЕРЖКА</a>
+            <a href="orders.html">МОИ ЗАКАЗЫ</a>
+            <a href="about.html">О НАС</a>
+        </nav>
+        <div class="burger-menu">
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+        </div>
+        <a href="#" class="cart-icon" aria-label="Корзина">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <rect width="32" height="32" fill="none"/>
+            <circle cx="10" cy="26" r="3" fill="white"/>
+            <circle cx="24" cy="26" r="3" fill="white"/>
+            <path d="M4 7H7L10 20H25L28 11H9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+        </a>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav">
+        <div class="mobile-nav-list">
+            <a href="#top">ГЛАВНАЯ</a>
+            <a href="#" onclick="openFilterModal()">ФИЛЬТР</a>
+            <a href="equipment.html">ОБОРУДОВАНИЕ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="#" onclick="openDocumentationModal()">ДОКУМЕНТАЦИЯ</a>
+            <a href="launch-process.html">ПРОЦЕСС ЗАПУСКА</a>
+            <a href="launch-help.html">ПОМОЩЬ С ЗАПУСКОМ</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+            <a href="orders.html">МОИ ЗАКАЗЫ</a>
+            <a href="about.html">О НАС</a>
+            <a href="cart.html" class="mobile-cart-link" aria-label="Корзина">
+                <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="10" cy="26" r="3" fill="white"/>
+                    <circle cx="24" cy="26" r="3" fill="white"/>
+                    <path d="M4 7H7L10 20H25L28 11H9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
+                КОРЗИНА
+            </a>
+        </div>
+    </nav>
+
+    <section class="hero-section" style="background-image: url('img-1.png'); background-size: cover; background-position: center;">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Хотите купить спутник?</h1>
+            <p class="hero-subtitle">
+                Разработка, производство и внедрение космических спутников нового поколения.
+            </p>
+            <p class="hero-desc">
+                RUSKY — это инжиниринговая платформа, специализирующаяся на создании космических спутников и модулей различной сложности.<br>
+                Мы объединяем экспертов в аэрокосмической отрасли, проектные группы и стартапы для реализации космических решений от идеи до вывода на орбиту.
+            </p>
+            <a href="satellites.html" class="hero-btn">ПОДРОБНЕЕ</a>
+        </div>
+    </section>
+
+    <section class="manufacturer-section" style="background-image: url('img 2.png'); background-size: cover; background-position: center;">
+        <div class="manufacturer-overlay"></div>
+        <div class="manufacturer-content">
+            <h2>Вы производитель спутников и вам нужны детали?</h2>
+            <p>Откройте для себя широкий ассортимент спутниковых компонентов в RUSKY. Мы предоставляем все необходимое для производства спутников под одной крышей, гарантируя удобство и надежность для наших клиентов.</p>
+            <a href="equipment.html" class="manufacturer-btn">ПОДРОБНЕЕ</a>
+        </div>
+
+        <div class="innovation-graphics">
+            <div class="corner-frame top-left"></div>
+            <div class="corner-frame top-right"></div>
+            <div class="corner-frame bottom-left"></div>
+            <div class="corner-frame bottom-right"></div>
+        </div>
+
+    </section>
+    
+    <div class="grid-container">
+        <div class="box box-text" style="grid-area: box-1; padding: 60px; background-color: black; border-radius: 24px;">
+            <h1>ТИПЫ<br>СПУТНИКОВ</h1>
+            <p>Разработка, производство и внедрение космических спутников нового поколения.</p>
+        </div>
+        <div class="box clickable" style="grid-area: box-2; border-radius: 24px;" onclick="goToSatelliteDetail('CLAY-NAV')">
+            <img src="card 4.png" alt="CLAY-NAV">
+            <div class="card-label">CLAY-NAV</div>
+        </div>
+        <div class="box clickable" style="grid-area: box-3; border-radius: 24px;" onclick="goToSatelliteDetail('CLAY-CUBE')">
+            <img src="card 1.png" alt="CLAY-CUBE">
+            <div class="card-label">CLAY-CUBE</div>
+        </div>
+        <div class="box clickable" style="grid-area: box-4; border-radius: 24px;" onclick="goToSatelliteDetail('CLAY-COM')">
+            <img src="card 2.png" alt="CLAY-COM">
+            <div class="card-label">CLAY-COM</div>
+        </div>
+        <div class="box clickable" style="grid-area: box-5; border-radius: 24px;" onclick="goToSatelliteDetail('CLAY-SCI')">
+            <img src="card 3.png" alt="CLAY-SCI">
+            <div class="card-label">CLAY-SCI</div>
+        </div>
+    </div>
+
+    <section class="stats-section" style="background-image: url('img 3.png'); background-size: cover; background-position: center;">
+        <div class="stats-overlay"></div>
+        <div class="stats-content">
+            <div class="stats-left">
+                <div class="stats-header">
+                    <h2>Почему именно мы?</h2>
+                </div>
+                <div class="stats-numbers">
+                    <div class="stat-item">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Успешных запуска</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">42+</span>
+                        <span class="stat-label">Довольных клиентов</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">80+</span>
+                        <span class="stat-label">Изготовленных спутников</span>
+                    </div>
+                </div>
+                <div class="stats-features">
+                    <div class="feature-arrow" onclick="openModal('scientificModal')">
+                        <span>Научная точность</span>
+                        <span class="arrow">&gt;</span>
+                    </div>
+                    <div class="feature-arrow" onclick="openModal('launchModal')">
+                        <span>Быстрый запуск</span>
+                        <span class="arrow">&gt;</span>
+                    </div>
+                    <div class="feature-arrow" onclick="openModal('configModal')">
+                        <span>Гибкие конфигурации</span>
+                        <span class="arrow">&gt;</span>
+                    </div>
+                    <div class="feature-arrow" onclick="openModal('coverageModal')">
+                        <span>Глобальное покрытие</span>
+                        <span class="arrow">&gt;</span>
+                    </div>
+                </div>
+            </div>
+            <div class="stats-right">
+                <div class="stats-year">2025</div>
+            </div>
+            
+        </div>
+    </section>
+
+    <section class="innovation-section" style="background-image: url('card 3.png'); background-size: cover; background-position: center;">
+        <div class="innovation-overlay"></div>
+        <div class="innovation-content">
+            <h2>Инновации на орбите</h2>
+            <p>RUSKY предлагает передовые спутниковые системы и комплексные технические решения — от проектирования до запуска.</p>
+            <a href="innovations.html" class="innovation-btn">ПОДРОБНЕЕ</a>
+        </div>
+        <div class="innovation-graphics">
+            <div class="corner-frame top-left"></div>
+            <div class="corner-frame top-right"></div>
+            <div class="corner-frame bottom-left"></div>
+            <div class="corner-frame bottom-right"></div>
+            <div class="connection-lines"></div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-block">
+            <h3>О нашей компании</h3>
+            <p>RUSKY — команда энтузиастов, разработчиков, инженеров и учёных, создающих спутники нового поколения.<br>
+            Мы обеспечиваем полный цикл работ: от проектирования до вывода на орбиту.</p>
+        </div>
+        <div class="footer-block">
+            <h3>Информация</h3>
+            <p>Политика конфиденциальности</p>
+        </div>
+        <div class="footer-block">
+            <h3>Контакты</h3>
+            <p>Телефон: +7 (999) 123-45-67<br>
+            Адрес: Россия, 119234<br>
+            г. Москва, ул. Космическая, д. 1<br>
+            E-mail: <a href="mailto:info@rusky.ru">info@rusky.ru</a></p>
+        </div>
+        <div class="footer-copyright">
+            © 2025. Все права защищены.
+        </div>
+    </footer>
+
+    <!-- Модальные окна -->
+    <div id="scientificModal" class="feature-modal">
+        <div class="feature-modal-overlay" onclick="closeModal('scientificModal')"></div>
+        <div class="feature-modal-content">
+            <div class="feature-modal-header">
+                <span class="feature-modal-title-small">Научная точность</span>
+            </div>
+            <div class="feature-modal-dropdown">
+                <div class="feature-modal-dropdown-header" onclick="toggleFeatureDropdown('scientificModal')">
+                    <h2 class="feature-modal-title">Научная точность</h2>
+                    <span class="feature-modal-close" onclick="closeModal('scientificModal')">&times;</span>
+                </div>
+                <div class="feature-modal-dropdown-content">
+                    <p>Наши спутники оснащаются высокоточными сенсорами и системами ориентации, обеспечивающими стабильность и надёжность сбора данных.</p>
+                    <p>Платформы CLAY-SCI поддерживают эксперименты в условиях микрогравитации и климатического мониторинга. Интеграция с международными научными программами и лабораториями.</p>
+                    <p>Точность измерений и синхронизации соответствует требованиям GNSS и научных миссий.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="launchModal" class="feature-modal">
+        <div class="feature-modal-overlay" onclick="closeModal('launchModal')"></div>
+        <div class="feature-modal-content">
+            <div class="feature-modal-header">
+                <span class="feature-modal-title-small">Быстрый запуск</span>
+            </div>
+            <div class="feature-modal-dropdown">
+                <div class="feature-modal-dropdown-header" onclick="toggleFeatureDropdown('launchModal')">
+                    <h2 class="feature-modal-title">Быстрый запуск</h2>
+                    <span class="feature-modal-close" onclick="closeModal('launchModal')">&times;</span>
+                </div>
+                <div class="feature-modal-dropdown-content">
+                    <p>Мы оптимизировали производственный цикл, чтобы сократить сроки вывода спутника на орбиту. От идеи до запуска — от 3 до 6 месяцев, включая сборку, тестирование и логистику.</p>
+                    <p>Готовые платформы CLAY-CUBE позволяют начать даже с минимального бюджета.</p>
+                    <p>Работаем напрямую с ключевыми провайдерами по индивидуальному графику.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="configModal" class="feature-modal">
+        <div class="feature-modal-overlay" onclick="closeModal('configModal')"></div>
+        <div class="feature-modal-content">
+            <div class="feature-modal-header">
+                <span class="feature-modal-title-small">Гибкие конфигурации</span>
+            </div>
+            <div class="feature-modal-dropdown">
+                <div class="feature-modal-dropdown-header" onclick="toggleFeatureDropdown('configModal')">
+                    <h2 class="feature-modal-title">Гибкие конфигурации</h2>
+                    <span class="feature-modal-close" onclick="closeModal('configModal')">&times;</span>
+                </div>
+                <div class="feature-modal-dropdown-content">
+                    <p>Конструктор спутников позволяет адаптировать полезную нагрузку, питание, антенны и программное обеспечение.</p>
+                    <p>Мы разрабатываем решения под конкретные задачи — от связи до науки и навигации. Поддержка модульных форматов: 3U, 6U, 12U, а также крупные форм-факторы.</p>
+                    <p>Можно модернизировать спутники даже после запуска (в рамках LEO-миссий).</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="coverageModal" class="feature-modal">
+        <div class="feature-modal-overlay" onclick="closeModal('coverageModal')"></div>
+        <div class="feature-modal-content">
+            <div class="feature-modal-header">
+                <span class="feature-modal-title-small">Глобальное покрытие</span>
+            </div>
+            <div class="feature-modal-dropdown">
+                <div class="feature-modal-dropdown-header" onclick="toggleFeatureDropdown('coverageModal')">
+                    <h2 class="feature-modal-title">Глобальное покрытие</h2>
+                    <span class="feature-modal-close" onclick="closeModal('coverageModal')">&times;</span>
+                </div>
+                <div class="feature-modal-dropdown-content">
+                    <p>Наша система спутников обеспечивает устойчивую связь и навигацию в любой точке планеты. Поддержка работы на низких (LEO), средних (MEO) и геостационарных (GEO) орбитах.</p>
+                    <p>Используем диапазоны Ku/Ka/L и интеграцию с глобальными сетями (GNSS, IoT).</p>
+                    <p>Сервисы доступны в более чем 60 странах с минимальной задержкой сигнала.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно фильтра -->
+    <div id="filterModal" class="filter-modal">
+        <div class="filter-modal-content">
+            <div class="filter-header">
+                <h2 class="filter-title">Фильтр</h2>
+                <button class="filter-close" onclick="closeFilterModal()">&times;</button>
+            </div>
+            <div class="filter-content">
+                <div class="filter-section">
+                    <div class="filter-section-title" onclick="toggleFilterSection(this)">Тип спутника</div>
+                    <div class="filter-options">
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">Коммуникационный</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">Навигационный</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">Научный</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">Военный</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">Наноспутник</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <div class="filter-section-title" onclick="toggleFilterSection(this)">Масса</div>
+                    <div class="filter-options">
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">&lt;10 кг</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">10-100 кг</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">100-500 кг</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">500 кг</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <div class="filter-section-title" onclick="toggleFilterSection(this)">Бренд</div>
+                    <div class="filter-options">
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">CLAYSpace</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">SpaceX</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">NASA и др.</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">Airbus</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <div class="filter-section-title" onclick="toggleFilterSection(this)">Орбита</div>
+                    <div class="filter-options">
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">LEO (низкая)</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">MEO (средняя)</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">GEO (геостационарная)</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">HEO (высокоэллиптическая)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <div class="filter-section-title" onclick="toggleFilterSection(this)">Статус</div>
+                    <div class="filter-options">
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">Готов к запуску</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">На производстве</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">В эксплуатации</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">Устаревший</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <div class="filter-section-title" onclick="toggleFilterSection(this)">Сортировка</div>
+                    <div class="filter-options">
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">По дате</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">По весу</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">По популярности</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-footer">
+                <button class="filter-apply-btn" onclick="applyFilters()">ПРИМЕНИТЬ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно документации -->
+    <div id="documentationModal" class="filter-modal">
+        <div class="filter-modal-content">
+            <div class="filter-header">
+                <h2 class="filter-title">Документация</h2>
+                <button class="filter-close" onclick="closeDocumentationModal()">&times;</button>
+            </div>
+            <div class="filter-content">
+                <div class="filter-section">
+                    <div class="filter-section-title" onclick="toggleFilterSection(this)">Тип спутника</div>
+                    <div class="filter-options">
+                        <div class="filter-option" data-satellite="clay-com" onclick="selectSatelliteType('clay-com', event)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">CLAY-COM</span>
+                        </div>
+                        <div class="filter-option" data-satellite="clay-nav" onclick="selectSatelliteType('clay-nav', event)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">CLAY-NAV</span>
+                        </div>
+                        <div class="filter-option" data-satellite="clay-sci" onclick="selectSatelliteType('clay-sci', event)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">CLAY-SCI</span>
+                        </div>
+                        <div class="filter-option" data-satellite="clay-cube" onclick="selectSatelliteType('clay-cube', event)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">CLAY-CUBE</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <div class="filter-section-title" onclick="toggleFilterSection(this)">По году выпуска</div>
+                    <div class="filter-options">
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">2000-2005</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">2006-2010</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">2011-2015</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">2016-2025</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <div class="filter-section-title" onclick="toggleFilterSection(this)">Статус</div>
+                    <div class="filter-options">
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">Действующий</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">Архивный</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <div class="filter-section-title">Поиск по серийному номеру</div>
+                    <div class="filter-options">
+                        <input type="text" class="serial-search-input" placeholder="24990" maxlength="50">
+                    </div>
+                </div>
+            </div>
+            <div class="filter-footer">
+                <button class="filter-apply-btn" onclick="applyDocumentationFilters()">ПРИМЕНИТЬ</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

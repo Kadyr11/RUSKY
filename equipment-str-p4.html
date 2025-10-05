@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RUSKY — STR.P4 Звездный датчик</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo" onclick="location.href='index.html'" style="cursor:pointer">RUSKY</div>
+        <nav class="header-nav">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="#" onclick="openFilterModal()">ФИЛЬТР</a>
+            <a href="equipment.html" class="active">ОБОРУДОВАНИЕ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="#" onclick="openDocumentationModal()">ДОКУМЕНТАЦИЯ</a>
+            <a href="launches.html">ЗАПУСК</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+            <a href="cart.html">МОИ ЗАКАЗЫ</a>
+            <a href="about.html">О НАС</a>
+        </nav>
+        <div class="burger-menu" onclick="toggleMobileMenu()">
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+        </div>
+        <a href="cart.html" class="cart-icon" aria-label="Корзина">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="10" cy="26" r="3" fill="white"/>
+                <circle cx="24" cy="26" r="3" fill="white"/>
+                <path d="M4 7H7L10 20H25L28 11H9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+            <span class="cart-badge" style="display: none;">0</span>
+        </a>
+    </header>
+
+    <nav class="mobile-nav">
+        <div class="mobile-nav-list">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="#" onclick="openFilterModal()">ФИЛЬТР</a>
+            <a href="equipment.html">ОБОРУДОВАНИЕ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="#" onclick="openDocumentationModal()">ДОКУМЕНТАЦИЯ</a>
+            <a href="launches.html">ЗАПУСК</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+            <a href="cart.html">МОИ ЗАКАЗЫ</a>
+            <a href="about.html">О НАС</a>
+        </div>
+    </nav>
+
+    <main class="product-page">
+        <div class="product-container">
+            <aside class="product-gallery">
+                <div class="product-main-image">
+                    <img id="mainImage" src="2.png" alt="STR.P4 Звездный датчик" loading="eager">
+                </div>
+                <div class="product-thumbs">
+                    <img src="2.png" alt="STR.P4 основной вид" class="thumb-active" onclick="changeMainImage('2.png', this)">
+                    <img src="1.png" alt="Сравнение с MT-2.P4" onclick="changeMainImage('1.png', this)">
+                    <img src="3.png" alt="Сравнение с Monopole2-UHF" onclick="changeMainImage('3.png', this)">
+                    <img src="2.png" alt="STR.P4 детали" onclick="changeMainImage('2.png', this)">
+                </div>
+            </aside>
+
+            <section class="product-info">
+                <h1 class="product-title">STR.P4<br>Звездный датчик</h1>
+                <div class="product-price">
+                    <span class="price-value">125 000 ₽</span>
+                    <span class="price-note">В наличии</span>
+                </div>
+                <p class="product-lead">
+                    Высокоточный звездный датчик для навигационно-пространственного ориентирования спутника. Обеспечивает точное определение ориентации в пространстве с использованием звездных каталогов.
+                </p>
+
+                <div class="product-specs">
+                    <h3>Ключевые характеристики:</h3>
+                    <p><strong>Тип:</strong> Звездный трекер с CMOS сенсором</p>
+                    <p><strong>Точность:</strong> ≤ 10 угловых секунд (3σ)</p>
+                    <p><strong>Поле зрения:</strong> 20° × 15°</p>
+                    <p><strong>Потребляемая мощность:</strong> 2.5-4.0 Вт</p>
+                    <p><strong>Масса:</strong> 450 г</p>
+                    <p><strong>Размеры:</strong> 95×95×85 мм</p>
+                    <p><strong>Рабочая температура:</strong> -30°C до +70°C</p>
+                    <p><strong>Частота обновления:</strong> до 10 Гц</p>
+                </div>
+
+                <div class="product-advantages">
+                    <h3>Преимущества:</h3>
+                    <p>Высочайшая точность определения ориентации</p>
+                    <p>Автономная работа без внешних референсов</p>
+                    <p>Устойчивость к засветке Солнцем и Землей</p>
+                    <p>Интегрированная обработка изображений</p>
+                    <p>Совместимость с различными спутниковыми платформами</p>
+                </div>
+
+                <div class="product-actions">
+                    <button class="btn btn-outline" onclick="window.location.href='delivery.html'">ОФОРМИТЬ ДОСТАВКУ</button>
+                    <button class="btn btn-outline btn-add-cart" onclick="addToCart('STR.P4', 'Звездный датчик', 125000, '2.png')">ДОБАВИТЬ В КОРЗИНУ</button>
+                </div>
+
+                <div class="product-side-label">STR.P4</div>
+            </section>
+        </div>
+    </main>
+
+    <script src="main.js"></script>
+    <script>
+        function changeMainImage(src, element) {
+            // Обновляем главное изображение
+            document.getElementById('mainImage').src = src;
+            
+            // Убираем активный класс со всех миниатюр
+            document.querySelectorAll('.product-thumbs img').forEach(img => {
+                img.classList.remove('thumb-active');
+            });
+            
+            // Добавляем активный класс к выбранной миниатюре
+            element.classList.add('thumb-active');
+        }
+    </script>
+</body>
+</html>

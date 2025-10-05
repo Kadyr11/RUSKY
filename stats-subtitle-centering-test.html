@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Тест центрирования подзаголовков - RUSKY</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Стили для демонстрации центрирования подзаголовков */
+        .subtitle-centering-overlay {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.9);
+            color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            z-index: 9999;
+            font-size: 13px;
+            max-height: 220px;
+            overflow-y: auto;
+        }
+        
+        .centering-guides {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 5;
+        }
+        
+        .center-guide {
+            position: absolute;
+            width: 2px;
+            background: rgba(255, 255, 0, 0.8);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .subtitle-center-indicator {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: rgba(0, 255, 0, 0.9);
+            border-radius: 50%;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .number-center-indicator {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: rgba(0, 255, 255, 0.9);
+            border-radius: 50%;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .success { color: #51cf66; }
+        .warning { color: #ffd43b; }
+        .error { color: #ff6b6b; }
+        .info { color: #74c0fc; }
+        
+        .test-section {
+            margin: 8px 0;
+            padding: 8px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 6px;
+        }
+        
+        .hide-on-desktop {
+            display: block;
+        }
+        
+        @media (min-width: 769px) {
+            .hide-on-desktop {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Информационная панель -->
+    <div class="subtitle-centering-overlay hide-on-desktop" id="testOverlay">
+        <div><strong>🎯 Тест центрирования подзаголовков</strong></div>
+        
+        <div class="test-section">
+            <div><strong>📝 Подзаголовки</strong></div>
+            <div>Левый: <span id="subtitle1Align" class="info"></span></div>
+            <div>Центральный: <span id="subtitle2Align" class="info"></span></div>
+            <div>Правый: <span id="subtitle3Align" class="info"></span></div>
+        </div>
+        
+        <div class="test-section">
+            <div><strong>🔢 Числа</strong></div>
+            <div>50+: <span id="number1Align" class="info"></span></div>
+            <div>42+: <span id="number2Align" class="info"></span></div>
+            <div>80+: <span id="number3Align" class="info"></span></div>
+        </div>
+        
+        <div class="test-section">
+            <div><strong>✅ Результат</strong></div>
+            <div>Экран: <span id="screenWidth" class="info"></span>px</div>
+            <div>Статус: <span id="centeringResult"></span></div>
+        </div>
+        
+        <div style="margin-top: 12px; font-size: 11px; opacity: 0.8;">
+            <div><span style="color: yellow;">Желтые линии</span> - центр блоков</div>
+            <div><span style="color: lime;">Зеленые точки</span> - центр подзаголовков</div>
+            <div><span style="color: cyan;">Голубые точки</span> - центр чисел</div>
+            <div><em>Двойной клик для скрытия панели</em></div>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="header-logo">RUSKY</div>
+        <nav class="header-nav">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="launches.html">ЗАПУСКИ</a>
+            <a href="documentation.html">ДОКУМЕНТАЦИЯ</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+        </nav>
+        <div class="burger-menu" onclick="toggleMobileMenu()">
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+        </div>
+    </header>
+
+    <nav class="mobile-nav" id="mobile-nav">
+        <div class="mobile-nav-list">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="launches.html">ЗАПУСКИ</a>
+            <a href="documentation.html">ДОКУМЕНТАЦИЯ</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+        </div>
+    </nav>
+
+    <!-- Основная секция статистики -->
+    <section class="stats-section" style="background-image: url('img 3.png'); background-size: cover; background-position: center;">
+        <div class="stats-overlay"></div>
+        <div class="stats-content">
+            <div class="stats-left">
+                <div class="stats-header">
+                    <h2>Почему именно мы?</h2>
+                </div>
+                <div class="stats-numbers" id="statsNumbers">
+                    <div class="stat-item" id="statItem1">
+                        <div class="centering-guides">
+                            <div class="center-guide"></div>
+                            <div class="number-center-indicator"></div>
+                            <div class="subtitle-center-indicator"></div>
+                        </div>
+                        <span class="stat-number" id="number1">50+</span>
+                        <span class="stat-label" id="subtitle1">Успешных запуска</span>
+                    </div>
+                    <div class="stat-item" id="statItem2">
+                        <div class="centering-guides">
+                            <div class="center-guide"></div>
+                            <div class="number-center-indicator"></div>
+                            <div class="subtitle-center-indicator"></div>
+                        </div>
+                        <span class="stat-number" id="number2">42+</span>
+                        <span class="stat-label" id="subtitle2">Довольных клиентов</span>
+                    </div>
+                    <div class="stat-item" id="statItem3">
+                        <div class="centering-guides">
+                            <div class="center-guide"></div>
+                            <div class="number-center-indicator"></div>
+                            <div class="subtitle-center-indicator"></div>
+                        </div>
+                        <span class="stat-number" id="number3">80+</span>
+                        <span class="stat-label" id="subtitle3">Изготовленных спутников</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">15+</span>
+                        <span class="stat-label">Лет опыта</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">25+</span>
+                        <span class="stat-label">Инженеров</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Качество</span>
+                    </div>
+                </div>
+                <div class="stats-features">
+                    <div class="feature-arrow">
+                        <span>Научная точность</span>
+                        <span class="arrow">→</span>
+                    </div>
+                    <div class="feature-arrow">
+                        <span>Быстрый запуск</span>
+                        <span class="arrow">→</span>
+                    </div>
+                    <div class="feature-arrow">
+                        <span>Гибкие конфигурации</span>
+                        <span class="arrow">→</span>
+                    </div>
+                    <div class="feature-arrow">
+                        <span>Глобальное покрытие</span>
+                        <span class="arrow">→</span>
+                    </div>
+                </div>
+            </div>
+            <div class="stats-right">
+                <div class="stats-year">2025</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Демо секция -->
+    <div style="background: #111; padding: 60px 20px; color: #fff;">
+        <h2 style="text-align: center; margin-bottom: 30px;">🎯 Центрирование всех подзаголовков</h2>
+        <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; color: #ccc;">
+            <h3 style="color: #00ff00; margin-bottom: 15px;">✅ Унифицированное выравнивание</h3>
+            <ul style="line-height: 1.8;">
+                <li><strong>Все числа:</strong> text-align: center</li>
+                <li><strong>Все подзаголовки:</strong> text-align: center</li>
+                <li><strong>Симметрия:</strong> одинаковое выравнивание во всех блоках</li>
+                <li><strong>Консистентность:</strong> единообразный дизайн</li>
+            </ul>
+            
+            <h3 style="color: #4A9EFF; margin: 20px 0 15px;">🔧 CSS упрощение</h3>
+            <pre style="background: #000; padding: 12px; border-radius: 6px; font-size: 12px; overflow-x: auto;">
+.stat-item {
+    text-align: center; /* все элементы по центру */
+}
+
+.stat-item .stat-number {
+    text-align: center; /* числа по центру */
+    width: 100%;
+}
+
+/* Убраны специфичные стили для :first-child и :last-child */</pre>
+            
+            <h3 style="color: #ff9900; margin: 20px 0 15px;">🎨 Визуальный результат</h3>
+            <ul style="line-height: 1.8;">
+                <li>Все подзаголовки выровнены по центру блоков</li>
+                <li>Числа также центрированы</li>
+                <li>Гармоничное и сбалансированное расположение</li>
+                <li>Улучшенная читаемость на мобильных устройствах</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+    <script>
+        function updateSubtitleCenteringInfo() {
+            const screenWidth = window.innerWidth;
+            
+            document.getElementById('screenWidth').textContent = screenWidth;
+            
+            if (screenWidth > 768) {
+                document.getElementById('centeringResult').innerHTML = 
+                    '<span class="info">Тест активен только на планшетах/мобильных</span>';
+                return;
+            }
+            
+            // Получаем элементы
+            const statItem1 = document.getElementById('statItem1');
+            const statItem2 = document.getElementById('statItem2');
+            const statItem3 = document.getElementById('statItem3');
+            const number1 = document.getElementById('number1');
+            const number2 = document.getElementById('number2');
+            const number3 = document.getElementById('number3');
+            
+            if (!statItem1 || !number1) return;
+            
+            // Проверяем выравнивание контейнеров (подзаголовки)
+            const item1Style = getComputedStyle(statItem1);
+            const item2Style = getComputedStyle(statItem2);
+            const item3Style = getComputedStyle(statItem3);
+            
+            // Проверяем выравнивание чисел
+            const number1Style = getComputedStyle(number1);
+            const number2Style = getComputedStyle(number2);
+            const number3Style = getComputedStyle(number3);
+            
+            const subtitle1Align = item1Style.textAlign;
+            const subtitle2Align = item2Style.textAlign;
+            const subtitle3Align = item3Style.textAlign;
+            
+            const number1Align = number1Style.textAlign;
+            const number2Align = number2Style.textAlign;
+            const number3Align = number3Style.textAlign;
+            
+            // Обновление информации
+            document.getElementById('subtitle1Align').textContent = subtitle1Align;
+            document.getElementById('subtitle2Align').textContent = subtitle2Align;
+            document.getElementById('subtitle3Align').textContent = subtitle3Align;
+            document.getElementById('number1Align').textContent = number1Align;
+            document.getElementById('number2Align').textContent = number2Align;
+            document.getElementById('number3Align').textContent = number3Align;
+            
+            // Проверка корректности
+            const subtitlesCorrect = 
+                subtitle1Align === 'center' && 
+                subtitle2Align === 'center' && 
+                subtitle3Align === 'center';
+                
+            const numbersCorrect = 
+                number1Align === 'center' && 
+                number2Align === 'center' && 
+                number3Align === 'center';
+            
+            const allCorrect = subtitlesCorrect && numbersCorrect;
+            
+            let statusHTML = '';
+            if (allCorrect) {
+                statusHTML = '<span class="success">✅ Все элементы идеально центрированы</span>';
+            } else {
+                const issues = [];
+                if (!subtitlesCorrect) issues.push('подзаголовки');
+                if (!numbersCorrect) issues.push('числа');
+                statusHTML = `<span class="warning">⚠️ Требует корректировки: ${issues.join(', ')}</span>`;
+            }
+            
+            document.getElementById('centeringResult').innerHTML = statusHTML;
+            
+            console.log('Subtitle centering test:', {
+                screenWidth,
+                subtitles: { subtitle1Align, subtitle2Align, subtitle3Align },
+                numbers: { number1Align, number2Align, number3Align },
+                subtitlesCorrect,
+                numbersCorrect,
+                allCorrect
+            });
+        }
+        
+        // Обновляем при загрузке и изменении размера
+        window.addEventListener('load', updateSubtitleCenteringInfo);
+        window.addEventListener('resize', updateSubtitleCenteringInfo);
+        
+        // Скрыть/показать по двойному клику
+        document.addEventListener('dblclick', function() {
+            const overlay = document.getElementById('testOverlay');
+            const isVisible = overlay.style.display !== 'none';
+            
+            overlay.style.display = isVisible ? 'none' : 'block';
+            
+            // Также скрыть/показать направляющие
+            document.querySelectorAll('.centering-guides').forEach(guide => {
+                guide.style.display = isVisible ? 'none' : 'block';
+            });
+        });
+        
+        console.log('🎯 Subtitle centering test loaded');
+        console.log('🔍 Double-click to toggle centering guides');
+    </script>
+</body>
+</html>

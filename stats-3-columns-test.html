@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Тест статистики 3 колонки - RUSKY</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Стили для демонстрации */
+        .stats-test-overlay {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.9);
+            color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            z-index: 9999;
+            font-size: 13px;
+            max-height: 250px;
+            overflow-y: auto;
+        }
+        
+        .grid-visualization {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 10;
+        }
+        
+        .grid-overlay {
+            position: absolute;
+            border: 2px solid rgba(255, 0, 255, 0.7);
+            background: rgba(255, 0, 255, 0.1);
+        }
+        
+        .success { color: #51cf66; }
+        .warning { color: #ffd43b; }
+        .error { color: #ff6b6b; }
+        .info { color: #74c0fc; }
+        
+        .test-stats {
+            margin: 15px 0;
+            padding: 12px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+        }
+        
+        .hide-on-desktop {
+            display: block;
+        }
+        
+        @media (min-width: 769px) {
+            .hide-on-desktop {
+                display: none;
+            }
+        }
+        
+        /* Расширенный demo контент */
+        .demo-stats-section {
+            background: #111;
+            padding: 60px 20px;
+            margin: 40px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Информационная панель -->
+    <div class="stats-test-overlay hide-on-desktop" id="testOverlay">
+        <div><strong>📊 Тест статистики 3 колонки</strong></div>
+        
+        <div class="test-stats">
+            <div><strong>📐 Сетка</strong></div>
+            <div>Экран: <span id="screenWidth" class="info"></span>px</div>
+            <div>Колонки: <span id="columnsCount" class="info"></span></div>
+            <div>Gap: <span id="gridGap" class="info"></span></div>
+            <div>Брейкпоинт: <span id="breakpointInfo" class="info"></span></div>
+        </div>
+        
+        <div class="test-stats">
+            <div><strong>🎯 Статус</strong></div>
+            <div>Макет: <span id="layoutStatus"></span></div>
+            <div>Выравнивание: <span id="alignmentStatus"></span></div>
+        </div>
+        
+        <div style="margin-top: 15px; font-size: 11px; opacity: 0.8;">
+            <div><span style="color: magenta;">Фиолетовые рамки</span> - границы stat-item элементов</div>
+            <div><em>Двойной клик для скрытия панели</em></div>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="header-logo">RUSKY</div>
+        <nav class="header-nav">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="launches.html">ЗАПУСКИ</a>
+            <a href="documentation.html">ДОКУМЕНТАЦИЯ</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+        </nav>
+        <div class="burger-menu" onclick="toggleMobileMenu()">
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+        </div>
+    </header>
+
+    <nav class="mobile-nav" id="mobile-nav">
+        <div class="mobile-nav-list">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="launches.html">ЗАПУСКИ</a>
+            <a href="documentation.html">ДОКУМЕНТАЦИЯ</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+        </div>
+    </nav>
+
+    <!-- Основная секция статистики -->
+    <section class="stats-section" style="background-image: url('img 3.png'); background-size: cover; background-position: center;">
+        <div class="stats-overlay"></div>
+        <div class="stats-content">
+            <div class="stats-left">
+                <div class="stats-header">
+                    <h2>Почему именно мы?</h2>
+                </div>
+                <div class="stats-numbers" id="statsNumbers">
+                    <div class="stat-item">
+                        <div class="grid-visualization"></div>
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Успешных запуска</span>
+                    </div>
+                    <div class="stat-item">
+                        <div class="grid-visualization"></div>
+                        <span class="stat-number">42+</span>
+                        <span class="stat-label">Довольных клиентов</span>
+                    </div>
+                    <div class="stat-item">
+                        <div class="grid-visualization"></div>
+                        <span class="stat-number">80+</span>
+                        <span class="stat-label">Проектов</span>
+                    </div>
+                    <div class="stat-item">
+                        <div class="grid-visualization"></div>
+                        <span class="stat-number">15+</span>
+                        <span class="stat-label">Лет опыта</span>
+                    </div>
+                    <div class="stat-item">
+                        <div class="grid-visualization"></div>
+                        <span class="stat-number">25+</span>
+                        <span class="stat-label">Инженеров</span>
+                    </div>
+                    <div class="stat-item">
+                        <div class="grid-visualization"></div>
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Качество</span>
+                    </div>
+                </div>
+                <div class="stats-features">
+                    <div class="feature-arrow">
+                        <span>Надежность и инновации</span>
+                        <span class="arrow">→</span>
+                    </div>
+                    <div class="feature-arrow">
+                        <span>Полный цикл разработки</span>
+                        <span class="arrow">→</span>
+                    </div>
+                    <div class="feature-arrow">
+                        <span>Экспертная поддержка</span>
+                        <span class="arrow">→</span>
+                    </div>
+                </div>
+            </div>
+            <div class="stats-right">
+                <div class="stats-year">2025</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Дополнительная демо-секция для планшетов -->
+    <div class="demo-stats-section">
+        <h2 style="color: #fff; text-align: center; margin-bottom: 30px;">📱 Демо на разных устройствах</h2>
+        <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; color: #ccc;">
+            <h3 style="color: #00ff00; margin-bottom: 15px;">✅ Новое расположение</h3>
+            <ul style="line-height: 1.8;">
+                <li><strong>Мобильные (≤480px):</strong> 3 колонки, gap 15px, выравнивание по центру</li>
+                <li><strong>Планшеты (481-768px):</strong> 3 колонки, gap 16px, выравнивание по левому краю</li>
+                <li><strong>Desktop (>768px):</strong> горизонтальная строка с оригинальными отступами</li>
+            </ul>
+            
+            <h3 style="color: #4A9EFF; margin: 20px 0 15px; ">🎯 Преимущества 3 колонок</h3>
+            <ul style="line-height: 1.8;">
+                <li>Более компактное отображение статистики</li>
+                <li>Лучшее использование пространства экрана</li>
+                <li>Сохранение читаемости на мобильных устройствах</li>
+                <li>Гармоничные пропорции для touch-интерфейсов</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+    <script>
+        function updateStatsInfo() {
+            const screenWidth = window.innerWidth;
+            const statsNumbers = document.getElementById('statsNumbers');
+            
+            if (!statsNumbers) return;
+            
+            const computedStyle = getComputedStyle(statsNumbers);
+            const gridTemplate = computedStyle.gridTemplateColumns;
+            const gap = computedStyle.gap;
+            
+            // Подсчет колонок
+            const columns = gridTemplate.split(' ').filter(col => col && col !== 'none').length;
+            
+            // Определение брейкпоинта
+            let breakpoint = 'Desktop';
+            let expectedColumns = 'flex-row';
+            
+            if (screenWidth <= 480) {
+                breakpoint = 'Mobile';
+                expectedColumns = 3;
+            } else if (screenWidth <= 768) {
+                breakpoint = 'Tablet';
+                expectedColumns = 3;
+            }
+            
+            // Обновление информации
+            document.getElementById('screenWidth').textContent = screenWidth;
+            document.getElementById('columnsCount').textContent = columns > 0 ? columns : 'flex-row';
+            document.getElementById('gridGap').textContent = gap || 'N/A';
+            document.getElementById('breakpointInfo').textContent = breakpoint;
+            
+            // Статус макета
+            const layoutCorrect = screenWidth <= 768 ? columns === expectedColumns : true;
+            document.getElementById('layoutStatus').innerHTML = layoutCorrect ?
+                '<span class="success">✅ 3 колонки активны</span>' :
+                '<span class="error">❌ Неверное количество колонок</span>';
+            
+            // Статус выравнивания
+            const statItems = document.querySelectorAll('.stat-item');
+            const firstItemStyle = statItems.length > 0 ? getComputedStyle(statItems[0]) : null;
+            const textAlign = firstItemStyle ? firstItemStyle.textAlign : 'unknown';
+            
+            let expectedAlign = 'center';
+            if (screenWidth > 480 && screenWidth <= 768) {
+                expectedAlign = 'left';
+            }
+            
+            const alignmentCorrect = screenWidth <= 768 ? textAlign === expectedAlign : true;
+            document.getElementById('alignmentStatus').innerHTML = alignmentCorrect ?
+                '<span class="success">✅ ' + textAlign + '</span>' :
+                '<span class="warning">⚠️ ' + textAlign + ' (ожидался ' + expectedAlign + ')</span>';
+            
+            // Визуализация сетки
+            if (screenWidth <= 768) {
+                addGridVisualization(statItems);
+            } else {
+                removeGridVisualization();
+            }
+            
+            console.log('Stats grid test:', {
+                screenWidth,
+                breakpoint,
+                columns,
+                expectedColumns,
+                gap,
+                textAlign,
+                layoutCorrect,
+                alignmentCorrect
+            });
+        }
+        
+        function addGridVisualization(statItems) {
+            statItems.forEach((item, index) => {
+                const visualization = item.querySelector('.grid-visualization');
+                if (visualization && window.innerWidth <= 768) {
+                    const rect = item.getBoundingClientRect();
+                    const statsRect = item.closest('.stats-numbers').getBoundingClientRect();
+                    
+                    visualization.innerHTML = `<div class="grid-overlay" style="
+                        top: ${rect.top - statsRect.top}px;
+                        left: ${rect.left - statsRect.left}px;
+                        width: ${rect.width}px;
+                        height: ${rect.height}px;
+                    "></div>`;
+                }
+            });
+        }
+        
+        function removeGridVisualization() {
+            document.querySelectorAll('.grid-visualization').forEach(viz => {
+                viz.innerHTML = '';
+            });
+        }
+        
+        // Обновляем при загрузке и изменении размера
+        window.addEventListener('load', updateStatsInfo);
+        window.addEventListener('resize', updateStatsInfo);
+        
+        // Скрыть/показать по двойному клику
+        document.addEventListener('dblclick', function() {
+            const overlay = document.getElementById('testOverlay');
+            const isVisible = overlay.style.display !== 'none';
+            
+            overlay.style.display = isVisible ? 'none' : 'block';
+        });
+        
+        console.log('📊 Stats 3-column test loaded');
+        console.log('🔍 Double-click to toggle test overlay');
+    </script>
+</body>
+</html>

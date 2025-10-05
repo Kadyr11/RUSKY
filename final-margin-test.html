@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Финальный тест Product Title Margin</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .margin-checker {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,0,0,0.9);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            z-index: 9999;
+            font-size: 12px;
+            max-width: 280px;
+            font-family: monospace;
+        }
+        .margin-value {
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 8px;
+            padding: 5px;
+            border-radius: 3px;
+        }
+        .good { background: rgba(0,255,0,0.3); }
+        .bad { background: rgba(255,0,0,0.3); }
+        
+        /* Визуальный индикатор */
+        .title-wrapper {
+            position: relative;
+            border: 2px solid cyan;
+            margin: 10px 0;
+        }
+        .title-wrapper::before {
+            content: 'product-info container';
+            position: absolute;
+            top: -18px;
+            left: 0;
+            background: cyan;
+            color: black;
+            padding: 2px 6px;
+            font-size: 10px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="margin-checker">
+        <strong>🔍 MARGIN CHECKER</strong><br>
+        Размер: <span id="size"></span><br>
+        Медиа-запрос: <span id="media"></span><br>
+        <div id="margin-info" class="margin-value">...</div>
+        <div style="margin-top: 10px; font-size: 11px; line-height: 1.4;">
+            <strong>Цель:</strong><br>
+            Убрать margin в мобильной версии<br>
+            <strong>Ожидаем:</strong> margin: 5px 0 5px 0<br>
+            <strong>Не должно быть:</strong> 21.44px
+        </div>
+    </div>
+
+    <!-- Product Page -->
+    <main class="product-page">
+        <div class="product-container">
+            <!-- Информация о товаре -->
+            <section class="product-info">
+                <div class="title-wrapper">
+                    <h1 class="product-title" id="test-title">Исследовательский спутник R-Research</h1>
+                </div>
+                
+                <div class="product-price">
+                    <span class="price-value">₽4,750,000</span>
+                    <span class="price-note">В НАЛИЧИИ</span>
+                </div>
+                
+                <p class="product-lead">
+                    Многофункциональный исследовательский спутник для проведения научных экспериментов 
+                    в космическом пространстве и изучения поверхности Земли.
+                </p>
+                
+                <div class="product-actions">
+                    <button class="btn">ЗАПРОСИТЬ ЦЕНУ</button>
+                    <button class="btn">ДОБАВИТЬ В КОРЗИНУ</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        function updateMarginChecker() {
+            const width = window.innerWidth;
+            const title = document.getElementById('test-title');
+            const styles = getComputedStyle(title);
+            
+            const marginTop = parseInt(styles.marginTop);
+            const marginBottom = parseInt(styles.marginBottom);
+            const marginLeft = parseInt(styles.marginLeft);
+            const marginRight = parseInt(styles.marginRight);
+            
+            document.getElementById('size').textContent = width + 'px';
+            
+            let mediaQuery = '';
+            if (width <= 480) {
+                mediaQuery = '≤480px (Mobile)';
+            } else if (width <= 768) {
+                mediaQuery = '≤768px (Tablet)';
+            } else if (width <= 1100) {
+                mediaQuery = '≤1100px (Small Desktop)';
+            } else {
+                mediaQuery = '>1100px (Desktop)';
+            }
+            document.getElementById('media').textContent = mediaQuery;
+            
+            const marginInfo = document.getElementById('margin-info');
+            const marginText = `margin: ${marginTop}px ${marginRight}px ${marginBottom}px ${marginLeft}px`;
+            
+            // Проверяем, правильные ли значения
+            const isGood = (width <= 1100) ? 
+                (marginTop <= 10 && marginBottom <= 10 && marginLeft === 0 && marginRight === 0) :
+                true; // На desktop любые значения ок
+            
+            marginInfo.textContent = marginText;
+            marginInfo.className = 'margin-value ' + (isGood ? 'good' : 'bad');
+            
+            // Дополнительная информация
+            if (width <= 1100 && (marginTop > 10 || marginBottom > 10)) {
+                marginInfo.innerHTML += '<br><span style="color: #ffcccc;">❌ Margin слишком большой!</span>';
+            } else if (width <= 1100) {
+                marginInfo.innerHTML += '<br><span style="color: #ccffcc;">✅ Margin правильный!</span>';
+            }
+        }
+        
+        updateMarginChecker();
+        window.addEventListener('resize', updateMarginChecker);
+        
+        // Дополнительная проверка после загрузки шрифтов
+        document.fonts.ready.then(updateMarginChecker);
+        setTimeout(updateMarginChecker, 500);
+    </script>
+</body>
+</html>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Satellite Detail Styles Demo - RUSKY</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Демонстрационные стили для лучшей визуализации */
+        .demo-container {
+            background: #000;
+            color: #fff;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        
+        .demo-section {
+            max-width: 1200px;
+            margin: 0 auto 60px;
+            padding: 30px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+        }
+        
+        .demo-image {
+            background: linear-gradient(45deg, #333, #666);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .sidebar-demo {
+            background: rgba(255,255,255,0.08);
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .spec-list {
+            list-style: none;
+            padding: 0;
+            margin: 16px 0;
+        }
+        
+        .spec-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .spec-list li:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo">RUSKY</div>
+        <nav class="header-nav">
+            <a href="#">ГЛАВНАЯ</a>
+            <a href="#">СПУТНИКИ</a>
+            <a href="#">ДЕМО</a>
+        </nav>
+        <div class="burger-menu" onclick="toggleMobileMenu()">
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+        </div>
+    </header>
+
+    <!-- Мобильное меню -->
+    <nav class="mobile-nav" id="mobile-nav">
+        <div class="mobile-nav-list">
+            <a href="#">ГЛАВНАЯ</a>
+            <a href="#">СПУТНИКИ</a>
+            <a href="#">ДЕМО</a>
+        </div>
+    </nav>
+
+    <div class="demo-container">
+        <!-- Заголовок -->
+        <section style="text-align: center; margin-bottom: 60px; padding-top: 80px;">
+            <h1 style="font-size: var(--fs-h1); margin-bottom: 16px;">Satellite Detail Layout</h1>
+            <p style="font-size: var(--fs-body); color: #ccc; max-width: 42ch; margin: 0 auto;">
+                Демонстрация улучшенной сетки для детальных страниц спутников с адаптивным дизайном
+            </p>
+        </section>
+
+        <!-- Основная демонстрация -->
+        <section class="demo-section">
+            <h2 style="margin-bottom: 24px;">🛰️ CLAY-COM Спутник</h2>
+            
+            <div class="satellite-detail">
+                <!-- Левая колонка с изображениями -->
+                <div>
+                    <img 
+                        src="CLAY-COM.png" 
+                        alt="CLAY-COM Главное изображение" 
+                        class="main-image"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
+                    >
+                    <div class="demo-image main-image" style="display: none;">
+                        CLAY-COM<br>Главное изображение<br>4:3 соотношение
+                    </div>
+                    
+                    <div style="margin-top: 16px;">
+                        <h3 style="margin-bottom: 12px; font-size: 18px;">Галерея</h3>
+                        <div class="thumbs">
+                            <img src="card 1.png" alt="Вид 1" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                            <div class="demo-image" style="display: none; font-size: 12px;">Вид 1</div>
+                            
+                            <img src="card 2.png" alt="Вид 2" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                            <div class="demo-image" style="display: none; font-size: 12px;">Вид 2</div>
+                            
+                            <img src="card 3.png" alt="Вид 3" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                            <div class="demo-image" style="display: none; font-size: 12px;">Вид 3</div>
+                            
+                            <img src="card 4.png" alt="Вид 4" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                            <div class="demo-image" style="display: none; font-size: 12px;">Вид 4</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Правая колонка с информацией -->
+                <div class="sidebar-demo">
+                    <h3 style="font-size: var(--fs-h2); margin-bottom: 16px;">Характеристики</h3>
+                    <ul class="spec-list">
+                        <li>
+                            <span>Масса:</span>
+                            <span>12 кг</span>
+                        </li>
+                        <li>
+                            <span>Размеры:</span>
+                            <span>30×20×10 см</span>
+                        </li>
+                        <li>
+                            <span>Орбита:</span>
+                            <span>LEO 400-600 км</span>
+                        </li>
+                        <li>
+                            <span>Связь:</span>
+                            <span>UHF/VHF</span>
+                        </li>
+                        <li>
+                            <span>Срок службы:</span>
+                            <span>2-3 года</span>
+                        </li>
+                    </ul>
+                    
+                    <div style="margin-top: 24px;">
+                        <button class="btn-primary" style="width: 100%; margin-bottom: 12px;">
+                            Добавить в корзину
+                        </button>
+                        <button class="btn-primary" style="background: transparent; border: 2px solid #fff; color: #fff; width: 100%;">
+                            Подробнее
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Responsive демонстрация -->
+        <section class="demo-section">
+            <h2 style="margin-bottom: 24px;">📱 Responsive поведение</h2>
+            
+            <div style="margin-bottom: 24px;">
+                <h3 style="color: #00ff00; margin-bottom: 12px;">✅ Desktop (768px+)</h3>
+                <ul style="color: #ccc; line-height: 1.6;">
+                    <li>Двухколоночная сетка: содержимое + боковая панель 420px</li>
+                    <li>Увеличенный gap между колонками: 24px</li>
+                    <li>4 миниатюры в ряд</li>
+                </ul>
+            </div>
+            
+            <div style="margin-bottom: 24px;">
+                <h3 style="color: #ff9900; margin-bottom: 12px;">📱 Mobile (до 768px)</h3>
+                <ul style="color: #ccc; line-height: 1.6;">
+                    <li>Одноколоночный layout</li>
+                    <li>Уменьшенный gap: 16px</li>
+                    <li>Галерея адаптируется под экран</li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3 style="color: #ff6666; margin-bottom: 12px;">📱 Small Mobile (до 480px)</h3>
+                <ul style="color: #ccc; line-height: 1.6;">
+                    <li>Горизонтальная прокрутка галереи</li>
+                    <li>Scroll snap для плавной навигации</li>
+                    <li>Минимальная ширина миниатюр: 64px</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Технические детали -->
+        <section class="demo-section">
+            <h2 style="margin-bottom: 24px;">⚙️ CSS Grid особенности</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+                <div>
+                    <h3 style="color: #4A9EFF; margin-bottom: 12px;">Основная сетка</h3>
+                    <pre style="background: #111; padding: 16px; border-radius: 8px; font-size: 14px; overflow-x: auto;">
+.satellite-detail {
+  display: grid; 
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .satellite-detail { 
+    grid-template-columns: 1fr 420px; 
+    gap: 24px; 
+  }
+}</pre>
+                </div>
+                
+                <div>
+                    <h3 style="color: #4A9EFF; margin-bottom: 12px;">Галерея миниатюр</h3>
+                    <pre style="background: #111; padding: 16px; border-radius: 8px; font-size: 14px; overflow-x: auto;">
+.thumbs {
+  display: grid; 
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 10px;
+}
+
+@media (max-width: 480px) {
+  .thumbs { 
+    grid-template-columns: repeat(4, minmax(64px, 1fr)); 
+    overflow-x: auto; 
+    scroll-snap-type: x mandatory; 
+  }
+}</pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Инструкции по тестированию -->
+        <section class="demo-section">
+            <h2 style="margin-bottom: 24px;">🧪 Как тестировать</h2>
+            
+            <ol style="line-height: 1.8; color: #ccc;">
+                <li><strong>Измените размер окна браузера</strong> - посмотрите как адаптируется layout</li>
+                <li><strong>Попробуйте на мобильном</strong> - проверьте горизонтальную прокрутку галереи</li>
+                <li><strong>Откройте Developer Tools</strong> - переключите в режим эмуляции разных устройств</li>
+                <li><strong>Проверьте breakpoints:</strong>
+                    <ul style="margin-top: 8px;">
+                        <li>768px+ (desktop layout)</li>
+                        <li>480px- (mobile gallery scroll)</li>
+                    </ul>
+                </li>
+            </ol>
+        </section>
+
+    </div>
+
+    <script src="main.js"></script>
+    <script>
+        console.log('Satellite Detail Styles Demo загружена!');
+        
+        // Функция для показа текущих размеров экрана
+        function showScreenSize() {
+            const width = window.innerWidth;
+            let layout = 'Mobile';
+            
+            if (width >= 768) {
+                layout = 'Desktop (2 columns)';
+            } else if (width <= 480) {
+                layout = 'Small Mobile (scroll gallery)';
+            }
+            
+            console.log(`Screen width: ${width}px - Layout: ${layout}`);
+        }
+        
+        // Отслеживаем изменения размера экрана
+        window.addEventListener('resize', showScreenSize);
+        showScreenSize();
+        
+        // Демонстрация CSS Grid поддержки
+        console.log('CSS Grid support:', CSS.supports('display', 'grid'));
+        console.log('CSS aspect-ratio support:', CSS.supports('aspect-ratio', '4/3'));
+        console.log('CSS scroll-snap support:', CSS.supports('scroll-snap-type', 'x mandatory'));
+    </script>
+</body>
+</html>

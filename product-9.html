@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RUSKY — R-TestSat</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo" onclick="location.href='index.html'" style="cursor:pointer">RUSKY</div>
+        <nav class="header-nav">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="#" onclick="openFilterModal()">ФИЛЬТР</a>
+            <a href="equipment.html">ОБОРУДОВАНИЕ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="#" onclick="openDocumentationModal()">ДОКУМЕНТАЦИЯ</a>
+            <a href="#">ЗАПУСК</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+            <a href="orders.html">МОИ ЗАКАЗЫ</a>
+            <a href="about.html">О НАС</a>
+        </nav>
+        <div class="burger-menu" onclick="toggleMobileMenu()">
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+        </div>
+        <a href="#" class="cart-icon" aria-label="Корзина">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="10" cy="26" r="3" fill="white"/>
+                <circle cx="24" cy="26" r="3" fill="white"/>
+                <path d="M4 7H7L10 20H25L28 11H9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+        </a>
+    </header>
+
+    <nav class="mobile-nav">
+        <div class="mobile-nav-list">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="#" onclick="openFilterModal()">ФИЛЬТР</a>
+            <a href="equipment.html">ОБОРУДОВАНИЕ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="#" onclick="openDocumentationModal()">ДОКУМЕНТАЦИЯ</a>
+            <a href="launch-process.html">ПРОЦЕСС ЗАПУСКА</a>
+            <a href="launch-help.html">ПОМОЩЬ С ЗАПУСКОМ</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+            <a href="orders.html">МОИ ЗАКАЗЫ</a>
+            <a href="about.html">О НАС</a>
+            <a href="cart.html" class="mobile-cart-link" aria-label="Корзина">
+                <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="10" cy="26" r="3" fill="white"/>
+                    <circle cx="24" cy="26" r="3" fill="white"/>
+                    <path d="M4 7H7L10 20H25L28 11H9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
+                КОРЗИНА
+            </a>
+        </div>
+    </nav>
+
+    <main class="product-page">
+        <div class="product-container">
+            <aside class="product-gallery">
+                <div class="product-main-image">
+                    <img class="main-image" src="card 3.png" alt="Экспериментальный спутник R-TestSat" loading="eager">
+                </div>
+                <div class="product-thumbs">
+                    <img src="card 3.png" alt="thumb 1" data-full="card 3.png">
+                    <img src="card 1.png" alt="thumb 2" data-full="card 1.png">
+                    <img src="card 2.png" alt="thumb 3" data-full="card 2.png">
+                    <img src="card 4.png" alt="thumb 4" data-full="card 4.png">
+                </div>
+            </aside>
+
+            <section class="product-info">
+                <div class="corner-frame top-left"></div>
+                <div class="corner-frame top-right"></div>
+                <div class="corner-frame bottom-left"></div>
+                <div class="corner-frame bottom-right"></div>
+                <h1 class="product-title">R-TestSat</h1>
+                
+                <!-- Индикаторы наличия и цены -->
+                <div class="product-indicators" style="margin: 20px 0 30px 0;">
+                    <div class="availability-indicator" style="display: inline-block; background: rgba(40, 167, 69, 0.1); color: #28a745; padding: 4px 12px; border-radius: 20px; font-size: 14px; font-weight: 600; margin-right: 15px; border: 1px solid #28a745; text-transform: uppercase; letter-spacing: 0.5px;">
+                        В наличии
+                    </div>
+                    <div class="price-indicator" style="display: inline-block; background: rgba(0, 123, 255, 0.1); color: #007bff; padding: 4px 12px; border-radius: 20px; font-size: 14px; font-weight: 600; border: 1px solid #007bff; text-transform: uppercase; letter-spacing: 0.5px;">
+                        Цена по запросу
+                    </div>
+                </div>
+                
+                <p class="product-lead">
+                    Экспериментальная космическая платформа для отработки новых технологий и концепций. Предназначен для тестирования инновационных решений в реальных космических условиях.
+                </p>
+
+                <div class="product-specs">
+                    <h3>Ключевые характеристики:</h3>
+                    <p><strong>Орбита:</strong> Различные орбиты в зависимости от эксперимента</p>
+                    <p><strong>Модульность:</strong> сменные экспериментальные блоки</p>
+                    <p><strong>Телеметрия:</strong> расширенная система мониторинга</p>
+                    <p><strong>Адаптивность:</strong> перепрограммируемая полетная программа</p>
+                    <p><strong>Срок службы:</strong> 2-5 лет в зависимости от задач</p>
+                </div>
+
+                <div class="product-advantages">
+                    <h3>Преимущества:</h3>
+                    <p>Возможность тестирования перспективных технологий</p>
+                    <p>Гибкая архитектура для различных экспериментов</p>
+                    <p>Низкие риски для отработки новых решений</p>
+                </div>
+
+                <div class="product-actions">
+                    <button class="btn btn-outline" id="requestPriceBtn">ЗАПРОСИТЬ ЦЕНУ</button>
+                    <button class="btn btn-outline btn-add-cart" id="addToCartBtn">ДОБАВИТЬ В КОРЗИНУ</button>
+                </div>
+
+                <div class="product-side-label">R-TESTSAT</div>
+            </section>
+        </div>
+    </main>
+
+    <script src="main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Обновляем бейдж корзины при загрузке страницы
+            if (typeof updateCartBadge === 'function') {
+                updateCartBadge();
+            }
+
+            // Кнопка "Запросить цену"
+            const requestPriceBtn = document.getElementById('requestPriceBtn');
+            if (requestPriceBtn) {
+                requestPriceBtn.addEventListener('click', function() {
+                    window.location.href = 'request.html';
+                });
+            }
+
+            // Кнопка "Добавить в корзину"
+            const addToCartBtn = document.getElementById('addToCartBtn');
+            if (addToCartBtn) {
+                addToCartBtn.addEventListener('click', function() {
+                    // Данные товара (Технологический демонстратор R-TestSat)
+                    const productId = 'r-testsat-satellite';
+                    const productName = 'Технологический демонстратор R-TestSat';
+                    const productPrice = 0; // Цена по запросу для спутников
+                    const productImage = 'card 4.png';
+                    const productType = 'satellite';
+
+                    // Добавляем товар в корзину
+                    if (typeof addToCart === 'function') {
+                        addToCart(productId, productName, productPrice, productImage, productType);
+                    } else {
+                        console.error('Функция addToCart не найдена');
+                        // Запасной вариант - прямо в localStorage
+                        try {
+                            const cart = JSON.parse(localStorage.getItem('rusky_cart') || '[]');
+                            const existingItem = cart.find(item => item.id === productId);
+                            
+                            if (existingItem) {
+                                existingItem.qty = (existingItem.qty || 1) + 1;
+                            } else {
+                                cart.push({
+                                    id: productId,
+                                    name: productName,
+                                    price: productPrice,
+                                    image: productImage,
+                                    type: productType,
+                                    qty: 1
+                                });
+                            }
+                            
+                            localStorage.setItem('rusky_cart', JSON.stringify(cart));
+                            
+                            // Показываем уведомление
+                            alert('Товар добавлен в корзину!');
+                            
+                            // Обновляем бейдж корзины
+                            if (typeof updateCartBadge === 'function') {
+                                updateCartBadge();
+                            }
+                        } catch (e) {
+                            console.error('Ошибка при добавлении товара в корзину:', e);
+                            alert('Произошла ошибка при добавлении товара в корзину');
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+    <!-- Интерактивная галерея товаров -->
+    <script src="product-gallery.js"></script>
+</body>
+</html>

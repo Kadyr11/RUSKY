@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест Product Page Top-0 для мобильных</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .test-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,0,0,0.9);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            z-index: 9999;
+            font-size: 12px;
+            max-width: 300px;
+            font-family: monospace;
+        }
+        .layout-info {
+            margin-top: 10px;
+            padding: 8px;
+            border-radius: 4px;
+            background: rgba(0,0,0,0.3);
+        }
+        .mobile { color: #ffff00; }
+        .desktop { color: #00ffff; }
+        
+        /* Индикатор позиции */
+        .position-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, red, orange, yellow);
+            z-index: 9998;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="position-indicator"></div>
+    
+    <div class="test-indicator">
+        <strong>📱 Product Page Top Test</strong><br>
+        Размер: <span id="size"></span><br>
+        <div id="layout-info" class="layout-info">...</div>
+        <div style="margin-top: 10px; font-size: 11px; line-height: 1.4;">
+            <strong>Desktop:</strong> padding-top: 120px<br>
+            <strong>≤768px:</strong> padding-top: 0px !important<br>
+            <strong>≤480px:</strong> padding-top: 0px !important<br>
+            <div style="color: #ffff00; margin-top: 5px;">
+                Красная полоса сверху = позиция top: 0
+            </div>
+        </div>
+    </div>
+
+    <!-- Имитация header -->
+    <header class="header" style="background: rgba(0,0,0,0.5); backdrop-filter: blur(10px);">
+        <div class="header-logo">RUSKY</div>
+        <div class="burger-menu" style="display: flex;">
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+        </div>
+    </header>
+
+    <!-- Product Page -->
+    <main class="product-page">
+        <div class="product-container">
+            <!-- Галерея товара -->
+            <aside class="product-gallery">
+                <div class="product-main-image">
+                    <div style="width: 100%; height: 100%; background: #333; display: flex; align-items: center; justify-content: center; color: #666;">
+                        📷 Изображение товара
+                    </div>
+                </div>
+                <div class="product-thumbs">
+                    <div style="background: #222; aspect-ratio: 1/1; border-radius: 8px;"></div>
+                    <div style="background: #222; aspect-ratio: 1/1; border-radius: 8px;"></div>
+                    <div style="background: #222; aspect-ratio: 1/1; border-radius: 8px;"></div>
+                    <div style="background: #222; aspect-ratio: 1/1; border-radius: 8px;"></div>
+                </div>
+            </aside>
+            
+            <!-- Информация о товаре -->
+            <section class="product-info">
+                <h1 class="product-title">Кубсат CLAY-CUBE</h1>
+                
+                <div class="product-price">
+                    <span class="price-value">₽2,450,000</span>
+                    <span class="price-note">В НАЛИЧИИ</span>
+                </div>
+                
+                <p class="product-lead">
+                    Компактный кубический спутник для научных исследований и коммерческих задач. 
+                    Поддерживает форматы 3U, 6U и 12U с возможностью кастомизации.
+                </p>
+                
+                <div class="product-specs">
+                    <h3>Технические характеристики</h3>
+                    <p><strong>Размер:</strong> 3U / 6U / 12U</p>
+                    <p><strong>Масса:</strong> от 4 до 24 кг</p>
+                    <p><strong>Орбита:</strong> LEO 400-2000 км</p>
+                </div>
+                
+                <div class="product-actions">
+                    <button class="btn">ЗАПРОСИТЬ ЦЕНУ</button>
+                    <button class="btn">ДОБАВИТЬ В КОРЗИНУ</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        function updateStatus() {
+            const width = window.innerWidth;
+            document.getElementById('size').textContent = width + 'px';
+            
+            const infoEl = document.getElementById('layout-info');
+            
+            if (width > 768) {
+                infoEl.innerHTML = '<span class="desktop">Desktop - padding-top: 120px (нормально)</span>';
+            } else if (width > 480) {
+                infoEl.innerHTML = '<span class="mobile">Tablet ≤768px - padding-top: 0px (убран)</span>';
+            } else {
+                infoEl.innerHTML = '<span class="mobile">Mobile ≤480px - padding-top: 0px (убран)</span>';
+            }
+        }
+        
+        updateStatus();
+        window.addEventListener('resize', updateStatus);
+    </script>
+</body>
+</html>

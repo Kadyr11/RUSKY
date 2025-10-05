@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hero Section - Manufacturer Settings Test</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .comparison-info {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.9);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            z-index: 9999;
+            font-size: 12px;
+            max-width: 400px;
+            font-family: monospace;
+        }
+        .old-settings, .new-settings {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .old-settings { background: rgba(255, 0, 0, 0.2); }
+        .new-settings { background: rgba(0, 255, 0, 0.2); }
+    </style>
+</head>
+<body>
+    <div class="comparison-info">
+        <strong>🔄 Применены настройки manufacturer-section</strong>
+        
+        <div class="old-settings">
+            <strong>❌ Старые настройки:</strong><br>
+            • Padding: 60px 0px<br>
+            • Max-width: 620px<br>
+            • H1: var(--fs-h1), margin: 0 0 20px<br>
+            • Subtitle: 16px, margin: 0 0 30px<br>
+            • Desc: var(--fs-body), margin-bottom: 30px<br>
+            • Line-height: 1.15/1.5
+        </div>
+        
+        <div class="new-settings">
+            <strong>✅ Новые настройки (как manufacturer):</strong><br>
+            • Padding: 120px 0px<br>
+            • Max-width: 700px<br>
+            • H1: 42px, margin: 0 0 30px<br>
+            • Subtitle: 18px, margin: 0 0 50px<br>
+            • Desc: 18px, margin-bottom: 50px<br>
+            • Line-height: 1.3/1.6<br>
+            • Min-height: 700px<br>
+            • Justify: flex-start
+        </div>
+        
+        <div style="margin-top: 15px; padding: 10px; background: rgba(0, 100, 255, 0.2);">
+            <strong>🔘 Кнопка теперь правильно настроена:</strong><br>
+            • Desktop: 8px 16px, min-height: 32px<br>
+            • Шрифт: 12px, weight: 700<br>
+            • Стиль: как manufacturer-btn<br>
+            • Добавлен !important для desktop версии
+        </div>
+    </div>
+
+    <section class="hero-section" style="background-image: url('img-1.png'); background-size: cover; background-position: center;">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Хотите купить спутник?</h1>
+            <p class="hero-subtitle">
+                Разработка, производство и внедрение космических спутников нового поколения.
+            </p>
+            <p class="hero-desc">
+                RUSKY — это инжиниринговая платформа, специализирующаяся на создании космических спутников и модулей различной сложности.
+                Мы объединяем экспертов в аэрокосмической отрасли, проектные группы и стартапы для реализации космических решений от идеи до вывода на орбиту.
+            </p>
+            <a href="#" class="hero-btn">ПОДРОБНЕЕ</a>
+        </div>
+    </section>
+
+    <section style="padding: 50px; background: #111; color: white; text-align: center;">
+        <h2>Сравнение завершено</h2>
+        <p>Hero-section теперь использует те же настройки, что и manufacturer-section</p>
+    </section>
+</body>
+</html>

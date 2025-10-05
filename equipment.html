@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог оборудования - RUSKY</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-logo" onclick="location.href='index.html'" style="cursor:pointer">RUSKY</div>
+        <nav class="header-nav">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="#" onclick="openFilterModal()">ФИЛЬТР</a>
+            <a href="equipment.html" class="active">ОБОРУДОВАНИЕ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="#" onclick="openDocumentationModal()">ДОКУМЕНТАЦИЯ</a>
+            <div class="dropdown">
+                <a href="#" class="dropdown-toggle">ЗАПУСК</a>
+                <div class="dropdown-content">
+                    <a href="launch-process.html">Процесс запуска</a>
+                    <a href="launch-help.html">Помощь с запуском</a>
+                </div>
+            </div>
+            <a href="support.html">ПОДДЕРЖКА</a>
+            <a href="orders.html">МОИ ЗАКАЗЫ</a>
+            <a href="about.html">О НАС</a>
+        </nav>
+        <div class="burger-menu">
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+        </div>
+        <a href="cart.html" class="cart-icon" aria-label="Корзина">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <rect width="32" height="32" fill="none"/>
+            <circle cx="10" cy="26" r="3" fill="white"/>
+            <circle cx="24" cy="26" r="3" fill="white"/>
+            <path d="M4 7H7L10 20H25L28 11H9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+        </a>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav">
+        <div class="mobile-nav-list">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="#" onclick="openFilterModal()">ФИЛЬТР</a>
+            <a href="equipment.html">ОБОРУДОВАНИЕ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="#" onclick="openDocumentationModal()">ДОКУМЕНТАЦИЯ</a>
+            <a href="launch-process.html">ПРОЦЕСС ЗАПУСКА</a>
+            <a href="launch-help.html">ПОМОЩЬ С ЗАПУСКОМ</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+            <a href="orders.html">МОИ ЗАКАЗЫ</a>
+            <a href="about.html">О НАС</a>
+            <a href="cart.html" class="mobile-cart-link" aria-label="Корзина">
+                <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="10" cy="26" r="3" fill="white"/>
+                    <circle cx="24" cy="26" r="3" fill="white"/>
+                    <path d="M4 7H7L10 20H25L28 11H9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
+                КОРЗИНА
+            </a>
+        </div>
+    </nav>
+
+    <!-- Хлебные крошки -->
+    <section class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <span class="breadcrumb-separator">&gt;</span>
+            <span class="breadcrumb-current">КАТАЛОГ ОБОРУДОВАНИЯ</span>
+        </div>
+    </section>
+
+    <!-- Заголовок каталога -->
+    <section class="catalog-header">
+        <div class="catalog-container">
+            <h1>Каталог оборудования</h1>
+        </div>
+    </section>
+
+    <!-- Каталог оборудования -->
+    <section class="catalog-section">
+        <div class="catalog-container">
+            <div class="catalog-grid">
+                <!-- Карточка 1 - MT-2.P4 -->
+                <div class="catalog-card">
+                    <div class="catalog-image">
+                        <img src="1.png" alt="MT-2.P4">
+                    </div>
+                    <div class="catalog-info">
+                        <h3>MT-2.P4</h3>
+                        <div class="catalog-price">Цена: 45 000 ₽</div>
+                        <p>Магнитный стержень для сброса накопленной спутниковой энергии и создания дипольного эффекта.</p>
+                        <a href="equipment-mt2p4.html" class="catalog-btn">ПРОСМОТРЕТЬ МОДУЛЬ</a>
+                    </div>
+                </div>
+
+                <!-- Карточка 2 - STR.P4 -->
+                <div class="catalog-card">
+                    <div class="catalog-image">
+                        <img src="2.png" alt="STR.P4">
+                    </div>
+                    <div class="catalog-info">
+                        <h3>STR.P4</h3>
+                        <div class="catalog-price">Цена: 125 000 ₽</div>
+                        <p>Звездный датчик для точка навигационного-пространственного ориентирования спутника.</p>
+                        <a href="equipment-str-p4.html" class="catalog-btn">ПРОСМОТРЕТЬ МОДУЛЬ</a>
+                    </div>
+                </div>
+
+                <!-- Карточка 3 - Monopole2-UHF -->
+                <div class="catalog-card">
+                    <div class="catalog-image">
+                        <img src="3.png" alt="Monopole2-UHF">
+                    </div>
+                    <div class="catalog-info">
+                        <h3>Monopole2-UHF</h3>
+                        <div class="catalog-price">Цена: 78 000 ₽</div>
+                        <p>Магнитный стержень для сброса накопленной спутниковой энергии в диапазоне спутниковых частот Leo.</p>
+                        <a href="equipment-monopole2-uhf.html" class="catalog-btn">ПРОСМОТРЕТЬ МОДУЛЬ</a>
+                    </div>
+                </div>
+
+                <!-- Карточка 4 - STR.P4 (дубль) -->
+                <div class="catalog-card">
+                    <div class="catalog-image">
+                        <img src="2.png" alt="STR.P4">
+                    </div>
+                    <div class="catalog-info">
+                        <h3>STR.P4</h3>
+                        <div class="catalog-price">Цена: 125 000 ₽</div>
+                        <p>Звездный датчик для точка навигационного ориентирования.</p>
+                        <a href="equipment-str-p4.html" class="catalog-btn">ПРОСМОТРЕТЬ МОДУЛЬ</a>
+                    </div>
+                </div>
+
+                <!-- Карточка 5 - Monopole2-UHF (дубль) -->
+                <div class="catalog-card">
+                    <div class="catalog-image">
+                        <img src="3.png" alt="Monopole2-UHF">
+                    </div>
+                    <div class="catalog-info">
+                        <h3>Monopole2-UHF</h3>
+                        <div class="catalog-price">Цена: 78 000 ₽</div>
+                        <p>Магнитный стержень для сброса накопленной спутниковой энергии в диапазоне спутниковых частот Leo.</p>
+                        <a href="equipment-monopole2-uhf.html" class="catalog-btn">ПРОСМОТРЕТЬ МОДУЛЬ</a>
+                    </div>
+                </div>
+
+                <!-- Карточка 6 - MT-2.P4 (дубль) -->
+                <div class="catalog-card">
+                    <div class="catalog-image">
+                        <img src="1.png" alt="MT-2.P4">
+                    </div>
+                    <div class="catalog-info">
+                        <h3>MT-2.P4</h3>
+                        <div class="catalog-price">Цена: 45 000 ₽</div>
+                        <p>Магнитный стержень для сброса накопленной спутниковой энергии в диапазоне спутниковых частот Leo.</p>
+                        <a href="equipment-mt2p4.html" class="catalog-btn">ПРОСМОТРЕТЬ МОДУЛЬ</a>
+                    </div>
+                </div>
+
+                <!-- Карточка 7 - Monopole2-UHF (дубль) -->
+                <div class="catalog-card">
+                    <div class="catalog-image">
+                        <img src="3.png" alt="Monopole2-UHF">
+                    </div>
+                    <div class="catalog-info">
+                        <h3>Monopole2-UHF</h3>
+                        <div class="catalog-price">Цена: 78 000 ₽</div>
+                        <p>Магнитный стержень для сброса накопленной спутниковой энергии в диапазоне спутниковых частот Leo.</p>
+                        <a href="equipment-monopole2-uhf.html" class="catalog-btn">ПРОСМОТРЕТЬ МОДУЛЬ</a>
+                    </div>
+                </div>
+
+                <!-- Карточка 8 - MT-2.P4 (дубль) -->
+                <div class="catalog-card">
+                    <div class="catalog-image">
+                        <img src="1.png" alt="MT-2.P4">
+                    </div>
+                    <div class="catalog-info">
+                        <h3>MT-2.P4</h3>
+                        <div class="catalog-price">Цена: 45 000 ₽</div>
+                        <p>Магнитный стержень для сброса накопленной спутниковой энергии и создания дипольного эффекта.</p>
+                        <a href="equipment-mt2p4.html" class="catalog-btn">ПРОСМОТРЕТЬ МОДУЛЬ</a>
+                    </div>
+                </div>
+
+                <!-- Карточка 9 - STR.P4 (дубль) -->
+                <div class="catalog-card">
+                    <div class="catalog-image">
+                        <img src="2.png" alt="STR.P4">
+                    </div>
+                    <div class="catalog-info">
+                        <h3>STR.P4</h3>
+                        <div class="catalog-price">Цена: 125 000 ₽</div>
+                        <p>Звездный датчик для точка навигационного-пространственного ориентирования спутника.</p>
+                        <a href="equipment-str-p4.html" class="catalog-btn">ПРОСМОТРЕТЬ МОДУЛЬ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="footer-block">
+            <h3>О нашей компании</h3>
+            <p>RUSKY — команда энтузиастов, разработчиков, инженеров и учёных, создающих спутники нового поколения.<br>
+            Мы обеспечиваем полный цикл работ: от проектирования до вывода на орбиту.</p>
+        </div>
+        <div class="footer-block">
+            <h3>Информация</h3>
+            <p>Политика конфиденциальности</p>
+        </div>
+        <div class="footer-block">
+            <h3>Контакты</h3>
+            <p>Телефон: +7 (999) 123-45-67<br>
+            Адрес: Россия, 119234<br>
+            г. Москва, ул. Космическая, д. 1<br>
+            E-mail: <a href="mailto:info@rusky.ru">info@rusky.ru</a></p>
+        </div>
+        <div class="footer-copyright">
+            © 2025. Все права защищены.
+        </div>
+    </footer>
+
+    <!-- Модальное окно фильтра -->
+    <div id="filterModal" class="filter-modal">
+        <div class="filter-modal-content">
+            <div class="filter-header">
+                <h2 class="filter-title">Фильтр</h2>
+                <button class="filter-close" onclick="closeFilterModal()">&times;</button>
+            </div>
+            <div class="filter-content">
+                <div class="filter-section">
+                    <div class="filter-section-title" onclick="toggleFilterSection(this)">Тип оборудования</div>
+                    <div class="filter-options">
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">Датчики</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">Антенны</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">Магнитные системы</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">Навигационное оборудование</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">Источники питания</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <div class="filter-section-title" onclick="toggleFilterSection(this)">Масса</div>
+                    <div class="filter-options">
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">&lt;100 г</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">100г-1кг</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">1-5 кг</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">&gt;5 кг</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <div class="filter-section-title" onclick="toggleFilterSection(this)">Производитель</div>
+                    <div class="filter-options">
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">RUSKY Components</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">SpaceTech</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">Orbital Systems</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">SatComponents</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <div class="filter-section-title" onclick="toggleFilterSection(this)">Применение</div>
+                    <div class="filter-options">
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">CubeSat</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">SmallSat</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">Большие спутники</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">Универсальное</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <div class="filter-section-title" onclick="toggleFilterSection(this)">Статус</div>
+                    <div class="filter-options">
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">В наличии</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">Под заказ</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">В разработке</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">Снято с производства</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <div class="filter-section-title" onclick="toggleFilterSection(this)">Сортировка</div>
+                    <div class="filter-options">
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">По цене</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">По массе</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">По популярности</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-footer">
+                <button class="filter-apply-btn" onclick="applyFilters()">ПРИМЕНИТЬ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно документации -->
+    <div id="documentationModal" class="filter-modal">
+        <div class="filter-modal-content">
+            <div class="filter-header">
+                <h2 class="filter-title">Документация</h2>
+                <button class="filter-close" onclick="closeDocumentationModal()">&times;</button>
+            </div>
+            <div class="filter-content">
+                <div class="filter-section">
+                    <div class="filter-section-title" onclick="toggleFilterSection(this)">Тип оборудования</div>
+                    <div class="filter-options">
+                        <div class="filter-option" data-equipment="mt-2p4" onclick="selectEquipmentType('mt-2p4', event)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">MT-2.P4</span>
+                        </div>
+                        <div class="filter-option" data-equipment="str-p4" onclick="selectEquipmentType('str-p4', event)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">STR.P4</span>
+                        </div>
+                        <div class="filter-option" data-equipment="monopole2-uhf" onclick="selectEquipmentType('monopole2-uhf', event)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">Monopole2-UHF</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <div class="filter-section-title" onclick="toggleFilterSection(this)">По году выпуска</div>
+                    <div class="filter-options">
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">2020-2021</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">2022-2023</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">2024-2025</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <div class="filter-section-title" onclick="toggleFilterSection(this)">Статус</div>
+                    <div class="filter-options">
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">Действующий</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">Архивный</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <div class="filter-section-title">Поиск по артикулу</div>
+                    <div class="filter-options">
+                        <input type="text" class="serial-search-input" placeholder="MT-2.P4" maxlength="50">
+                    </div>
+                </div>
+            </div>
+            <div class="filter-footer">
+                <button class="filter-apply-btn" onclick="applyDocumentationFilters()">ПРИМЕНИТЬ</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

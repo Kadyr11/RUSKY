@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>iOS Оптимизированная страница - RUSKY</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Демонстрационные стили для показа безопасных зон */
+        .demo-safe-zones {
+            background: linear-gradient(45deg, rgba(255,0,0,0.3), rgba(0,255,0,0.3));
+            border: 2px dashed #fff;
+            margin: 20px 0;
+            text-align: center;
+            color: #fff;
+        }
+        
+        .demo-typography {
+            margin: 40px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+        }
+        
+        .demo-typography h1 {
+            font-size: var(--fs-h1);
+            margin-bottom: 16px;
+        }
+        
+        .demo-typography h2 {
+            font-size: var(--fs-h2);
+            margin-bottom: 12px;
+        }
+        
+        .demo-typography p {
+            font-size: var(--fs-body);
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo">RUSKY</div>
+        <nav class="header-nav">
+            <a href="#">ГЛАВНАЯ</a>
+            <a href="#">СПУТНИКИ</a>
+            <a href="#">ДОКУМЕНТАЦИЯ</a>
+        </nav>
+        <div class="burger-menu" onclick="toggleMobileMenu()">
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+        </div>
+    </header>
+
+    <!-- Мобильное меню -->
+    <nav class="mobile-nav" id="mobile-nav">
+        <div class="mobile-nav-list">
+            <a href="#">ГЛАВНАЯ</a>
+            <a href="#">СПУТНИКИ</a>
+            <a href="#">ДОКУМЕНТАЦИЯ</a>
+            <a href="#">ЗАПУСК</a>
+            <a href="#">ПОДДЕРЖКА</a>
+        </div>
+    </nav>
+
+    <!-- Hero секция с iOS оптимизациями -->
+    <section class="hero-section" style="background-image: url('CLAY-COM.png');">
+        <div class="hero-overlay"></div>
+        <div class="hero-content safe-pad">
+            <h1>iOS Оптимизированная версия</h1>
+            <p class="hero-subtitle">Демонстрация новых мобильных улучшений</p>
+            <p class="hero-desc">
+                Эта страница демонстрирует iOS-специфичные оптимизации: 
+                динамический viewport, безопасные зоны, адаптивную типографику и touch-friendly элементы.
+            </p>
+            <button class="hero-btn">Тестировать на iPhone</button>
+        </div>
+    </section>
+
+    <!-- Демонстрационные секции -->
+    <main style="padding: 40px 20px; background: #000;">
+        
+        <!-- Безопасные зоны -->
+        <section class="safe-pad demo-safe-zones">
+            <h2>Безопасные зоны (safe-area-inset)</h2>
+            <p>Этот блок автоматически адаптируется под вырезы экрана (Dynamic Island, вырез камеры)</p>
+        </section>
+
+        <!-- Адаптивная типографика -->
+        <section class="demo-typography">
+            <h1>Адаптивный заголовок H1</h1>
+            <h2>Адаптивный заголовок H2</h2>
+            <p>
+                Этот текст использует адаптивные размеры шрифтов через CSS clamp(). 
+                Размер автоматически масштабируется от 15px до 18px в зависимости от размера экрана,
+                обеспечивая оптимальную читаемость на всех устройствах.
+            </p>
+        </section>
+
+        <!-- Touch-friendly элементы -->
+        <section style="margin: 40px 0;">
+            <h2 style="margin-bottom: 20px; font-size: var(--fs-h2);">Touch-friendly кнопки</h2>
+            <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                <button style="min-height: 44px; min-width: 120px; padding: 12px 24px; background: #333; color: #fff; border: 1px solid #555; border-radius: 8px;">
+                    Кнопка 1
+                </button>
+                <button style="min-height: 44px; min-width: 120px; padding: 12px 24px; background: #007AFF; color: #fff; border: none; border-radius: 8px;">
+                    Кнопка 2
+                </button>
+                <button style="min-height: 44px; min-width: 120px; padding: 12px 24px; background: transparent; color: #fff; border: 2px solid #fff; border-radius: 8px;">
+                    Кнопка 3
+                </button>
+            </div>
+            <p style="margin-top: 16px; font-size: var(--fs-body); color: #ccc;">
+                Все кнопки имеют минимальный размер 44x44px для удобного касания
+            </p>
+        </section>
+
+        <!-- Информация об устройстве -->
+        <section style="margin: 40px 0; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 12px;">
+            <h2 style="margin-bottom: 16px; font-size: var(--fs-h2);">Информация об устройстве</h2>
+            <div id="device-info" style="font-family: monospace; font-size: 14px; line-height: 1.6;">
+                <!-- Будет заполнено JavaScript -->
+            </div>
+        </section>
+
+    </main>
+
+    <script src="main.js"></script>
+    <script>
+        // Отображение информации об устройстве
+        function updateDeviceInfo() {
+            const info = document.getElementById('device-info');
+            const safeAreaTop = getComputedStyle(document.documentElement).getPropertyValue('env(safe-area-inset-top)') || '0px';
+            const safeAreaBottom = getComputedStyle(document.documentElement).getPropertyValue('env(safe-area-inset-bottom)') || '0px';
+            
+            info.innerHTML = `
+                <div><strong>Разрешение экрана:</strong> ${window.screen.width} x ${window.screen.height}</div>
+                <div><strong>Размер viewport:</strong> ${window.innerWidth} x ${window.innerHeight}</div>
+                <div><strong>Device Pixel Ratio:</strong> ${window.devicePixelRatio}</div>
+                <div><strong>User Agent:</strong> ${navigator.userAgent.includes('iPhone') ? 'iPhone' : navigator.userAgent.includes('iPad') ? 'iPad' : 'Другое устройство'}</div>
+                <div><strong>Safe Area Top:</strong> ${safeAreaTop}</div>
+                <div><strong>Safe Area Bottom:</strong> ${safeAreaBottom}</div>
+                <div><strong>Поддержка svh:</strong> ${CSS.supports('height', '100svh') ? 'Да' : 'Нет'}</div>
+                <div><strong>Поддержка env():</strong> ${CSS.supports('padding', 'env(safe-area-inset-top)') ? 'Да' : 'Нет'}</div>
+            `;
+        }
+
+        // Обновляем информацию при загрузке и изменении размера
+        document.addEventListener('DOMContentLoaded', updateDeviceInfo);
+        window.addEventListener('resize', updateDeviceInfo);
+        window.addEventListener('orientationchange', updateDeviceInfo);
+
+        // Тест функций
+        console.log('iOS оптимизации загружены успешно!');
+        console.log('CSS переменные:', {
+            h1: getComputedStyle(document.documentElement).getPropertyValue('--fs-h1'),
+            h2: getComputedStyle(document.documentElement).getPropertyValue('--fs-h2'),
+            body: getComputedStyle(document.documentElement).getPropertyValue('--fs-body')
+        });
+    </script>
+</body>
+</html>

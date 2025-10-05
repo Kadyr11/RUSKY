@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Инновации на орбите - RUSKY</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            overflow-x: hidden;
+        }
+        .innovations-cta {
+            width: 100%;
+            left: 0;
+            right: 0;
+            margin-left: 0;
+            margin-right: 0;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo" onclick="location.href='index.html'" style="cursor:pointer">RUSKY</div>
+        <nav class="header-nav">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="#" onclick="openFilterModal()">ФИЛЬТР</a>
+            <a href="equipment.html">ОБОРУДОВАНИЕ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="#" onclick="openDocumentationModal()">ДОКУМЕНТАЦИЯ</a>
+            <a href="launches.html">ЗАПУСК</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+            <a href="cart.html">МОИ ЗАКАЗЫ</a>
+            <a href="about.html">О НАС</a>
+        </nav>
+        <div class="burger-menu" onclick="toggleMobileMenu()">
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+        </div>
+        <a href="cart.html" class="cart-icon" aria-label="Корзина">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="10" cy="26" r="3" fill="white"/>
+                <circle cx="24" cy="26" r="3" fill="white"/>
+                <path d="M4 7H7L10 20H25L28 11H9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+            <span class="cart-badge" style="display: none;">0</span>
+        </a>
+    </header>
+
+    <nav class="mobile-nav">
+        <div class="mobile-nav-list">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="#" onclick="openFilterModal()">ФИЛЬТР</a>
+            <a href="equipment.html">ОБОРУДОВАНИЕ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="#" onclick="openDocumentationModal()">ДОКУМЕНТАЦИЯ</a>
+            <a href="launches.html">ЗАПУСК</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+            <a href="cart.html">МОИ ЗАКАЗЫ</a>
+            <a href="about.html">О НАС</a>
+        </div>
+    </nav>
+
+    <main class="innovations-page">
+        <!-- Главный баннер -->
+        <section class="innovations-hero" style="background: url('unsplash_JRu9UClgp_8.png') center/cover; min-height: 100vh; display: flex; align-items: flex-end; position: relative;">
+            <div class="hero-content" style="max-width: 1200px; margin: 0 auto; padding: 0 40px; color: white;">
+                <!-- ...изображение без затемнения, без текста... -->
+            </div>
+        </section>
+
+        <!-- Новый отдельный блок с заголовком и описанием -->
+        <section class="platform-title-section" style="background: #000; padding: 80px 40px 0; color: white;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <h1 style="font-family: 'Inter', sans-serif; font-size: 56px; font-weight: 700; line-height: 1.1; margin-bottom: 40px;">
+                    Спутниковая платформа RUSKY-Next
+                </h1>
+                <div style="max-width: 500px; margin-bottom: 0;">
+                    <p style="font-size: 20px; line-height: 1.5; opacity: 0.9; margin-bottom: 0;">
+                        Технология <strong>RUSKY-Next</strong> сочетает в себе передовые решения в области дистанционного зондирования и научных исследований ионосферы.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Информационная секция под изображением -->
+        <section class="info-section" style="background: #000; padding: 150px 40px 0; color: white;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <!-- Первый информационный блок -->
+                <div style="margin-bottom: 60px;">
+                    <div style="border-left: 2px solid #333; padding-left: 30px; max-width: 600px;">
+                        <p style="font-size: 16px; line-height: 1.6; color: #ccc; margin-bottom: 40px;">
+                            Технологии RUSKY-Next успешно применяются для мониторинга состояния атмосферы и проведения научных экспериментов в рамках международного сотрудничества. Спутники платформы адаптированы для вывода на орбиту ракетами-носителями "Ангара", "Союз", "Протон".
+                        </p>
+                        
+                        <div style="margin-bottom: 40px;">
+                            <h3 style="font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 20px; color: white;">
+                                Система обеспечивает:
+                            </h3>
+                            <ul style="list-style: none; padding: 0; color: #ccc; font-size: 14px; font-style: italic;">
+                                <li style="margin-bottom: 8px;">• Непрерывное наблюдение за состоянием ионосферы и магнитосферы Земли</li>
+                                <li style="margin-bottom: 8px;">• Сбор научных данных в высоком разрешении</li>
+                                <li style="margin-bottom: 8px;">• Геологические исследования новых вычислительных модулей и систем ориентации</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Основной контент -->
+        <section class="innovations-content" style="background: #000; padding: 0 40px 80px; max-width: 1200px; margin: 0 auto;">
+            <div class="content-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;">
+                
+                <!-- Левая колонка -->
+                <div class="left-column">
+                    <div class="tech-specs">
+                        <h2 style="font-family: 'Inter', sans-serif; font-size: 32px; font-weight: 700; margin-bottom: 40px; color: white;">
+                            Технология RUSKY-Next
+                        </h2>
+                        
+                        <div class="specs-section" style="margin-bottom: 40px;">
+                            <h4 style="font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 20px; color: white;">
+                                Основные возможности платформы:
+                            </h4>
+                            <ul style="list-style: none; padding: 0; color: #ccc; font-size: 14px;">
+                                <li style="margin-bottom: 8px;">• Высокоточная система ориентации с погрешностью менее 0.1°</li>
+                                <li style="margin-bottom: 8px;">• Передача данных на скорости до 1 Гбит/с</li>
+                                <li style="margin-bottom: 8px;">• Бортовая память объёмом до 2 ТБ</li>
+                                <li style="margin-bottom: 8px;">• Спектрометры и приборы для изучения ионосферных возмущений</li>
+                                <li style="margin-bottom: 8px;">• Срок активной эксплуатации — до 7 лет</li>
+                            </ul>
+                        </div>
+
+                        <div class="application-section">
+                            <h4 style="font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 20px; color: white;">
+                                Применение
+                            </h4>
+                            <ul style="list-style: none; padding: 0; color: #ccc; font-size: 14px;">
+                                <li style="margin-bottom: 8px;">• Научные исследования ионосферы</li>
+                                <li style="margin-bottom: 8px;">• Контроль параметров атмосферы</li>
+                                <li style="margin-bottom: 8px;">• Изучение новых технологий управления спутниковыми аппаратами</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Правая колонка -->
+                <div class="right-column">
+                    <div class="tech-characteristics">
+                        <h4 style="font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 20px; color: white;">
+                            Технические характеристики:
+                        </h4>
+                        <ul style="list-style: none; padding: 0; color: #ccc; font-size: 14px;">
+                            <li style="margin-bottom: 8px;">• Масса платформы: 200 кг</li>
+                            <li style="margin-bottom: 8px;">• Высота орбиты: ~600 км</li>
+                            <li style="margin-bottom: 8px;">• Тип орбиты: Полярная</li>
+                            <li style="margin-bottom: 8px;">• Питание: солнечные батареи + аккумуляторы</li>
+                            <li style="margin-bottom: 8px;">• Каналы передачи: X-диапазон, Радиоканал → S-диапазон</li>
+                            <li style="margin-bottom: 8px;">• Центры управления и приёма телеметрии на территории России</li>
+                            <li style="margin-bottom: 8px;">• Программное обеспечение для обработки и архивации данных</li>
+                            <li style="margin-bottom: 8px;">• Системы мониторинга состояния спутника в режиме реального времени</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA секция -->
+        <section class="innovations-cta" style="background: #000; width: 100%; padding: 80px 0 60px 0; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+            <div style="max-width: 600px; margin: 0 auto; box-shadow: 0 0 24px 0 rgba(0,170,255,0.12), 0 0 0 2px rgba(0,170,255,0.22); border-radius: 16px; border: 2px solid rgba(0,170,255,0.35); padding: 24px 12px; margin-bottom: 60px;">
+                <h2 style="font-family: 'Inter', sans-serif; font-size: 38px; font-weight: 700; color: #fff; margin-bottom: 16px; text-align: center;">Готовы к сотрудничеству?</h2>
+                <p style="font-size: 18px; color: #bfc9d1; margin-bottom: 28px; text-align: center;">Узнайте больше о возможностях платформы RUSKY-Next и наших спутниковых решениях</p>
+                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: nowrap;">
+                    <a href="satellites.html" style="background: #44aafc; color: #fff; padding: 0 18px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 16px; box-shadow: 0 0 8px 0 rgba(68,170,252,0.12); border: none; height: 38px; display: flex; align-items: center; justify-content: center; letter-spacing: 0.5px; white-space: nowrap;">
+                        Каталог спутников
+                    </a>
+                    <a href="contact.html" style="background: transparent; color: #44aafc; padding: 0 18px; border: 2px solid #44aafc; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 16px; box-shadow: 0 0 8px 0 rgba(68,170,252,0.12); height: 38px; display: flex; align-items: center; justify-content: center; letter-spacing: 0.5px; white-space: nowrap;">
+                        Связаться с нами
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-block">
+                <h3>О нашей компании</h3>
+                <p>RUSKY — команда энтузиастов, разработчиков, инженеров и учёных, создающих спутники нового поколения.<br>
+                Мы обеспечиваем полный цикл работ: от проектирования до вывода на орбиту.</p>
+            </div>
+            <div class="footer-block">
+                <h3>Информация</h3>
+                <p>Политика конфиденциальности</p>
+            </div>
+            <div class="footer-block">
+                <h3>Контакты</h3>
+                <p>Телефон: +7 (999) 123-45-67<br>
+                Адрес: Россия, 119234<br>
+                г. Москва, ул. Космическая, д. 1<br>
+                E-mail: <a href="mailto:info@rusky.ru">info@rusky.ru</a></p>
+            </div>
+            <div class="footer-copyright">
+                © 2025. Все права защищены.
+            </div>
+        </footer>
+    </main>
+    <script src="main.js"></script>
+    <script>
+        // Обновляем счетчик корзины при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartBadge();
+        });
+    </script>
+</body>
+</html>

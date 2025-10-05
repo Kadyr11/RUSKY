@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Тест исправлений мобильной версии - RUSKY</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Дополнительные стили для демонстрации */
+        .test-overlay {
+            position: fixed;
+            top: 120px;
+            left: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.8);
+            color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            z-index: 9999;
+            font-size: 14px;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+        
+        .test-marker {
+            position: absolute;
+            top: 80px;
+            left: 0;
+            width: 20px;
+            height: 100vh;
+            background: repeating-linear-gradient(
+                to bottom,
+                red 0px,
+                red 2px,
+                transparent 2px,
+                transparent 10px
+            );
+            z-index: 9998;
+            pointer-events: none;
+        }
+        
+        .test-marker.right {
+            left: auto;
+            right: 0;
+        }
+        
+        .typography-check {
+            border-left: 3px solid #4A9EFF;
+            padding-left: 10px;
+            margin: 10px 0;
+        }
+        
+        .success { color: #51cf66; }
+        .warning { color: #ffd43b; }
+        .error { color: #ff6b6b; }
+        
+        @media (min-width: 769px) {
+            .test-overlay {
+                display: none;
+            }
+            .test-marker {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Маркеры для проверки отступов -->
+    <div class="test-marker"></div>
+    <div class="test-marker right"></div>
+    
+    <!-- Информационная панель -->
+    <div class="test-overlay" id="testOverlay">
+        <div><strong>📱 Тест мобильных исправлений</strong></div>
+        <div id="logoCheck" class="typography-check">
+            <span class="warning">📍 Логотип:</span> <span id="logoStatus">проверяется...</span>
+        </div>
+        <div id="textCheck" class="typography-check">
+            <span class="warning">📝 Типографика:</span> <span id="textStatus">проверяется...</span>
+        </div>
+        <div id="bgCheck" class="typography-check">
+            <span class="warning">🖼️ Фон:</span> <span id="bgStatus">проверяется...</span>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="header-logo">RUSKY</div>
+        <nav class="header-nav">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="launches.html">ЗАПУСКИ</a>
+            <a href="documentation.html">ДОКУМЕНТАЦИЯ</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+            <a href="orders.html">МОИ ЗАКАЗЫ</a>
+            <a href="about.html">О НАС</a>
+        </nav>
+        <div class="burger-menu" onclick="toggleMobileMenu()">
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+        </div>
+        <a href="cart.html" class="cart-icon" aria-label="Корзина">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="10" cy="26" r="3" fill="white"/>
+                <circle cx="24" cy="26" r="3" fill="white"/>
+                <path d="M4 7H7L10 20H25L28 11H9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+        </a>
+    </header>
+
+    <nav class="mobile-nav" id="mobile-nav">
+        <div class="mobile-nav-list">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="launches.html">ЗАПУСКИ</a>
+            <a href="documentation.html">ДОКУМЕНТАЦИЯ</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+            <a href="orders.html">МОИ ЗАКАЗЫ</a>
+            <a href="about.html">О НАС</a>
+            <a href="cart.html">КОРЗИНА</a>
+        </div>
+    </nav>
+
+    <section class="hero-section" style="background-image: url('img-1.png'); background-size: cover; background-position: center;">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Хотите купить спутник?</h1>
+            <p class="hero-subtitle">
+                Разработка, производство и внедрение космических спутников нового поколения.
+            </p>
+            <p class="hero-desc">
+                RUSKY — это инжиниринговая платформа, специализирующаяся на создании космических спутников и модулей различной сложности.<br>
+                Мы объединяем экспертов в аэрокосмической отрасли, проектные группы и стартапы для реализации космических решений от идеи до вывода на орбиту.
+            </p>
+            <a href="satellites.html" class="hero-btn">ПОДРОБНЕЕ</a>
+        </div>
+    </section>
+
+    <section class="manufacturer-section" style="background-image: url('img 2.png'); background-size: cover; background-position: center;">
+        <div class="manufacturer-overlay"></div>
+        <div class="manufacturer-content">
+            <h2>Вы производитель спутников и вам нужны детали?</h2>
+            <p>Откройте для себя широкий ассортимент спутниковых компонентов в RUSKY. Мы предоставляем все необходимое для производства спутников под одной крышей, гарантируя удобство и надежность для наших клиентов.</p>
+            <a href="equipment.html" class="manufacturer-btn">ПОДРОБНЕЕ</a>
+        </div>
+    </section>
+
+    <section class="stats-section" style="background-image: url('img 3.png'); background-size: cover; background-position: center;">
+        <div class="stats-overlay"></div>
+        <div class="stats-content">
+            <div class="stats-left">
+                <div class="stats-header">
+                    <h2>Почему именно мы?</h2>
+                </div>
+                <div class="stats-numbers">
+                    <div class="stat-item">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Успешных запуска</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">42+</span>
+                        <span class="stat-label">Довольных клиентов</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">80+</span>
+                        <span class="stat-label">Выполненных проектов</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="innovation-section" style="background-image: url('card 3.png'); background-size: cover; background-position: center;">
+        <div class="innovation-overlay"></div>
+        <div class="innovation-content">
+            <h2>Инновации на орбите</h2>
+            <p>RUSKY предлагает передовые спутниковые системы и комплексные технические решения — от проектирования до запуска.</p>
+            <a href="innovations.html" class="innovation-btn">ПОДРОБНЕЕ</a>
+        </div>
+    </section>
+
+    <script src="main.js"></script>
+    <script>
+        function checkImplementation() {
+            // Проверка логотипа
+            const logo = document.querySelector('.header-logo');
+            const logoStyles = getComputedStyle(logo);
+            const logoMarginLeft = parseInt(logoStyles.marginLeft);
+            
+            const logoStatus = document.getElementById('logoStatus');
+            if (logoMarginLeft >= 15) { // учитываем возможные различия в браузерах
+                logoStatus.textContent = `✅ Отступ ${logoMarginLeft}px`;
+                logoStatus.className = 'success';
+            } else {
+                logoStatus.textContent = `❌ Отступ ${logoMarginLeft}px (нужно ≥20px)`;
+                logoStatus.className = 'error';
+            }
+            
+            // Проверка типографики
+            const heroContent = document.querySelector('.hero-content');
+            const textAlign = getComputedStyle(heroContent).textAlign;
+            
+            const textStatus = document.getElementById('textStatus');
+            if (textAlign === 'left' || textAlign === 'start') {
+                textStatus.textContent = '✅ Выровнено по левому краю';
+                textStatus.className = 'success';
+            } else {
+                textStatus.textContent = `❌ text-align: ${textAlign}`;
+                textStatus.className = 'error';
+            }
+            
+            // Проверка фона
+            const heroSection = document.querySelector('.hero-section');
+            const heroRect = heroSection.getBoundingClientRect();
+            const windowWidth = window.innerWidth;
+            
+            const bgStatus = document.getElementById('bgStatus');
+            if (Math.abs(heroRect.width - windowWidth) < 5) { // небольшая погрешность
+                bgStatus.textContent = '✅ Фон на всю ширину экрана';
+                bgStatus.className = 'success';
+            } else {
+                bgStatus.textContent = `❌ Ширина: ${Math.round(heroRect.width)}px из ${windowWidth}px`;
+                bgStatus.className = 'error';
+            }
+            
+            console.log('Implementation check:', {
+                logoMarginLeft,
+                textAlign,
+                sectionWidth: heroRect.width,
+                windowWidth
+            });
+        }
+        
+        function toggleTestInfo() {
+            const overlay = document.getElementById('testOverlay');
+            overlay.style.display = overlay.style.display === 'none' ? 'block' : 'none';
+        }
+        
+        // Проверяем при загрузке и изменении размера
+        window.addEventListener('load', checkImplementation);
+        window.addEventListener('resize', checkImplementation);
+        
+        // Показать/скрыть тест по двойному клику
+        document.addEventListener('dblclick', toggleTestInfo);
+        
+        console.log('🔧 Mobile fixes test page loaded');
+        console.log('📱 Double-click to toggle test info');
+        console.log('📏 Red lines show 20px margins');
+    </script>
+</body>
+</html>

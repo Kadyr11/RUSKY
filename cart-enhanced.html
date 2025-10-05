@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>RUSKY — Корзина (Улучшенная версия)</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Дополнительные стили для улучшенной корзины */
+    .enhanced-cart-page {
+      background: #000;
+      color: #fff;
+      padding: 120px 20px 60px;
+      min-height: 100vh;
+    }
+    
+    .enhanced-cart-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    .cart-breadcrumbs {
+      margin-bottom: 32px;
+      font-size: 14px;
+      color: #ccc;
+    }
+    
+    .cart-breadcrumbs a {
+      color: #ccc;
+      text-decoration: none;
+    }
+    
+    .cart-breadcrumbs a:hover {
+      color: #fff;
+    }
+    
+    .cart-header {
+      margin-bottom: 32px;
+    }
+    
+    .cart-header h1 {
+      font-size: var(--fs-h1);
+      line-height: 1.15;
+      margin: 0 0 8px 0;
+    }
+    
+    .cart-meta {
+      color: #ccc;
+      font-size: var(--fs-body);
+    }
+    
+    .cart-content {
+      display: grid;
+      gap: 32px;
+    }
+    
+    @media (min-width: 768px) {
+      .cart-content {
+        grid-template-columns: 1fr 320px;
+      }
+    }
+    
+    .cart-items-section h2 {
+      font-size: var(--fs-h2);
+      margin-bottom: 20px;
+    }
+    
+    .cart-items-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    
+    .cart-sidebar {
+      position: sticky;
+      top: 140px;
+      height: fit-content;
+    }
+    
+    .empty-cart {
+      text-align: center;
+      padding: 60px 20px;
+      color: #ccc;
+    }
+    
+    .empty-cart h2 {
+      font-size: var(--fs-h2);
+      margin-bottom: 16px;
+      color: #fff;
+    }
+    
+    .empty-cart-icon {
+      font-size: 64px;
+      margin-bottom: 24px;
+      opacity: 0.3;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-logo" onclick="location.href='index.html'" style="cursor:pointer">RUSKY</div>
+    <nav class="header-nav">
+      <a href="index.html">ГЛАВНАЯ</a>
+      <a href="#" onclick="openFilterModal()">ФИЛЬТР</a>
+      <a href="equipment.html">ОБОРУДОВАНИЕ</a>
+      <a href="satellites.html">СПУТНИКИ</a>
+      <a href="#" onclick="openDocumentationModal()">ДОКУМЕНТАЦИЯ</a>
+      <a href="#">ЗАПУСК</a>
+      <a href="support.html">ПОДДЕРЖКА</a>
+      <a href="orders.html">МОИ ЗАКАЗЫ</a>
+      <a href="about.html">О НАС</a>
+    </nav>
+    <div class="burger-menu" onclick="toggleMobileMenu()">
+      <div class="burger-line"></div>
+      <div class="burger-line"></div>
+      <div class="burger-line"></div>
+    </div>
+    <a href="cart.html" class="cart-icon" aria-label="Корзина">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="10" cy="26" r="3" fill="white"/>
+        <circle cx="24" cy="26" r="3" fill="white"/>
+        <path d="M4 7H7L10 20H25L28 11H9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      <span id="cart-badge" style="position: absolute; top: -8px; right: -8px; background: #ff4444; color: white; border-radius: 50%; width: 20px; height: 20px; font-size: 12px; font-weight: 600; display: none; align-items: center; justify-content: center;">0</span>
+    </a>
+  </header>
+
+  <!-- Mobile Navigation -->
+  <nav class="mobile-nav" id="mobile-nav">
+    <div class="mobile-nav-list">
+      <a href="index.html">ГЛАВНАЯ</a>
+      <a href="#" onclick="openFilterModal()">ФИЛЬТР</a>
+      <a href="equipment.html">ОБОРУДОВАНИЕ</a>
+      <a href="satellites.html">СПУТНИКИ</a>
+      <a href="#" onclick="openDocumentationModal()">ДОКУМЕНТАЦИЯ</a>
+      <a href="#">ЗАПУСК</a>
+      <a href="support.html">ПОДДЕРЖКА</a>
+      <a href="orders.html">МОИ ЗАКАЗЫ</a>
+      <a href="about.html">О НАС</a>
+    </div>
+  </nav>
+
+  <main class="enhanced-cart-page">
+    <div class="enhanced-cart-container">
+      <!-- Хлебные крошки -->
+      <nav class="cart-breadcrumbs">
+        <a href="index.html">Главная</a> > 
+        <span>Корзина</span>
+      </nav>
+
+      <!-- Заголовок корзины -->
+      <div class="cart-header">
+        <h1>Корзина</h1>
+        <div class="cart-meta">
+          <span id="cart-count">3 товара</span> • 
+          <span>Обновлено сейчас</span>
+        </div>
+      </div>
+
+      <!-- Основной контент -->
+      <div class="cart-content">
+        <!-- Список товаров -->
+        <div class="cart-items-section">
+          <h2>Товары в корзине</h2>
+          
+          <div class="cart-items-list" id="cart-items-list">
+            <!-- Товар 1: Спутник -->
+            <div class="cart-card">
+              <div class="cart-item">
+                <img 
+                  src="CLAY-COM.png" 
+                  alt="CLAY-COM" 
+                  class="thumb"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
+                >
+                <div style="background: linear-gradient(45deg, #333, #666); display: none; align-items: center; justify-content: center; color: #fff; font-weight: bold; text-align: center; font-size: 12px; width: 56px; height: 56px; border-radius: 12px;">
+                  CLAY
+                </div>
+                
+                <div style="flex: 1;">
+                  <h3 style="margin: 0 0 4px 0; font-size: 16px; font-weight: 600;">Коммуникационный спутник CLAY-COM</h3>
+                  <p style="margin: 0 0 8px 0; color: #ccc; font-size: 14px;">Артикул: SAT-CLAYCOM-001</p>
+                  <div style="color: #4A9EFF; font-weight: 600; font-size: 16px;">Цена по запросу</div>
+                </div>
+                
+                <div style="display: flex; align-items: center; gap: 16px;">
+                  <div class="qty">
+                    <button onclick="changeQuantity(this, -1)" data-item="clay-com">−</button>
+                    <span class="value">1</span>
+                    <button onclick="changeQuantity(this, 1)" data-item="clay-com">+</button>
+                  </div>
+                  <button class="btn btn-outline" style="padding: 8px 12px; min-height: 36px;" onclick="removeItem('clay-com')" title="Удалить">
+                    🗑️
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Товар 2: Антенна -->
+            <div class="cart-card">
+              <div class="cart-item">
+                <img 
+                  src="equipment-1.png" 
+                  alt="Антенна" 
+                  class="thumb"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
+                >
+                <div style="background: linear-gradient(45deg, #333, #666); display: none; align-items: center; justify-content: center; color: #fff; font-weight: bold; text-align: center; font-size: 12px; width: 56px; height: 56px; border-radius: 12px;">
+                  ANT
+                </div>
+                
+                <div style="flex: 1;">
+                  <h3 style="margin: 0 0 4px 0; font-size: 16px; font-weight: 600;">Спутниковая антенна UHF/VHF</h3>
+                  <p style="margin: 0 0 8px 0; color: #ccc; font-size: 14px;">Артикул: ANT-UHF-VHF-002</p>
+                  <div style="color: #00ff00; font-weight: 600; font-size: 16px;">$2,500</div>
+                </div>
+                
+                <div style="display: flex; align-items: center; gap: 16px;">
+                  <div class="qty">
+                    <button onclick="changeQuantity(this, -1)" data-item="antenna">−</button>
+                    <span class="value">2</span>
+                    <button onclick="changeQuantity(this, 1)" data-item="antenna">+</button>
+                  </div>
+                  <button class="btn btn-outline" style="padding: 8px 12px; min-height: 36px;" onclick="removeItem('antenna')" title="Удалить">
+                    🗑️
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Товар 3: Оборудование -->
+            <div class="cart-card">
+              <div class="cart-item">
+                <img 
+                  src="equipment-2.png" 
+                  alt="Контроллер" 
+                  class="thumb"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
+                >
+                <div style="background: linear-gradient(45deg, #333, #666); display: none; align-items: center; justify-content: center; color: #fff; font-weight: bold; text-align: center; font-size: 12px; width: 56px; height: 56px; border-radius: 12px;">
+                  CTRL
+                </div>
+                
+                <div style="flex: 1;">
+                  <h3 style="margin: 0 0 4px 0; font-size: 16px; font-weight: 600;">Контроллер связи STR-P4</h3>
+                  <p style="margin: 0 0 8px 0; color: #ccc; font-size: 14px;">Артикул: CTRL-STR-P4-003</p>
+                  <div style="color: #00ff00; font-weight: 600; font-size: 16px;">$1,200</div>
+                </div>
+                
+                <div style="display: flex; align-items: center; gap: 16px;">
+                  <div class="qty">
+                    <button onclick="changeQuantity(this, -1)" data-item="controller" disabled style="opacity: 0.5;">−</button>
+                    <span class="value">1</span>
+                    <button onclick="changeQuantity(this, 1)" data-item="controller">+</button>
+                  </div>
+                  <button class="btn btn-outline" style="padding: 8px 12px; min-height: 36px;" onclick="removeItem('controller')" title="Удалить">
+                    🗑️
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Боковая панель с итогами -->
+        <div class="cart-sidebar">
+          <div class="cart-card">
+            <h3 style="margin: 0 0 20px 0; font-size: 20px;">Итоги заказа</h3>
+            
+            <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+              <span>Товары (4 шт.):</span>
+              <span id="subtotal">$6,200</span>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+              <span>Скидка:</span>
+              <span style="color: #00ff00;">-$200</span>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+              <span>Доставка:</span>
+              <span style="color: #00ff00;">Бесплатно</span>
+            </div>
+            
+            <hr style="border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 16px 0;">
+            
+            <div style="display: flex; justify-content: space-between; margin-bottom: 24px;">
+              <span style="font-weight: 600; font-size: 18px;">Итого:</span>
+              <span style="font-weight: 600; font-size: 18px;" id="total">$6,000</span>
+            </div>
+            
+            <div class="cart-summary">
+              <button class="btn btn-outline" onclick="continueShopping()">
+                Продолжить покупки
+              </button>
+              <button class="btn btn-primary" onclick="checkout()">
+                Оформить заказ
+              </button>
+            </div>
+            
+            <div style="margin-top: 20px; padding: 16px; background: rgba(74, 158, 255, 0.1); border-radius: 12px; border: 1px solid rgba(74, 158, 255, 0.2);">
+              <div style="font-size: 14px; color: #4A9EFF; margin-bottom: 8px;">
+                💼 Корпоративные клиенты
+              </div>
+              <div style="font-size: 14px; line-height: 1.4;">
+                Доступны специальные условия и индивидуальные скидки
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Пустая корзина (скрыта по умолчанию) -->
+      <div class="empty-cart" id="empty-cart" style="display: none;">
+        <div class="empty-cart-icon">🛒</div>
+        <h2>Корзина пуста</h2>
+        <p style="margin-bottom: 32px;">Добавьте товары из каталога, чтобы оформить заказ</p>
+        <button class="btn btn-primary" onclick="location.href='satellites.html'">
+          Перейти к каталогу
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <script src="main.js"></script>
+  <script>
+    // Функции управления корзиной
+    function changeQuantity(button, delta) {
+      const qtyContainer = button.closest('.qty');
+      const valueSpan = qtyContainer.querySelector('.value');
+      const currentValue = parseInt(valueSpan.textContent);
+      const newValue = Math.max(1, currentValue + delta);
+      
+      valueSpan.textContent = newValue;
+      
+      // Обновляем состояние кнопок
+      const minusBtn = qtyContainer.querySelector('button:first-child');
+      minusBtn.disabled = newValue <= 1;
+      minusBtn.style.opacity = newValue <= 1 ? '0.5' : '1';
+      
+      updateCartSummary();
+    }
+
+    function removeItem(itemId) {
+      if (confirm('Удалить товар из корзины?')) {
+        const itemCard = document.querySelector(`[data-item="${itemId}"]`).closest('.cart-card');
+        itemCard.remove();
+        updateCartSummary();
+        checkEmptyCart();
+      }
+    }
+
+    function updateCartSummary() {
+      // Подсчет общего количества товаров
+      const quantities = document.querySelectorAll('.qty .value');
+      let totalItems = 0;
+      quantities.forEach(qty => {
+        totalItems += parseInt(qty.textContent);
+      });
+      
+      document.getElementById('cart-count').textContent = `${totalItems} товар${totalItems > 1 ? 'а' : ''}`;
+      
+      // Обновляем бейдж корзины
+      const badge = document.getElementById('cart-badge');
+      if (totalItems > 0) {
+        badge.textContent = totalItems;
+        badge.style.display = 'flex';
+      } else {
+        badge.style.display = 'none';
+      }
+    }
+
+    function checkEmptyCart() {
+      const itemsList = document.getElementById('cart-items-list');
+      const emptyCart = document.getElementById('empty-cart');
+      const cartContent = document.querySelector('.cart-content');
+      
+      if (itemsList.children.length === 0) {
+        cartContent.style.display = 'none';
+        emptyCart.style.display = 'block';
+      }
+    }
+
+    function continueShopping() {
+      window.location.href = 'satellites.html';
+    }
+
+    function checkout() {
+      alert('Переход к оформлению заказа...\n\nВ реальном приложении здесь был бы переход на страницу оформления заказа.');
+    }
+
+    // Инициализация при загрузке
+    document.addEventListener('DOMContentLoaded', function() {
+      updateCartSummary();
+      console.log('Улучшенная корзина загружена!');
+      
+      // Демонстрация CSS поддержки
+      console.log('CSS Grid support:', CSS.supports('display', 'grid'));
+      console.log('CSS gap support:', CSS.supports('gap', '16px'));
+      console.log('Sticky positioning support:', CSS.supports('position', 'sticky'));
+    });
+  </script>
+</body>
+</html>

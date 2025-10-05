@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLAY-CUBE 6U - CLAYSAT Documentation</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Стили для бейджа корзины */
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ff4444;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .cart-icon {
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo">RUSKY</div>
+        <nav class="header-nav">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="#" onclick="openFilterModal()">ФИЛЬТР</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="equipment.html">ОБОРУДОВАНИЕ</a>
+            <a href="#" onclick="openDocumentationModal()">ДОКУМЕНТАЦИЯ</a>
+            <a href="request.html">ЗАПРОС</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+            <a href="orders.html">МОИ ЗАКАЗЫ</a>
+            <a href="about.html">О НАС</a>
+        </nav>
+        <div class="burger-menu">
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+        </div>
+        <a href="cart.html" class="cart-icon" aria-label="Корзина">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <rect width="32" height="32" fill="none"/>
+            <circle cx="10" cy="26" r="3" fill="white"/>
+            <circle cx="24" cy="26" r="3" fill="white"/>
+            <path d="M4 7H7L10 20H25L28 11H9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+            <span class="cart-badge" style="display: none;">0</span>
+        </a>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav">
+        <div class="mobile-nav-list">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="#" onclick="openFilterModal()">ФИЛЬТР</a>
+            <a href="equipment.html">ОБОРУДОВАНИЕ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="#" onclick="openDocumentationModal()">ДОКУМЕНТАЦИЯ</a>
+            <a href="launch-process.html">ПРОЦЕСС ЗАПУСКА</a>
+            <a href="launch-help.html">ПОМОЩЬ С ЗАПУСКОМ</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+            <a href="orders.html">МОИ ЗАКАЗЫ</a>
+            <a href="about.html">О НАС</a>
+            <a href="cart.html" class="mobile-cart-link" aria-label="Корзина">
+                <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="10" cy="26" r="3" fill="white"/>
+                    <circle cx="24" cy="26" r="3" fill="white"/>
+                    <path d="M4 7H7L10 20H25L28 11H9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
+                КОРЗИНА
+            </a>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Breadcrumb Navigation -->
+        <div class="breadcrumbs">
+            <div class="breadcrumbs-container">
+                <a href="index.html">Главная</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="documentation.html">Документация</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">CLAY-CUBE 6U</span>
+            </div>
+        </div>
+
+        <!-- Documentation Section -->
+        <section class="documentation-section">
+            <div class="documentation-container">
+                <div class="documentation-header">
+                    <h1>Сертификат подлинности CLAY-CUBE 6U</h1>
+                    <p class="documentation-subtitle">Официальный документ, удостоверяющий что спутник CLAY-CUBE 6U (серийный номер SN-2025-041) произведен и сертифицирован компанией CLAYSAT</p>
+                </div>
+                
+                <div class="documentation-content">
+                    <div class="documentation-image">
+                        <img src="img-1.png" alt="Сертификат CLAY-CUBE 6U" />
+                    </div>
+                    
+                    <div class="documentation-info">
+                        <div class="info-block">
+                            <h3>Основная информация</h3>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <span class="info-label">Модель:</span>
+                                    <span class="info-value">CLAY-CUBE 6U</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Серийный номер:</span>
+                                    <span class="info-value">SN-2025-041</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Орбита:</span>
+                                    <span class="info-value">LEO (500 km)</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Дата запуска:</span>
+                                    <span class="info-value">Июнь 2025</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-block">
+                            <h3>Технические характеристики CLAY-CUBE 6U</h3>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <span class="info-label">Размеры:</span>
+                                    <span class="info-value">200 × 100 × 100 мм</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Масса:</span>
+                                    <span class="info-value">8.5 кг</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Энергопотребление:</span>
+                                    <span class="info-value">15 Вт</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Полезная нагрузка:</span>
+                                    <span class="info-value">3.2 кг</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Система связи:</span>
+                                    <span class="info-value">S-диапазон, X-диапазон</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Срок службы:</span>
+                                    <span class="info-value">3-5 лет</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-block">
+                            <h3>Сертификация</h3>
+                            <p>Настоящим подтверждается, что спутник CLAY-CUBE 6U произведен, испытан и сертифицирован компанией CLAYSAT в соответствии с международными стандартами качества, безопасности и эксплуатационной надежности.</p>
+                            
+                            <div class="certification-details">
+                                <h4>Сертификат подтверждает:</h4>
+                                <ul>
+                                    <li>Полное соответствие международным стандартам качества и безопасности</li>
+                                    <li>Успешное прохождение всех предполетных испытаний</li>
+                                    <li>Аутентичность оборудования и сопроводительной документации</li>
+                                    <li>Соответствие экологическим требованиям космической индустрии</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="info-block">
+                            <h3>Дополнительная информация</h3>
+                            <p>Для получения дополнительной информации и верификации сертификата используйте QR-код или посетите сайт компании. Документ содержит идентификационные данные, информацию о параметрах орбиты, дату выпуска, подпись уполномоченного лица и официальный QR-код для проверки подлинности.</p>
+                        </div>
+
+                        <div class="documentation-actions">
+                            <button class="doc-btn primary">Скачать PDF</button>
+                            <button class="doc-btn secondary">Верифицировать</button>
+                            <button class="doc-btn secondary">Печать</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-block">
+            <h3>О нашей компании</h3>
+            <p>RUSKY — команда энтузиастов, разработчиков, инженеров и учёных, создающих спутники нового поколения.<br>
+            Мы обеспечиваем полный цикл работ: от проектирования до вывода на орбиту.</p>
+        </div>
+        <div class="footer-block">
+            <h3>Информация</h3>
+            <p>Политика конфиденциальности</p>
+        </div>
+        <div class="footer-block">
+            <h3>Контакты</h3>
+            <p>Телефон: +7 (999) 123-45-67<br>
+            Адрес: Россия, 119234<br>
+            г. Москва, ул. Космическая, д. 1<br>
+            E-mail: <a href="mailto:info@rusky.ru">info@rusky.ru</a></p>
+        </div>
+        <div class="footer-copyright">
+            © 2025. Все права защищены.
+        </div>
+    </footer>
+
+    <!-- Filter Modal -->
+    <div id="filterModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Фильтр спутников</h2>
+                <span class="close" onclick="closeFilterModal()">&times;</span>
+            </div>
+            <div class="filter-content">
+                <div class="filter-column">
+                    <h3>▼ Категория</h3>
+                    <div class="filter-options">
+                        <label class="filter-checkbox-wrapper">
+                            <input type="checkbox" name="category" value="clay-com" />
+                            <span class="checkbox-custom"></span>
+                            Коммерческие
+                        </label>
+                        <label class="filter-checkbox-wrapper">
+                            <input type="checkbox" name="category" value="clay-nav" />
+                            <span class="checkbox-custom"></span>
+                            Навигационные
+                        </label>
+                        <label class="filter-checkbox-wrapper">
+                            <input type="checkbox" name="category" value="clay-sci" />
+                            <span class="checkbox-custom"></span>
+                            Научные
+                        </label>
+                        <label class="filter-checkbox-wrapper">
+                            <input type="checkbox" name="category" value="clay-cube" />
+                            <span class="checkbox-custom"></span>
+                            CubeSat
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="filter-column">
+                    <h3>▼ Размер</h3>
+                    <div class="filter-options">
+                        <label class="filter-checkbox-wrapper">
+                            <input type="checkbox" name="size" value="small" />
+                            <span class="checkbox-custom"></span>
+                            Малый
+                        </label>
+                        <label class="filter-checkbox-wrapper">
+                            <input type="checkbox" name="size" value="medium" />
+                            <span class="checkbox-custom"></span>
+                            Средний
+                        </label>
+                        <label class="filter-checkbox-wrapper">
+                            <input type="checkbox" name="size" value="large" />
+                            <span class="checkbox-custom"></span>
+                            Большой
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="filter-column">
+                    <h3>▼ Серийный номер</h3>
+                    <div class="filter-options">
+                        <input 
+                            type="text" 
+                            id="satelliteSerialInput"
+                            class="serial-search-input" 
+                            placeholder="Введите серийный номер"
+                            maxlength="20"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="apply-btn" onclick="applyFilters()">ПРИМЕНИТЬ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Documentation Modal -->
+    <div id="documentationModal" class="filter-modal">
+        <div class="filter-modal-content">
+            <div class="filter-header">
+                <h2 class="filter-title">Документация</h2>
+                <button class="filter-close" onclick="closeDocumentationModal()">&times;</button>
+            </div>
+            <div class="filter-content">
+                <div class="filter-section">
+                    <div class="filter-section-title" onclick="toggleFilterSection(this)">Тип спутника</div>
+                    <div class="filter-options">
+                        <div class="filter-option" data-satellite="clay-com" onclick="selectSatelliteType('clay-com', event)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">CLAY-COM</span>
+                        </div>
+                        <div class="filter-option" data-satellite="clay-nav" onclick="selectSatelliteType('clay-nav', event)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">CLAY-NAV</span>
+                        </div>
+                        <div class="filter-option" data-satellite="clay-sci" onclick="selectSatelliteType('clay-sci', event)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">CLAY-SCI</span>
+                        </div>
+                        <div class="filter-option" data-satellite="clay-cube" onclick="selectSatelliteType('clay-cube', event)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">CLAY-CUBE</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <div class="filter-section-title" onclick="toggleFilterSection(this)">По году выпуска</div>
+                    <div class="filter-options">
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">2000-2005</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">2006-2010</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">2011-2015</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">2016-2025</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <div class="filter-section-title" onclick="toggleFilterSection(this)">Статус</div>
+                    <div class="filter-options">
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">Действующий</span>
+                        </div>
+                        <div class="filter-option" onclick="toggleCheckbox(this)">
+                            <div class="filter-checkbox"></div>
+                            <span class="filter-label">Архивный</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <div class="filter-section-title">Поиск по серийному номеру</div>
+                    <div class="filter-options">
+                        <input type="text" class="serial-search-input" placeholder="24990" maxlength="50">
+                    </div>
+                </div>
+            </div>
+            <div class="filter-footer">
+                <button class="filter-apply-btn" onclick="applyDocumentationFilters()">ПРИМЕНИТЬ</button>
+            </div>
+        </div>
+    </div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Документация</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="filter-grid">
+                <div class="filter-column">
+                    <h3>▼ Тип спутника</h3>
+                    <div class="filter-options">
+                        <label class="filter-checkbox-wrapper" data-satellite="clay-com">
+                            <input type="checkbox" name="satellite-type" value="clay-com" />
+                            <span class="checkbox-custom"></span>
+                            CLAY-COM
+                        </label>
+                        <label class="filter-checkbox-wrapper" data-satellite="clay-nav">
+                            <input type="checkbox" name="satellite-type" value="clay-nav" />
+                            <span class="checkbox-custom"></span>
+                            CLAY-NAV
+                        </label>
+                        <label class="filter-checkbox-wrapper" data-satellite="clay-sci">
+                            <input type="checkbox" name="satellite-type" value="clay-sci" />
+                            <span class="checkbox-custom"></span>
+                            CLAY-SCI
+                        </label>
+                        <label class="filter-checkbox-wrapper" data-satellite="clay-cube">
+                            <input type="checkbox" name="satellite-type" value="clay-cube" />
+                            <span class="checkbox-custom"></span>
+                            CLAY-CUBE
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="filter-column">
+                    <h3>▼ По году выпуска</h3>
+                    <div class="filter-options">
+                        <label class="filter-checkbox-wrapper">
+                            <input type="checkbox" name="release-year" value="2000-2005" />
+                            <span class="checkbox-custom"></span>
+                            2000-2005
+                        </label>
+                        <label class="filter-checkbox-wrapper">
+                            <input type="checkbox" name="release-year" value="2006-2010" />
+                            <span class="checkbox-custom"></span>
+                            2006-2010
+                        </label>
+                        <label class="filter-checkbox-wrapper">
+                            <input type="checkbox" name="release-year" value="2011-2015" />
+                            <span class="checkbox-custom"></span>
+                            2011-2015
+                        </label>
+                        <label class="filter-checkbox-wrapper">
+                            <input type="checkbox" name="release-year" value="2016-2025" />
+                            <span class="checkbox-custom"></span>
+                            2016-2025
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="filter-column">
+                    <h3>▼ Статус</h3>
+                    <div class="filter-options">
+                        <label class="filter-checkbox-wrapper">
+                            <input type="checkbox" name="status" value="active" />
+                            <span class="checkbox-custom"></span>
+                            Действующий
+                        </label>
+                        <label class="filter-checkbox-wrapper">
+                            <input type="checkbox" name="status" value="archived" />
+                            <span class="checkbox-custom"></span>
+                            Архивный
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="filter-column">
+                    <h3>▼ Поиск по серийному номеру</h3>
+                    <div class="filter-options">
+                        <input 
+                            type="text" 
+                            id="serialNumberInput"
+                            class="serial-search-input" 
+                            placeholder="24990"
+                            maxlength="20"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="apply-btn" onclick="applyDocumentFilters()">ПРИМЕНИТЬ</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+    <script>
+        // Функция для обновления бейджа корзины на текущей странице
+        function updateCartBadgeOnPage() {
+            try {
+                const cart = JSON.parse(localStorage.getItem('rusky_cart') || '[]');
+                const totalQty = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+                const badge = document.querySelector('.cart-badge');
+                
+                if (badge) {
+                    if (totalQty > 0) {
+                        badge.style.display = 'flex';
+                        badge.textContent = totalQty;
+                    } else {
+                        badge.style.display = 'none';
+                    }
+                }
+            } catch (e) {
+                console.error('Ошибка при обновлении бейджа корзины:', e);
+            }
+        }
+
+        // Обновляем бейдж корзины при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartBadgeOnPage();
+        });
+    </script>
+</body>
+</html>

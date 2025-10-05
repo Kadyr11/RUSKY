@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест: Hero секция с фоновым изображением на весь экран</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .test-header {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 8px;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 300px;
+        }
+        
+        .screen-indicator {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 255, 0, 0.8);
+            color: #000;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 1000;
+        }
+        
+        .test-results {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 15px;
+            border-radius: 8px;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 400px;
+            font-size: 12px;
+        }
+        
+        .status-good { color: #00ff00; }
+        .status-warning { color: #ffff00; }
+        .status-error { color: #ff0000; }
+        
+        /* Показываем header для полного контекста */
+        .header {
+            background: rgba(0, 0, 0, 0.7) !important;
+            backdrop-filter: blur(10px) !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="screen-indicator" id="screenIndicator">Loading...</div>
+    
+    <div class="test-header">
+        <h3 style="margin: 0 0 10px; font-size: 14px;">🎯 Тест Hero секции</h3>
+        <ul style="margin: 0; padding-left: 15px; font-size: 11px; line-height: 1.4;">
+            <li>Фон на весь экран</li>
+            <li>Центрированная типографика</li>
+            <li>Адаптивность</li>
+            <li>Overlay эффект</li>
+        </ul>
+    </div>
+    
+    <!-- Minimal header для контекста -->
+    <header class="header">
+        <div class="header-logo">RUSKY</div>
+        <nav class="header-nav">
+            <a href="#">СПУТНИКИ</a>
+            <a href="#">ЗАПУСК</a>
+            <a href="#">О НАС</a>
+        </nav>
+        <div class="burger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- Hero секция с тестируемыми изменениями -->
+    <section class="hero-section" style="background-image: url('img-1.png'); background-size: cover; background-position: center;">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Хотите купить спутник?</h1>
+            <p class="hero-subtitle">
+                Разработка, производство и внедрение космических спутников нового поколения.
+            </p>
+            <p class="hero-desc">
+                RUSKY — это инжиниринговая платформа, специализирующаяся на создании космических спутников и модулей различной сложности.
+            </p>
+            <a href="#" class="hero-btn">ПОДРОБНЕЕ</a>
+        </div>
+    </section>
+    
+    <div class="test-results" id="testResults">
+        <h4 style="margin: 0 0 10px; font-size: 13px;">📋 Результаты тестирования</h4>
+        <div id="resultsContent">Проверяется...</div>
+    </div>
+
+    <script>
+        function updateScreenInfo() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            
+            let category = '';
+            let indicator = '';
+            
+            if (width <= 480) {
+                category = 'Мобильный';
+                indicator = `📱 ${width}px (≤480px)`;
+            } else if (width <= 768) {
+                category = 'Планшет';
+                indicator = `📊 ${width}px (481-768px)`;
+            } else if (width <= 1199) {
+                category = 'Маленький десктоп';
+                indicator = `💻 ${width}px (769-1199px)`;
+            } else {
+                category = 'Десктоп';
+                indicator = `🖥️ ${width}px (≥1200px)`;
+            }
+            
+            document.getElementById('screenIndicator').textContent = indicator;
+            
+            // Анализ hero секции
+            const heroSection = document.querySelector('.hero-section');
+            const heroContent = document.querySelector('.hero-content');
+            const heroTitle = document.querySelector('.hero-section h1');
+            
+            if (heroSection && heroContent && heroTitle) {
+                const sectionStyles = getComputedStyle(heroSection);
+                const contentStyles = getComputedStyle(heroContent);
+                const titleStyles = getComputedStyle(heroTitle);
+                
+                let results = [];
+                
+                // Проверка ширины секции
+                const sectionWidth = heroSection.offsetWidth;
+                const viewportWidth = window.innerWidth;
+                if (Math.abs(sectionWidth - viewportWidth) <= 10) {
+                    results.push('<span class="status-good">✅ Секция на весь экран</span>');
+                } else {
+                    results.push('<span class="status-warning">⚠️ Секция: ' + sectionWidth + 'px / ' + viewportWidth + 'px</span>');
+                }
+                
+                // Проверка высоты секции
+                const sectionHeight = heroSection.offsetHeight;
+                const viewportHeight = window.innerHeight;
+                if (Math.abs(sectionHeight - viewportHeight) <= 10) {
+                    results.push('<span class="status-good">✅ Высота: 100vh</span>');
+                } else {
+                    results.push('<span class="status-warning">⚠️ Высота: ' + sectionHeight + 'px / ' + viewportHeight + 'px</span>');
+                }
+                
+                // Проверка центрирования контента
+                const justifyContent = sectionStyles.justifyContent;
+                const alignItems = sectionStyles.alignItems;
+                if (justifyContent === 'center' && alignItems === 'center') {
+                    results.push('<span class="status-good">✅ Flex центрирование</span>');
+                } else {
+                    results.push('<span class="status-warning">⚠️ Flex: ' + justifyContent + ' / ' + alignItems + '</span>');
+                }
+                
+                // Проверка text-align
+                const textAlign = contentStyles.textAlign;
+                if (textAlign === 'center') {
+                    results.push('<span class="status-good">✅ Текст отцентрирован</span>');
+                } else {
+                    results.push('<span class="status-error">❌ Текст: ' + textAlign + '</span>');
+                }
+                
+                // Проверка заголовка
+                const titleTextAlign = titleStyles.textAlign;
+                const titleFontSize = parseInt(titleStyles.fontSize);
+                
+                let expectedSize = 48; // Базовый размер
+                if (width <= 480) expectedSize = 28;
+                else if (width <= 768) expectedSize = 32;
+                else if (width <= 1199) expectedSize = 40;
+                
+                if (titleTextAlign === 'center') {
+                    results.push('<span class="status-good">✅ H1 отцентрирован</span>');
+                } else {
+                    results.push('<span class="status-error">❌ H1: ' + titleTextAlign + '</span>');
+                }
+                
+                if (Math.abs(titleFontSize - expectedSize) <= 3) {
+                    results.push('<span class="status-good">✅ Размер H1: ' + titleFontSize + 'px</span>');
+                } else {
+                    results.push('<span class="status-warning">⚠️ H1: ' + titleFontSize + 'px (ожидался ' + expectedSize + 'px)</span>');
+                }
+                
+                // Проверка фонового изображения
+                const backgroundImage = sectionStyles.backgroundImage;
+                const backgroundSize = sectionStyles.backgroundSize;
+                const backgroundPosition = sectionStyles.backgroundPosition;
+                
+                if (backgroundImage !== 'none') {
+                    results.push('<span class="status-good">✅ Фоновое изображение</span>');
+                } else {
+                    results.push('<span class="status-error">❌ Нет фонового изображения</span>');
+                }
+                
+                if (backgroundSize === 'cover') {
+                    results.push('<span class="status-good">✅ Background-size: cover</span>');
+                } else {
+                    results.push('<span class="status-warning">⚠️ Background-size: ' + backgroundSize + '</span>');
+                }
+                
+                document.getElementById('resultsContent').innerHTML = results.join('<br>');
+            }
+        }
+        
+        // Обновляем информацию при загрузке и изменении размера
+        updateScreenInfo();
+        window.addEventListener('resize', updateScreenInfo);
+        
+        // Обновляем каждые 200мс для точности
+        setInterval(updateScreenInfo, 200);
+    </script>
+</body>
+</html>

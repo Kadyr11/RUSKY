@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест Product Title - Убираем отступы на мобильных</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .test-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.9);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            z-index: 9999;
+            font-size: 12px;
+            max-width: 300px;
+            font-family: monospace;
+        }
+        .layout-info {
+            margin-top: 10px;
+            padding: 8px;
+            border-radius: 4px;
+        }
+        .mobile { background: rgba(255, 100, 0, 0.3); }
+        .desktop { background: rgba(0, 100, 255, 0.3); }
+        
+        /* Визуальные индикаторы отступов */
+        .margin-indicator {
+            position: absolute;
+            border: 2px dashed red;
+            background: rgba(255, 0, 0, 0.1);
+            pointer-events: none;
+        }
+        
+        .title-container {
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-indicator">
+        <strong>📱 Product Title Margin Test</strong><br>
+        Размер: <span id="size"></span><br>
+        <div id="layout-info" class="layout-info">...</div>
+        <div style="margin-top: 10px; font-size: 11px; line-height: 1.4;">
+            <strong>Desktop:</strong> margin: 0 0 20px 0<br>
+            <strong>≤768px:</strong> margin: 0 !important<br>
+            <strong>≤480px:</strong> margin: 0 !important<br>
+            <div style="color: #ff6666; margin-top: 5px;">
+                Красная пунктирная рамка = область margin
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Page -->
+    <main class="product-page">
+        <div class="product-container">
+            <!-- Галерея товара -->
+            <aside class="product-gallery" style="display: none;">
+                <!-- Скрыта для фокуса на тесте -->
+            </aside>
+            
+            <!-- Информация о товаре -->
+            <section class="product-info">
+                <div class="title-container">
+                    <div class="margin-indicator" id="margin-box"></div>
+                    <h1 class="product-title" id="product-title">Исследовательский спутник CLAY-SCI</h1>
+                </div>
+                
+                <div class="product-price">
+                    <span class="price-value">₽3,200,000</span>
+                    <span class="price-note">В НАЛИЧИИ</span>
+                </div>
+                
+                <p class="product-lead">
+                    Специализированный научный спутник для проведения космических исследований 
+                    и научных экспериментов в условиях невесомости.
+                </p>
+                
+                <div class="product-specs">
+                    <h3>Основные характеристики</h3>
+                    <p><strong>Тип:</strong> Научный исследовательский спутник</p>
+                    <p><strong>Масса:</strong> 1200 кг</p>
+                    <p><strong>Орбита:</strong> LEO 600-800 км</p>
+                    <p><strong>Срок службы:</strong> 5-7 лет</p>
+                </div>
+                
+                <div class="product-actions">
+                    <button class="btn">ЗАПРОСИТЬ ЦЕНУ</button>
+                    <button class="btn">ДОБАВИТЬ В КОРЗИНУ</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        function updateStatus() {
+            const width = window.innerWidth;
+            document.getElementById('size').textContent = width + 'px';
+            
+            const infoEl = document.getElementById('layout-info');
+            const title = document.getElementById('product-title');
+            const marginBox = document.getElementById('margin-box');
+            
+            // Получаем computed стили
+            const titleStyles = getComputedStyle(title);
+            const marginTop = parseInt(titleStyles.marginTop);
+            const marginBottom = parseInt(titleStyles.marginBottom);
+            
+            if (width > 768) {
+                infoEl.innerHTML = `<span class="desktop">Desktop</span><br>margin-top: ${marginTop}px<br>margin-bottom: ${marginBottom}px`;
+                infoEl.className = 'layout-info desktop';
+            } else if (width > 480) {
+                infoEl.innerHTML = `<span class="mobile">Tablet ≤768px</span><br>margin-top: ${marginTop}px<br>margin-bottom: ${marginBottom}px`;
+                infoEl.className = 'layout-info mobile';
+            } else {
+                infoEl.innerHTML = `<span class="mobile">Mobile ≤480px</span><br>margin-top: ${marginTop}px<br>margin-bottom: ${marginBottom}px`;
+                infoEl.className = 'layout-info mobile';
+            }
+            
+            // Обновляем визуальный индикатор margin
+            const titleRect = title.getBoundingClientRect();
+            const containerRect = title.parentElement.getBoundingClientRect();
+            
+            marginBox.style.left = '0px';
+            marginBox.style.right = '0px';
+            marginBox.style.top = `-${marginTop}px`;
+            marginBox.style.height = `${titleRect.height + marginTop + marginBottom}px`;
+            
+            // Показываем/скрываем индикатор в зависимости от наличия margin
+            marginBox.style.display = (marginTop > 0 || marginBottom > 0) ? 'block' : 'none';
+        }
+        
+        updateStatus();
+        window.addEventListener('resize', updateStatus);
+        
+        // Обновляем при загрузке шрифтов
+        document.fonts.ready.then(updateStatus);
+    </script>
+</body>
+</html>

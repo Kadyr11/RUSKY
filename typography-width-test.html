@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Тест ширины типографики - RUSKY</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Стили для демонстрации */
+        .width-test-overlay {
+            position: fixed;
+            top: 100px;
+            left: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.8);
+            color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            z-index: 9999;
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .width-markers {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 9998;
+        }
+        
+        .marker-left {
+            position: absolute;
+            top: 80px;
+            left: 20px;
+            bottom: 0;
+            width: 2px;
+            background: rgba(255, 0, 0, 0.7);
+        }
+        
+        .marker-right {
+            position: absolute;
+            top: 80px;
+            right: 20px;
+            bottom: 0;
+            width: 2px;
+            background: rgba(255, 0, 0, 0.7);
+        }
+        
+        .marker-content-left {
+            position: absolute;
+            top: 200px;
+            left: 0;
+            bottom: 0;
+            width: 2px;
+            background: rgba(0, 255, 0, 0.7);
+        }
+        
+        .marker-content-right {
+            position: absolute;
+            top: 200px;
+            right: 0;
+            bottom: 0;
+            width: 2px;
+            background: rgba(0, 255, 0, 0.7);
+        }
+        
+        .success { color: #51cf66; }
+        .warning { color: #ffd43b; }
+        .error { color: #ff6b6b; }
+        
+        .hide-on-desktop {
+            display: block;
+        }
+        
+        @media (min-width: 769px) {
+            .hide-on-desktop {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Маркеры для визуальной проверки -->
+    <div class="width-markers hide-on-desktop">
+        <div class="marker-left"></div>
+        <div class="marker-right"></div>
+    </div>
+
+    <!-- Информационная панель -->
+    <div class="width-test-overlay hide-on-desktop" id="testOverlay">
+        <div><strong>📏 Тест ширины контейнера типографики</strong></div>
+        <div style="margin: 10px 0;">
+            <div>Экран: <span id="screenWidth"></span>px</div>
+            <div>Ожидаемая ширина контента: <span id="expectedWidth"></span>px</div>
+            <div>Фактическая ширина контента: <span id="actualWidth"></span>px</div>
+            <div>Отступ слева: <span id="leftMargin"></span>px</div>
+            <div>Отступ справа: <span id="rightMargin"></span>px</div>
+        </div>
+        <div id="statusMessage" style="margin-top: 10px;"></div>
+        <div style="margin-top: 10px; font-size: 11px;">
+            <div><span style="color: red;">Красные линии</span> - отступы 20px от краев</div>
+            <div><span style="color: lime;">Зеленые линии</span> - границы контента</div>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="header-logo">RUSKY</div>
+        <nav class="header-nav">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="launches.html">ЗАПУСКИ</a>
+            <a href="documentation.html">ДОКУМЕНТАЦИЯ</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+        </nav>
+        <div class="burger-menu" onclick="toggleMobileMenu()">
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+        </div>
+    </header>
+
+    <nav class="mobile-nav" id="mobile-nav">
+        <div class="mobile-nav-list">
+            <a href="index.html">ГЛАВНАЯ</a>
+            <a href="satellites.html">СПУТНИКИ</a>
+            <a href="launches.html">ЗАПУСКИ</a>
+            <a href="documentation.html">ДОКУМЕНТАЦИЯ</a>
+            <a href="support.html">ПОДДЕРЖКА</a>
+        </div>
+    </nav>
+
+    <section class="hero-section" style="background-image: url('img-1.png'); background-size: cover; background-position: center;">
+        <div class="hero-overlay"></div>
+        <div class="hero-content" id="heroContent">
+            <h1>Хотите купить спутник?</h1>
+            <p class="hero-subtitle">
+                Разработка, производство и внедрение космических спутников нового поколения.
+            </p>
+            <p class="hero-desc">
+                RUSKY — это инжиниринговая платформа, специализирующаяся на создании космических спутников и модулей различной сложности. Мы объединяем экспертов в аэрокосмической отрасли, проектные группы и стартапы для реализации космических решений от идеи до вывода на орбиту.
+            </p>
+            <a href="satellites.html" class="hero-btn">ПОДРОБНЕЕ</a>
+        </div>
+    </section>
+
+    <div style="background: #111; color: #fff; padding: 40px 20px; text-align: center;">
+        <h2>📱 Только для мобильных и планшетов</h2>
+        <p>Эта страница тестирует ширину контейнера типографики на экранах ≤768px</p>
+        <p>На desktop версии данный тест не активен</p>
+    </div>
+
+    <script src="main.js"></script>
+    <script>
+        function updateWidthInfo() {
+            const screenWidth = window.innerWidth;
+            const heroContent = document.getElementById('heroContent');
+            
+            if (!heroContent) return;
+            
+            const contentRect = heroContent.getBoundingClientRect();
+            const computedStyle = getComputedStyle(heroContent);
+            
+            // Вычисляем ожидаемые значения
+            let expectedPadding, expectedWidth;
+            if (screenWidth <= 480) {
+                expectedPadding = 20;
+                expectedWidth = screenWidth - 40; // 20px с каждой стороны
+            } else if (screenWidth <= 768) {
+                expectedPadding = 30;
+                expectedWidth = screenWidth - 60; // 30px с каждой стороны
+            } else {
+                expectedPadding = 'N/A';
+                expectedWidth = 'N/A';
+            }
+            
+            // Обновляем информацию
+            document.getElementById('screenWidth').textContent = screenWidth;
+            document.getElementById('expectedWidth').textContent = expectedWidth;
+            document.getElementById('actualWidth').textContent = Math.round(contentRect.width);
+            document.getElementById('leftMargin').textContent = Math.round(contentRect.left);
+            document.getElementById('rightMargin').textContent = Math.round(screenWidth - contentRect.right);
+            
+            // Позиционируем зеленые маркеры по границам контента
+            const markers = document.querySelector('.width-markers');
+            if (markers) {
+                let leftMarker = markers.querySelector('.marker-content-left');
+                let rightMarker = markers.querySelector('.marker-content-right');
+                
+                if (!leftMarker) {
+                    leftMarker = document.createElement('div');
+                    leftMarker.className = 'marker-content-left';
+                    markers.appendChild(leftMarker);
+                }
+                
+                if (!rightMarker) {
+                    rightMarker = document.createElement('div');
+                    rightMarker.className = 'marker-content-right';
+                    markers.appendChild(rightMarker);
+                }
+                
+                leftMarker.style.left = contentRect.left + 'px';
+                rightMarker.style.right = (screenWidth - contentRect.right) + 'px';
+            }
+            
+            // Проверяем корректность
+            const statusMessage = document.getElementById('statusMessage');
+            const leftDistance = Math.round(contentRect.left);
+            const rightDistance = Math.round(screenWidth - contentRect.right);
+            
+            if (screenWidth > 768) {
+                statusMessage.innerHTML = '<span class="warning">⚠️ Тест активен только на мобильных/планшетах</span>';
+            } else {
+                const isCorrect = Math.abs(leftDistance - expectedPadding) <= 2 && 
+                                 Math.abs(rightDistance - expectedPadding) <= 2;
+                
+                if (isCorrect) {
+                    statusMessage.innerHTML = '<span class="success">✅ Контейнер растянут корректно!</span>';
+                } else {
+                    statusMessage.innerHTML = `<span class="error">❌ Ошибка: ожидался отступ ${expectedPadding}px, получился ${leftDistance}px/${rightDistance}px</span>`;
+                }
+            }
+            
+            console.log('Width test:', {
+                screenWidth,
+                expectedPadding,
+                expectedWidth,
+                actualWidth: Math.round(contentRect.width),
+                leftDistance,
+                rightDistance
+            });
+        }
+        
+        // Обновляем при загрузке и изменении размера
+        window.addEventListener('load', updateWidthInfo);
+        window.addEventListener('resize', updateWidthInfo);
+        
+        // Скрыть/показать по двойному клику
+        document.addEventListener('dblclick', function() {
+            const overlay = document.getElementById('testOverlay');
+            const markers = document.querySelector('.width-markers');
+            const isVisible = overlay.style.display !== 'none';
+            
+            overlay.style.display = isVisible ? 'none' : 'block';
+            markers.style.display = isVisible ? 'none' : 'block';
+        });
+        
+        console.log('📏 Width test page loaded');
+        console.log('🔍 Double-click to toggle test overlay');
+    </script>
+</body>
+</html>
